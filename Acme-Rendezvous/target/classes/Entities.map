@@ -1,12 +1,15 @@
 #./src/main/resources/Entities.map
-#Wed Feb 14 19:14:01 GMT+01:00 2018
-administrator=17
-announcement1=20
-userAccount6=16
-userAccount5=15
-userAccount4=14
-userAccount3=13
-rendezvouse1=19
-userAccount2=12
-userAccount1=11
-user1=18
+#Wed Feb 14 19:35:20 GMT+01:00 2018
+administrator=20
+question1=25
+announcement1=23
+comment1=24
+answer1=26
+userAccount6=19
+userAccount5=18
+userAccount4=17
+userAccount3=16
+rendezvouse1=22
+userAccount2=15
+userAccount1=14
+user1=21

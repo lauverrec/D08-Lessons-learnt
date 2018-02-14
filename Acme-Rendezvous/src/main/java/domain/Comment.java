@@ -37,7 +37,7 @@ public class Comment extends DomainEntity {
 		return this.writtenMoment;
 	}
 
-	public void setWrittenMoment(Date writtenMoment) {
+	public void setWrittenMoment(final Date writtenMoment) {
 		this.writtenMoment = writtenMoment;
 	}
 
@@ -46,7 +46,7 @@ public class Comment extends DomainEntity {
 		return this.text;
 	}
 
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.text = text;
 	}
 	@URL
@@ -54,7 +54,7 @@ public class Comment extends DomainEntity {
 		return this.picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(final String picture) {
 		this.picture = picture;
 	}
 
@@ -73,17 +73,17 @@ public class Comment extends DomainEntity {
 		return this.replys;
 	}
 
-	public void setReplys(Collection<Comment> replys) {
+	public void setReplys(final Collection<Comment> replys) {
 		this.replys = replys;
 	}
 
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Comment getCommentTo() {
 		return this.commentTo;
 	}
 
-	public void setCommentTo(Comment commentTo) {
+	public void setCommentTo(final Comment commentTo) {
 		this.commentTo = commentTo;
 	}
 
@@ -93,7 +93,7 @@ public class Comment extends DomainEntity {
 		return this.rendezvouse;
 	}
 
-	public void setRendezvouse(Rendezvouse rendezvouse) {
+	public void setRendezvouse(final Rendezvouse rendezvouse) {
 		this.rendezvouse = rendezvouse;
 	}
 
@@ -103,7 +103,7 @@ public class Comment extends DomainEntity {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(final User user) {
 		this.user = user;
 	}
 
