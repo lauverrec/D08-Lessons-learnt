@@ -60,31 +60,31 @@ public class Comment extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Comment>	answers;
-	private Comment				respondedTo;
+	private Collection<Comment>	replys;
+	private Comment				commentTo;
 	private Rendezvouse			rendezvouse;
 	private User				user;
 
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy = "respondedTo")
-	public Collection<Comment> getAnswers() {
-		return this.answers;
+	@OneToMany(mappedBy = "commentTo")
+	public Collection<Comment> getReplys() {
+		return this.replys;
 	}
 
-	public void setAnswers(Collection<Comment> answers) {
-		this.answers = answers;
+	public void setReplys(Collection<Comment> replys) {
+		this.replys = replys;
 	}
 
 	@Valid
 	@ManyToOne(optional = false)
-	public Comment getRespondedTo() {
-		return this.respondedTo;
+	public Comment getCommentTo() {
+		return this.commentTo;
 	}
 
-	public void setRespondedTo(Comment respondedTo) {
-		this.respondedTo = respondedTo;
+	public void setCommentTo(Comment commentTo) {
+		this.commentTo = commentTo;
 	}
 
 	@Valid

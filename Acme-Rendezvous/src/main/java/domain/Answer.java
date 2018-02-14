@@ -6,18 +6,19 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Reply extends DomainEntity {
+public class Answer extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
 	private String	reply;
 
 
-	@NotNull
+	@NotBlank
 	public String getReply() {
 		return this.reply;
 	}
@@ -42,12 +43,12 @@ public class Reply extends DomainEntity {
 		this.user = user;
 	}
 
+	@Valid
+	@ManyToOne(optional = false)
 	public Question getQuestion() {
 		return this.question;
 	}
 
-	@Valid
-	@ManyToOne(optional = false)
 	public void setQuestion(Question question) {
 		this.question = question;
 	}

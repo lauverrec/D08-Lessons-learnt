@@ -8,7 +8,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -106,8 +105,7 @@ public class Rendezvouse extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 	private Collection<User>		assistants;
-	private Collection<Rendezvouse>	rendezvousesVinculated;
-	private Rendezvouse				rendezvouseVinculatedTo;
+	private Collection<Rendezvouse>	similarRendezvouses;
 
 
 	@Valid
@@ -123,23 +121,13 @@ public class Rendezvouse extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy = "rendezvouseVinculatedTo")
-	public Collection<Rendezvouse> getRendezvousesVinculated() {
-		return this.rendezvousesVinculated;
+	@OneToMany
+	public Collection<Rendezvouse> getSimilarRendezvouses() {
+		return this.similarRendezvouses;
 	}
 
-	public void setRendezvousesVinculated(Collection<Rendezvouse> rendezvousesVinculated) {
-		this.rendezvousesVinculated = rendezvousesVinculated;
-	}
-
-	@Valid
-	@ManyToOne(optional = false)
-	public Rendezvouse getRendezvouseVinculatedTo() {
-		return this.rendezvouseVinculatedTo;
-	}
-
-	public void setRendezvouseVinculatedTo(Rendezvouse rendezvouseVinculatedTo) {
-		this.rendezvouseVinculatedTo = rendezvouseVinculatedTo;
+	public void setSimilarRendezvouses(Collection<Rendezvouse> similarRendezvouses) {
+		this.similarRendezvouses = similarRendezvouses;
 	}
 
 }
