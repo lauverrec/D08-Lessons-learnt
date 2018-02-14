@@ -38,7 +38,7 @@ public class Rendezvouse extends DomainEntity {
 		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -47,17 +47,17 @@ public class Rendezvouse extends DomainEntity {
 		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getOrganisedMoment() {
 		return this.organisedMoment;
 	}
 
-	public void setOrganisedMoment(Date organisedMoment) {
+	public void setOrganisedMoment(final Date organisedMoment) {
 		this.organisedMoment = organisedMoment;
 	}
 
@@ -66,7 +66,7 @@ public class Rendezvouse extends DomainEntity {
 		return this.picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(final String picture) {
 		this.picture = picture;
 	}
 
@@ -74,7 +74,7 @@ public class Rendezvouse extends DomainEntity {
 		return this.gps;
 	}
 
-	public void setGps(GPS gps) {
+	public void setGps(final GPS gps) {
 		this.gps = gps;
 	}
 
@@ -82,7 +82,7 @@ public class Rendezvouse extends DomainEntity {
 		return this.draftMode;
 	}
 
-	public void setDraftMode(boolean draftMode) {
+	public void setDraftMode(final boolean draftMode) {
 		this.draftMode = draftMode;
 	}
 
@@ -90,7 +90,7 @@ public class Rendezvouse extends DomainEntity {
 		return this.deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(final boolean deleted) {
 		this.deleted = deleted;
 	}
 
@@ -98,7 +98,7 @@ public class Rendezvouse extends DomainEntity {
 		return this.forAdult;
 	}
 
-	public void setForAdult(boolean forAdult) {
+	public void setForAdult(final boolean forAdult) {
 		this.forAdult = forAdult;
 	}
 
@@ -115,7 +115,7 @@ public class Rendezvouse extends DomainEntity {
 		return this.assistants;
 	}
 
-	public void setAssistants(Collection<User> assistants) {
+	public void setAssistants(final Collection<User> assistants) {
 		this.assistants = assistants;
 	}
 
@@ -126,7 +126,7 @@ public class Rendezvouse extends DomainEntity {
 		return this.similarRendezvouses;
 	}
 
-	public void setSimilarRendezvouses(Collection<Rendezvouse> similarRendezvouses) {
+	public void setSimilarRendezvouses(final Collection<Rendezvouse> similarRendezvouses) {
 		this.similarRendezvouses = similarRendezvouses;
 	}
 

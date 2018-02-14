@@ -31,8 +31,8 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -42,6 +42,142 @@
 		</property>
 	</bean>
 
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user4" />
+		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="user5" />
+		<property name="password" value="0a791842f52a0acfbb3a783378c066b8" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Administrator -->
+	
+	<bean id="administrator" class="domain.Administrator">
+		<property name="name" value="Admin" />
+		<property name="surname" value="Administrator Surnames" />
+		<property name="postalAddress" value="postal address admin" />
+		<property name="phoneNumber" value="+34662657322" />
+		<property name="emailAddress" value="admin@gmail.com" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	<!-- Users -->
+	
+	<bean id="user1" class="domain.User">
+		<property name="name" value="user1" />
+		<property name="surname" value="user1 Surnames" />
+		<property name="postalAddress" value="postal address user1" />
+		<property name="phoneNumber" value="+34662657322" />
+		<property name="emailAddress" value="user1@gmail.com" />
+		<property name="userAccount" ref="userAccount2" />
+		<property name="birthDate" value="1996/02/24 12:00" />
+		<property name="rendezvousesCreated">
+			<list>
+			<ref bean="rendezvouse1"></ref>
+			</list>
+		</property>
+		<property name="rendezvousesAssisted">
+			<list>
+			<ref bean="rendezvouse1"></ref>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Rendezvouses -->
+	
+		<bean id="rendezvouse1" class="domain.Rendezvouse">
+		<property name="name" value="rendezvouse1" />
+		<property name="description" value="description 1" />
+		<property name="organisedMoment" value="2018/03/21" />
+		<property name="picture" value="http://wikifaunia.com/wp-content/uploads/2014/12/un-gato-bebe-hermoso-10370.jpg" />
+		<property name="gps" ref="gps1" />
+		<property name="draftMode" value="1" />
+		<property name="deleted" value="0" />
+		<property name="forAdult" value="0" />
+		<property name="assistants">
+			<list>
+			<ref bean="user1"></ref>
+			</list>
+		</property>
+		<property name="similarRendezvouses">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Announcements -->
+	<bean id="announcement1" class="domain.Announcement">
+		<property name="title" value="announcement1" />
+		<property name="description" value="description 1" />
+		<property name="madeMoment" value="2017/07/21 12:00" />
+		<property name="rendezvouse" ref="rendezvouse1" />
+	</bean>
+	
+	<!-- Comments -->
+	
+	
+	<!-- gps -->
+	
+	<bean id="gps1" class="domain.GPS">
+		<property name="longitude" value="-5.98" />
+		<property name="latitude" value="37.35" />
+	</bean>
+	<bean id="gps2" class="domain.GPS">
+		<property name="longitude" value="-5.49" />
+		<property name="latitude" value="37.28" />
+	</bean>
+	<bean id="gps3" class="domain.GPS">
+		<property name="longitude" value="5.5" />
+		<property name="latitude" value="40.60" />
+	</bean>
+	<bean id="gps4" class="domain.GPS">
+		<property name="longitude" value="2.09" />
+		<property name="latitude" value="41.34" />
+	</bean>
+	<bean id="gps5" class="domain.GPS">
+		<property name="longitude" value="7.08" />
+		<property name="latitude" value="43.65" />
+	</bean>
 	
 	<!-- Other domain beans come here -->	
 	
