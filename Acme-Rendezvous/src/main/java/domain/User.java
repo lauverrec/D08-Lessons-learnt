@@ -57,7 +57,7 @@ public class User extends Actor {
 
 	@NotNull
 	@Valid
-	@ManyToMany
+	@ManyToMany(mappedBy = "assistants")
 	public Collection<Rendezvouse> getRendezvousesAssisted() {
 		return this.rendezvousesAssisted;
 	}

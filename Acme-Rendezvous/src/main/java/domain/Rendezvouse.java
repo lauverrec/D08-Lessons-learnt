@@ -29,7 +29,7 @@ public class Rendezvouse extends DomainEntity {
 	private String	picture;
 	private GPS		gps;
 	private boolean	draftMode;
-	private boolean	delete;
+	private boolean	deleted;
 	private boolean	forAdult;
 
 
@@ -86,12 +86,12 @@ public class Rendezvouse extends DomainEntity {
 		this.draftMode = draftMode;
 	}
 
-	public boolean isDelete() {
-		return this.delete;
+	public boolean isDeleted() {
+		return this.deleted;
 	}
 
-	public void setDelete(boolean delete) {
-		this.delete = delete;
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public boolean isForAdult() {
@@ -110,7 +110,7 @@ public class Rendezvouse extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@ManyToMany(mappedBy = "rendezvousesAssisted")
+	@ManyToMany
 	public Collection<User> getAssistants() {
 		return this.assistants;
 	}
