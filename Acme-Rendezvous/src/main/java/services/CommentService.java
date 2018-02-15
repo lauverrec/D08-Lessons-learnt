@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
+import security.Authority;
 import domain.Comment;
+import domain.User;
 
 @Service
 @Transactional
@@ -18,10 +20,16 @@ public class CommentService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private CommentRepository	commentRepository;
-
+	private CommentRepository		commentRepository;
 
 	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private UserService				userService;
+
+	@Autowired
+	private AdministratorService	administratorService;
+
 
 	// Constructors------------------------------------------------------------
 	public CommentService() {
@@ -32,27 +40,30 @@ public class CommentService {
 
 	public Comment create() {
 		Comment result;
-		result = new Comment();
 		Collection<Comment> replys;
+		User user;
 
+		result = new Comment();
 		replys = new ArrayList<Comment>();
-		//TODO: Falta asociar quien ha escrito este comentario.
+		user = this.userService.findByPrincipal();
 
 		result.setReplys(replys);
+		result.setUser(user);
 
 		return result;
 
 	}
-
 	public Comment save(Comment comment) {
 
 		Assert.notNull(comment);
+		User userConnected;
 
 		Comment result;
 
-		//TODO: Comprobar que el que lo va a guardar es el mismo que lo ha creado.
-		//TODO: Solo pueden escribirlos usuarios.
-		//TODO: No se puede actualizar un comentario.
+		userConnected = this.userService.findByPrincipal();
+
+		Assert.isTrue(comment.getUser().getUserAccount().getAuthorities().contains(Authority.USER));
+		Assert.isTrue(comment.getUser().equals(userConnected));
 		Assert.isTrue(comment.getId() == 0);
 
 		//TODO: Los comentarios deben tener un rendezvous que se haya confirmado la asistencia.
@@ -68,7 +79,8 @@ public class CommentService {
 		Assert.isTrue(comment.getId() != 0);
 
 		Assert.isTrue(this.commentRepository.findOne(comment.getId()) != null);
-		//TODO: Comprobar que el que va a borrar un comentario es un administador.
+
+		this.administratorService.checkPrincipal();
 
 	}
 	public Comment findOne(int commentId) {
