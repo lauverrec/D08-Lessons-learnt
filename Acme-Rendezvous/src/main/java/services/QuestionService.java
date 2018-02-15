@@ -89,4 +89,14 @@ public class QuestionService {
 
 	// Other business methods -------------------------------------------------
 
+	public Collection<Question> findAllQuestionsByUser() {
+		User user;
+		Collection<Question> questions;
+
+		user = this.userService.findByPrincipal();
+		questions = this.questionRepository.findAllQuestionsByUser(user.getId());
+
+		return questions;
+	}
+
 }

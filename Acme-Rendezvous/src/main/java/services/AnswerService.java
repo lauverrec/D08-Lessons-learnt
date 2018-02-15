@@ -76,7 +76,7 @@ public class AnswerService {
 
 	// Other business methods -------------------------------------------------
 
-	Collection<Answer> findAllAnswerByQuestionId(int questionId) {
+	public Collection<Answer> findAllAnswerByQuestionId(int questionId) {
 		Collection<Answer> answers;
 
 		answers = this.answerRepository.findAllAnswerByQuestionId(questionId);

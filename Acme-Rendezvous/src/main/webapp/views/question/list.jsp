@@ -21,7 +21,7 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="question" requestURI="question/user/list.do" id="row">
+	name="questions" requestURI="question/user/list.do" id="row">
 	
 	<!-- Action links -->
 
