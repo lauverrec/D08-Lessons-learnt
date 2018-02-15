@@ -351,6 +351,7 @@
 			value="http://wikifaunia.com/wp-content/uploads/2014/12/un-gato-bebe-hermoso-10370.jpg" />
 		<property name="replys">
 			<list>
+			<ref bean="comment5"></ref>
 			</list>
 		</property>
 		<property name="rendezvouse" ref="rendezvouse1" />
@@ -403,11 +404,11 @@
 			value="http://wikifaunia.com/wp-content/uploads/2014/12/un-gato-bebe-hermoso-10370.jpg" />
 		<property name="replys">
 			<list>
-				<ref bean="comment1"></ref>
 			</list>
 		</property>
 		<property name="rendezvouse" ref="rendezvouse1" />
 		<property name="user" ref="user1" />
+		<property name="commentTo" ref="comment1"/>
 	</bean>
 
 	<!-- Questions -->
