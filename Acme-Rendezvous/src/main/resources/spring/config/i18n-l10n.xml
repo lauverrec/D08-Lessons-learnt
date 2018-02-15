@@ -29,6 +29,8 @@
 		<value>/views/rendezvous/messages</value>
 		<value>/views/user/messages</value>
 		<value>/views/announcement/messages</value>
+		<value>/views/answer/messages</value>
+		
 	</util:list>
 
 </beans>

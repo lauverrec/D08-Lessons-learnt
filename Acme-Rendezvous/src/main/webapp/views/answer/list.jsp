@@ -21,38 +21,29 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="questions" requestURI="question/user/list.do" id="row">
+	name="answers" requestURI="answer/user/list.do" id="row">
 	
 	<!-- Action links -->
 
 
 	<security:authorize access="hasRole('USER')">
-		<spring:message code="question.edit" var="Edit" />
+		<spring:message code="answer.edit" var="Edit" />
 		<display:column title="${Edit}" sortable="true">
-		<spring:url value="question/user/edit.do" var="editURL">
-		<spring:param name="questionId" value="${row.id}"/>
+		<spring:url value="answer/user/edit.do" var="editURL">
+		<spring:param name="answerId" value="${row.id}"/>
 		</spring:url>
-		<a href="${editURL}"><spring:message code="question.edit"/></a>
+		<a href="${editURL}"><spring:message code="answer.edit"/></a>
 		</display:column>		
 	</security:authorize>
+
 	
-	<%-- <spring:message code="question.display" var="Display" />
-		<display:column title="${Display}" sortable="true">
-		<spring:url value="question/user/display.do" var="displayURL">
-		<spring:param name="questionId" value="${row.id}"/>
-		</spring:url>
-		<a href="${displayURL}"><spring:message code="question.display"/></a>
-		</display:column> --%>
 	
 	<!-- Attributes -->
-	<spring:message code="question.name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}" sortable="true" />
 	
+	<spring:message code="answer.question" var="questionHeader" />
+	<display:column value="${row.question.name}" title="${questionHeader}" sortable="true" />
+	
+	<spring:message code="answer.reply" var="replyHeader" />
+	<display:column property="reply" title="${replyHeader}" sortable="true" />
 </display:table>
-<security:authorize access="hasRole('USER')">
-	<div>
-		<a href="question/user/create.do"> 
-			<spring:message	code="question.create" />
-		</a>
-	</div>
-</security:authorize>
+

@@ -19,7 +19,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="${requestURI}" modelAttribute="Question">
+<form:form action="${requestURI}" modelAttribute="Answer">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -27,38 +27,32 @@
 	
 <!-- ATRIBUTOS -->
 
-	
-	<form:label path="name">
-		<spring:message code="question.name" />:
+<form:label path="question.name">
+		<spring:message code="answer.question" />:
 	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
+	<form:input path="question.name" readonly="true"/>
+	<form:errors cssClass="error" path="question.name" />
 	<br />
 	<br />
 	
-<h2><spring:message code="question.rendezvouse" /></h2>
-	<form:label path="rendezvouse">
-		<spring:message code="question.rendezvouse" />:
+	
+	<form:label path="reply">
+		<spring:message code="answer.reply" />:
 	</form:label>
-	<form:select id="rendezvouse" path="rendezvouse" >
-		<form:option value="0" label="----" />			
-		<form:options items="${rendezvouses}" itemValue="id" itemLabel="name" />		
-	</form:select>
-	<form:errors cssClass="error" path="rendezvouse" />
+	<form:input path="reply" readonly="true"/>
+	<form:errors cssClass="error" path="reply" />
 	<br />
 	<br />
-<!-- BOTONES -->
 
-	<input type="submit" name="save" value="<spring:message code="question.save" />" />&nbsp; 
-	
-	<jstl:if test="${Question.id != 0}">
+<!-- BOTONES -->	
+	<jstl:if test="${Answer.id != 0}">
 		<input type="submit" name="delete"
-			value="<spring:message code="question.delete" />"
-			onclick="javascript: return confirm('<spring:message code="question.confirm.delete" />')" />&nbsp;
+			value="<spring:message code="answer.delete" />"
+			onclick="javascript: return confirm('<spring:message code="answer.confirm.delete" />')" />&nbsp;
 	</jstl:if>
 	
 	<input type="button" name="cancel"
-		value="<spring:message code="question.cancel" />"
-		onclick="javascript:  window.location.replace('question/user/list.do');" />
+		value="<spring:message code="answer.cancel" />"
+		onclick="javascript:  window.location.replace('answer/user/list.do');" />
 	<br />
 </form:form>

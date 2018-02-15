@@ -57,7 +57,21 @@ public class QuestionUserController extends AbstractController {
 		result.addObject("questions", questions);
 		return result;
 	}
+	// Display ----------------------------------------------------------------
 
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam int questionId) {
+		ModelAndView result;
+		Question question = new Question();
+
+		question = this.questionService.findOne(questionId);
+
+		result = new ModelAndView("Question/display");
+		result.addObject("Question", question);
+		result.addObject("requestURI", "question/user/display.do");
+
+		return result;
+	}
 	//Creation-----------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -83,7 +97,10 @@ public class QuestionUserController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(question, "question.commit.error");
+				if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
+					result = this.createEditModelAndView(question, "question.rendezvouses");
+				else
+					result = this.createEditModelAndView(question, "question.commit.error");
 			}
 
 		return result;

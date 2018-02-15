@@ -83,4 +83,14 @@ public class AnswerService {
 
 		return answers;
 	}
+
+	public Collection<Answer> findAllAnswersByUserId() {
+		Collection<Answer> answers;
+		User user;
+
+		user = this.userService.findByPrincipal();
+		answers = this.answerRepository.findAllAnswersByUserId(user.getId());
+
+		return answers;
+	}
 }
