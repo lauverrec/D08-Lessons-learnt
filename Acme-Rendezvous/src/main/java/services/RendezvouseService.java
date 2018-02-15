@@ -71,11 +71,29 @@ public class RendezvouseService {
 
 	public void delete(final Rendezvouse rendezvouse) {
 		User user;
-		user = this.userService.findByPtincipal();
+		user = this.userService.findByPrincipal();
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse));
 		this.rendezvousRepository.delete(rendezvouse);
 
 	}
 	// Other business methods -------------------------------------------------
 
+	public Collection<Rendezvouse> findRendezvousesCreatedByUser() {
+		Collection<Rendezvouse> res;
+		User user;
+		user = this.userService.findByPrincipal();
+		res = this.rendezvousRepository.findRendezvousesCreatedByUser(user.getId());
+
+		return res;
+
+	}
+
+	public Collection<Rendezvouse> findRendezvousesAssitedByUser() {
+		Collection<Rendezvouse> res;
+		User user;
+		user = this.userService.findByPrincipal();
+		res = this.rendezvousRepository.findRendezvousesAssitedByUser(user.getId());
+		return res;
+
+	}
 }
