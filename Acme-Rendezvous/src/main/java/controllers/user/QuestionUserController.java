@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.QuestionService;
+import services.RendezvouseService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Question;
+import domain.Rendezvouse;
 import domain.User;
 
 @Controller
@@ -28,10 +30,13 @@ public class QuestionUserController extends AbstractController {
 	// Services---------------------------------------------------------
 
 	@Autowired
-	private QuestionService	questionService;
+	private QuestionService		questionService;
 
 	@Autowired
-	private UserService		userService;
+	private UserService			userService;
+
+	@Autowired
+	private RendezvouseService	rendezvouseService;
 
 
 	//Constructor--------------------------------------------------------
@@ -49,7 +54,7 @@ public class QuestionUserController extends AbstractController {
 		questions = this.questionService.findAllQuestionsByUser();
 
 		result = new ModelAndView("Question/list");
-		result.addObject("question", questions);
+		result.addObject("questions", questions);
 		return result;
 	}
 
@@ -145,12 +150,12 @@ public class QuestionUserController extends AbstractController {
 
 		assert question != null;
 		ModelAndView result;
-		//Collection<Trip> trips;
+		Collection<Rendezvouse> rendezvouses;
 
-		//trips = this.tripService.findAllTripsPublished();
+		rendezvouses = this.rendezvouseService.findAll();
 
 		result = new ModelAndView("Question/edit");
-		//	result.addObject("trips", trips);
+		result.addObject("rendezvouses", rendezvouses);
 		result.addObject("Question", question);
 		result.addObject("message", message);
 
