@@ -20,16 +20,16 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="rendezvous" requestURI="${RequestUri}" id="row">
+	name="rendezvous" requestURI="rendezvous/user/list.do" id="row">
 	
 </display:table>
-<security:authorize access="hasRole('USER)">
+<%-- <security:authorize access="hasRole('USER)">
+
 	<div>
 		<a href="rendezvous/user/create.do"> <spring:message
 				code="rendezvous.create" />
 		</a>
 	</div>
 </security:authorize>
-
+ --%>

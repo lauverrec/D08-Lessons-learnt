@@ -42,6 +42,13 @@
 					<li><a href="question/user/list.do"><spring:message code="master.page.question.list" /></a></li>
 					
 				</ul></li>
+								<li><a class="fNiv"><spring:message
+						code="master.page.rendezvous" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="rendezvous/user/list.do"><spring:message code="master.page.mi.rendezvous" /></a></li>
+					
+				</ul></li>
 		</security:authorize>
 		
 		

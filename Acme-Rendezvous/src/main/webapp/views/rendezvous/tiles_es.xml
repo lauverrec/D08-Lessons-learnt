@@ -32,19 +32,19 @@
 
 <tiles-definitions>
 
-	<definition name="xxx/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de xxx" />
-		<put-attribute name="body" value="/views/XXX/list.jsp" />
+	<definition name="rendezvous/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/list.jsp" />
 	</definition>
 
-	<definition name="xxx/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar xxx" />
-		<put-attribute name="body" value="/views/XXX/edit.jsp" />
+	<definition name="rendezvous/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/edit.jsp" />
 	</definition>
 
-	<definition name="xxx/display" extends="master.page">	
-		<put-attribute name="title" value="Mostrar un xxx" />
-		<put-attribute name="body" value="/views/XXX/display.jsp" />
+	<definition name="rendezvous/display" extends="master.page">	
+		<put-attribute name="title" value="Mostrar un rendezvous" />
+		<put-attribute name="body" value="/views/rendezvous/display.jsp" />
 	</definition>
  
 </tiles-definitions>
