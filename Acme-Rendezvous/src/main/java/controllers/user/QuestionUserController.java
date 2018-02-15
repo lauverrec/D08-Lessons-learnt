@@ -169,7 +169,7 @@ public class QuestionUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Rendezvouse> rendezvouses;
 
-		rendezvouses = this.rendezvouseService.findAll();
+		rendezvouses = this.rendezvouseService.findRendezvousesCreatedByUser();
 
 		result = new ModelAndView("Question/edit");
 		result.addObject("rendezvouses", rendezvouses);
