@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.QuestionRepository;
+import domain.Answer;
 import domain.Question;
+import domain.User;
 
 @Service
 @Transactional
@@ -21,10 +23,13 @@ public class QuestionService {
 	@Autowired
 	private QuestionRepository	questionRepository;
 
-
 	// Supporting services ----------------------------------------------------
-	//	@Autowired
-	//	private UserService userService;
+	@Autowired
+	private UserService			userService;
+
+	@Autowired
+	private AnswerService		answerService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -36,12 +41,12 @@ public class QuestionService {
 
 	public Question create() {
 		Question result;
-		//User user;
+		User user;
 
-		//user = this.userService.findByPrincipal();
+		user = this.userService.findByPrincipal();
 		result = new Question();
 
-		//result.setUser(user);
+		result.setUser(user);
 		return result;
 	}
 
@@ -70,6 +75,15 @@ public class QuestionService {
 		assert question != null;
 		assert question.getId() != 0;
 		Assert.isTrue(this.questionRepository.exists(question.getId()));
+		Collection<Answer> answers;
+		int questionId;
+
+		questionId = question.getId();
+		answers = this.answerService.findAllAnswerByQuestionId(questionId);
+
+		for (Answer s : answers)
+			this.answerService.delete(s);
+
 		this.questionRepository.delete(question);
 	}
 

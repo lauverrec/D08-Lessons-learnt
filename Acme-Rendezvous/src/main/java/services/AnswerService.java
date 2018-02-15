@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.AnswerRepository;
 import domain.Answer;
+import domain.User;
 
 @Service
 @Transactional
@@ -21,10 +22,10 @@ public class AnswerService {
 	@Autowired
 	private AnswerRepository	answerRepository;
 
-
 	// Supporting services ----------------------------------------------------
-	//	@Autowired
-	//	private UserService userService;
+	@Autowired
+	private UserService			userService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -36,12 +37,12 @@ public class AnswerService {
 
 	public Answer create() {
 		Answer result;
-		//User user;
+		User user;
 
-		//user = this.userService.findByPrincipal();
+		user = this.userService.findByPrincipal();
 		result = new Answer();
 
-		//result.setUser(user);
+		result.setUser(user);
 		return result;
 	}
 
@@ -75,4 +76,11 @@ public class AnswerService {
 
 	// Other business methods -------------------------------------------------
 
+	Collection<Answer> findAllAnswerByQuestionId(int questionId) {
+		Collection<Answer> answers;
+
+		answers = this.answerRepository.findAllAnswerByQuestionId(questionId);
+
+		return answers;
+	}
 }
