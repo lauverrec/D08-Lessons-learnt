@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import repositories.AdministratorRepository;
 import domain.Administrator;
 
 @Component
@@ -13,7 +14,7 @@ import domain.Administrator;
 public class StringToAdministratorConverter implements Converter<String, Administrator>{
 	
 	@Autowired
-	//private AdministratorRepository	administratorRepository;
+	private AdministratorRepository	administratorRepository;
 
 
 	@Override
@@ -27,7 +28,7 @@ public class StringToAdministratorConverter implements Converter<String, Adminis
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				//result = this.administratorRepository.findOne(id);
+				result = this.administratorRepository.findOne(id);
 
 			}
 
@@ -35,8 +36,8 @@ public class StringToAdministratorConverter implements Converter<String, Adminis
 			throw new IllegalArgumentException(oops);
 		}
 
-		//return result;
-		return null;
+		return result;
+		
 	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import repositories.ActorRepository;
 import domain.Actor;
 
 @Component
@@ -13,7 +14,7 @@ import domain.Actor;
 public class StringToActorConverter implements Converter<String, Actor>{
 	
 	@Autowired
-	//private ActorRepository	actorRepository;
+	private ActorRepository	actorRepository;
 
 
 	@Override
@@ -27,7 +28,7 @@ public class StringToActorConverter implements Converter<String, Actor>{
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				//result = this.actorRepository.findOne(id);
+				result = this.actorRepository.findOne(id);
 
 			}
 
@@ -35,8 +36,7 @@ public class StringToActorConverter implements Converter<String, Actor>{
 			throw new IllegalArgumentException(oops);
 		}
 
-		//return result;
-		return null;
+		return result;
 	}
 
 }

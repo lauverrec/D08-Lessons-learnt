@@ -24,11 +24,11 @@
 		<bean class="converters.AdministratorToStringConverter" /> 
 		<bean class="converters.StringToAdministratorConverter" />
 		
-		<bean class="converters.AnnouncementToStringConverter" /> 
-		<bean class="converters.StringToAnnouncementConverter" /> 
+		<bean class="converters.AnnouncementToStringConverter" />  
+		<bean class="converters.StringToAnnouncementConverter" />  
 		
-		<bean class="converters.CommentToStringConverter" /> 
-		<bean class="converters.StringToCommentConverter" />
+		<!-- <bean class="converters.CommentToStringConverter" /> --> 
+ 		<!-- <bean class="converters.StringToCommentConverter" /> --> 
 		
 		<bean class="converters.GPSToStringConverter" /> 
 		<bean class="converters.StringToGPSConverter" />
@@ -39,8 +39,8 @@
 		<bean class="converters.RendezvouseToStringConverter" /> 
 		<bean class="converters.StringToRendezvouseConverter" />
 		
-		<bean class="converters.ReplyToStringConverter" /> 
-		<bean class="converters.StringToReplyConverter" />
+		<bean class="converters.AnswerToStringConverter" /> 
+		<bean class="converters.StringToAnswerConverter" />
 		
 		<bean class="converters.UserToStringConverter" /> 
 		<bean class="converters.StringToUserConverter" />

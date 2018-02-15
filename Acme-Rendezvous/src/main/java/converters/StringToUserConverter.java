@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import repositories.UserRepository;
 import domain.User;
 
 @Component
@@ -13,7 +14,7 @@ import domain.User;
 public class StringToUserConverter implements Converter<String, User>{
 	
 	@Autowired
-	//private UserRepository	userRepository;
+	private UserRepository	userRepository;
 
 
 	@Override
@@ -27,7 +28,7 @@ public class StringToUserConverter implements Converter<String, User>{
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				//result = this.userRepository.findOne(id);
+				result = this.userRepository.findOne(id);
 
 			}
 
@@ -35,8 +36,8 @@ public class StringToUserConverter implements Converter<String, User>{
 			throw new IllegalArgumentException(oops);
 		}
 
-		//return result;
-		return null;
+		return result;
+		
 	}
 
 }

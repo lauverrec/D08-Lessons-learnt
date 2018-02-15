@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import repositories.AnnouncementRepository;
 import domain.Announcement;
 
 @Component
@@ -13,7 +14,7 @@ import domain.Announcement;
 public class StringToAnnouncementConverter implements Converter<String, Announcement>{
 	
 	@Autowired
-	//private AnnouncementRepository	announcementRepository;
+	private AnnouncementRepository	announcementRepository;
 
 
 	@Override
@@ -27,7 +28,7 @@ public class StringToAnnouncementConverter implements Converter<String, Announce
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				//result = this.announcementRepository.findOne(id);
+				result = this.announcementRepository.findOne(id);
 
 			}
 
@@ -35,8 +36,8 @@ public class StringToAnnouncementConverter implements Converter<String, Announce
 			throw new IllegalArgumentException(oops);
 		}
 
-		//return result;
-		return null;
+		return result;
+		
 	}
 
 }
