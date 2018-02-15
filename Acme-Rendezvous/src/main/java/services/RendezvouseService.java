@@ -106,4 +106,12 @@ public class RendezvouseService {
 		return res;
 
 	}
+
+	public Collection<Rendezvouse> findRendezvousesAssitedByUser2(int userId) {
+		Collection<Rendezvouse> res;
+
+		res = this.rendezvousRepository.findRendezvousesAssitedByUser2(userId);
+		return res;
+
+	}
 }

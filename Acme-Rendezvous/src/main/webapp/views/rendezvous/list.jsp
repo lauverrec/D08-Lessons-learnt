@@ -22,8 +22,9 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="rendezvous" requestURI="rendezvous/user/list.do" id="row">
+	name="rendezvous" requestURI="${requestURI }" id="row">
 
+<security:authorize access="hasRole('USER')">
 	<spring:message code="rendezvous.edit" var="Edit" />
 	<display:column title="${Edit}" sortable="true">
 		<spring:url value="rendezvous/user/edit.do" var="editURL">
@@ -31,7 +32,8 @@
 		</spring:url>
 		<a href="${editURL}"><spring:message code="rendezvous.edit" /></a>
 	</display:column>
-
+	</security:authorize>
+	
 	<spring:message code="rendezvouse.name" var="titleHeader" />
 	<display:column property="name" title="${titleHeader}" sortable="true" />
 

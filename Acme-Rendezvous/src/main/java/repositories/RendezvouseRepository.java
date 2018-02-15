@@ -20,4 +20,8 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	@Query("select u.rendezvousesAssisted from User u where u.id=?1")
 	Collection<Rendezvouse> findRendezvousesAssitedByUser(int userId);
 
+	// devuelve las rendevouz a las que asiste un usuario sin comprobar que sea el principal
+	@Query("select u.rendezvousesAssisted from User u where u.id=?1")
+	Collection<Rendezvouse> findRendezvousesAssitedByUser2(int userId);
+
 }
