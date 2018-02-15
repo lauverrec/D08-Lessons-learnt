@@ -1,4 +1,4 @@
-package sample;
+package services;
 
 
 public class CommentServiceTest {

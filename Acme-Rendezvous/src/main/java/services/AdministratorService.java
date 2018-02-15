@@ -4,6 +4,9 @@ package services;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +17,8 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.Rendezvouse;
+import domain.User;
 
 @Service
 @Transactional
@@ -81,6 +86,87 @@ public class AdministratorService {
 		auth.setAuthority(Authority.ADMINISTRATOR);
 
 		Assert.isTrue(authorities.contains(auth));
+	}
+
+	public Double[] findAvgStddevOfTheNumOfRendezvouseCreatedPerUser() {
+		Double[] result;
+		result = this.administratorRepository.findAvgStddevOfTheNumOfRendezvouseCreatedPerUser();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Double findRatioUsersWithRendezvousesAndNotRendezvouses() {
+		Double result;
+		result = this.administratorRepository.findRatioUsersWithRendezvousesAndNotRendezvouses();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Double findAvgStddevOfTheNumOfAssistansPerRendezvouse() {
+		Double result;
+		result = this.administratorRepository.findAvgStddevOfTheNumOfAssistansPerRendezvouse();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Double[] findAvgStddevOfTheNumOfRendezvouseAssitedPerUser() {
+		Double[] result;
+		result = this.administratorRepository.findAvgStddevOfTheNumOfRendezvouseAssitedPerUser();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Collection<User> findTop10RendezvouseWithRSVPd() {
+		Collection<User> result;
+		final Page<User> resPage;
+		final Pageable pageable;
+
+		pageable = new PageRequest(0, 10);
+		resPage = this.administratorRepository.findTop10RendezvouseWithRSVPd(pageable);
+		result = resPage.getContent();
+		return result;
+	}
+
+	public Double[] findAvgStddevOfTheNumOfAnnouncementsPerRendezvous() {
+		Double[] result;
+		result = this.administratorRepository.findAvgStddevOfTheNumOfAnnouncementsPerRendezvous();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Collection<Rendezvouse> findRendezvousesWithMore75PerCent() {
+		Collection<Rendezvouse> result;
+		result = this.administratorRepository.findRendezvousesWithMore75PerCent();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Collection<Rendezvouse> findRendezvousesWithAreLinked() {
+		Collection<Rendezvouse> result;
+		result = this.administratorRepository.findRendezvousesWithAreLinked();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Double[] findAvgStddevOfTheNumOfQuestionsPerRendezvous() {
+		Double[] result;
+		result = this.administratorRepository.findAvgStddevOfTheNumOfQuestionsPerRendezvous();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Double[] findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous() {
+		Double[] result;
+		result = this.administratorRepository.findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Double[] findAvgStddevOfTheNumOfRepliesPerComment() {
+		Double[] result;
+		result = this.administratorRepository.findAvgStddevOfTheNumOfRepliesPerComment();
+		Assert.notNull(result);
+		return result;
 	}
 
 }

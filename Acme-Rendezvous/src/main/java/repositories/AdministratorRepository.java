@@ -3,6 +3,7 @@ package repositories;
 
 import java.util.Collection;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -36,30 +37,30 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	//C/5 The top-10 rendezvouses in terms of users who have RSVPd them.
 	@Query("select r from Rendezvouse r where r.assistants.size!=0 order by r.assistants.size desc")
-	Collection<User> findTop10RendezvouseWithRSVPd(Pageable pageable);
+	Page<User> findTop10RendezvouseWithRSVPd(Pageable pageable);
 
 	//B/1 The average and the standard deviation of announcements per rendezvous.
-	//TODO No tengo navegabilidad para hacerlo con select avg(r.announcements.size), stddev(r.announcements.size) from Rendezvous r
-	@Query("")
-	Collection<User> findAvgStddevOfTheNumOfAnnouncementsPerRendezvous();
+	//TODO No tengo navegabilidad de rendezvous a announcement para hacerlo con select avg(r.announcements.size), stddev(r.announcements.size) from Rendezvous r
+	@Query("select avg(u.rendezvousesAssisted.size), stddev(u.rendezvousesAssisted.size) from User u")
+	Double[] findAvgStddevOfTheNumOfAnnouncementsPerRendezvous();
 
 	//B/2 The rendezvouses that whose number of announcements is above 75% the average number of announcements per rendezvous.
 	//TODO Necesito navegabilidad de Rendezvouse a Announcement
-	@Query("")
+	@Query("select r from Rendezvouse r")
 	Collection<Rendezvouse> findRendezvousesWithMore75PerCent();
 
 	//B/3 The rendezvouses that are linked to a number of rendezvouses that is great-er than the average plus 10%.
-	@Query("")
+	@Query("select r from Rendezvouse r")
 	Collection<Rendezvouse> findRendezvousesWithAreLinked();
 
 	//A/1 The average and the standard deviation of the number of questions per ren-dezvous.
 	//TODO Necesito navegabilidad de rendezvous a questions
-	@Query("")
+	@Query("select avg(u.rendezvousesAssisted.size), stddev(u.rendezvousesAssisted.size) from User u")
 	Double[] findAvgStddevOfTheNumOfQuestionsPerRendezvous();
 
 	//A/2 The average and the standard deviation of the number of answers to the questions per rendezvous.
 	//TODO Necesito navegabilidad de rendezvous a questions y de questions a answer
-	@Query("")
+	@Query("select avg(u.rendezvousesAssisted.size), stddev(u.rendezvousesAssisted.size) from User u")
 	Double[] findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous();
 
 	//A/3 The average and the standard deviation of replies per comment.
