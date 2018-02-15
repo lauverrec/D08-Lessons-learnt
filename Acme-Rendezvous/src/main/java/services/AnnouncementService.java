@@ -22,8 +22,10 @@ public class AnnouncementService {
 	@Autowired
 	private AnnouncementRepository	announcementRepository;
 
-
 	// Supporting services ----------------------------------------------------
+	@Autowired
+	private AdministratorService	administratorService;
+
 
 	// Constructors------------------------------------------------------------
 	public AnnouncementService() {
@@ -35,7 +37,7 @@ public class AnnouncementService {
 		Date madeMoment;
 		Announcement announcement;
 
-		madeMoment = new Date();
+		madeMoment = new Date(System.currentTimeMillis() - 1000);
 		announcement = new Announcement();
 		announcement.setMadeMoment(madeMoment);
 		announcement.setRendezvouse(rendezvouse);
@@ -58,6 +60,8 @@ public class AnnouncementService {
 	public void delete(final Announcement announcement) {
 		Assert.notNull(announcement);
 		Assert.isTrue(announcement.getId() != 0);
+		//Sólo un admin podrá borrar un announcement
+		this.administratorService.checkPrincipal();
 		this.announcementRepository.delete(announcement);
 	}
 

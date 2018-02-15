@@ -39,11 +39,4 @@ public class AnnouncementController extends AbstractController {
 		return result;
 	}
 
-	/*
-	 * @RequestMapping(value = "/create", method = RequestMethod.GET)
-	 * public ModelAndView create() {
-	 * ModelAndView result;
-	 * Announcement announcement;
-	 * }
-	 */
 }
