@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +37,18 @@ public class RendezvouseService {
 
 	public Rendezvouse create() {
 		Rendezvouse result;
+		Collection<User> assistants;
+		Collection<Rendezvouse> similarRendezvouses;
+		similarRendezvouses = new ArrayList<Rendezvouse>();
+		assistants = new ArrayList<User>();
 
 		result = new Rendezvouse();
+		result.setAssistants(assistants);
+		result.setSimilarRendezvouses(similarRendezvouses);
+		result.setDeleted(false);
 
 		return result;
 	}
-
 	public Collection<Rendezvouse> findAll() {
 		Collection<Rendezvouse> result;
 
@@ -65,7 +72,10 @@ public class RendezvouseService {
 		Assert.notNull(rendezvouse);
 		Rendezvouse result;
 		User user;
+		user = this.userService.findByPrincipal();
+		rendezvouse.getAssistants().add(user);
 		result = this.rendezvousRepository.save(rendezvouse);
+		user.getRendezvousesCreated().add(result);
 		return result;
 	}
 

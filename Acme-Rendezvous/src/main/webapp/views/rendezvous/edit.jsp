@@ -22,88 +22,108 @@
 
 
 
-<form:form action="xxx/manager/edit.do" modelAttribute="XXX">
+<form:form action="rendezvous/user/edit.do"
+	modelAttribute="rendezvouse">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="manager" />
+	<form:hidden path="assistants" />
 
 
-
-
-
-	<form:label path="code">
-		<spring:message code="xxx.code" />:
+	<form:label path="name">
+		<spring:message code="rendezvouse.name" />:
 	</form:label>
-	<form:input path="code" readonly="true" />
-	<form:errors cssClass="error" path="code" />
+	<form:input path="name" />
+	<form:errors cssClass="error" path="name" />
 	<br />
 	<br />
 
-	<form:label path="text">
-		<spring:message code="xxx.text" />:
+	<form:label path="description">
+		<spring:message code="rendezvouse.description" />:
 	</form:label>
-	<form:input path="text" />
-	<form:errors cssClass="error" path="text" />
+	<form:input path="description" />
+	<form:errors cssClass="error" path="description" />
 	<br />
 	<br />
 
-	<form:label path="gauge">
-		<spring:message code="xxx.gauge" />:
+
+	<form:label path="picture">
+		<spring:message code="rendezvouse.picture" />:
 	</form:label>
-
-	<form:input path="gauge" placeholder="1 or 2 or 3" />
-	<form:errors cssClass="error" path="gauge" />
+	<form:input path="picture" />
+	<form:errors cssClass="error" path="picture" />
 	<br />
 	<br />
 
-	<form:label path="createMoment">
-		<spring:message code="xxx.createMoment" />:
+
+	<form:label path="organisedMoment">
+		<spring:message code="rendezvouse.organisedMoment" />:
 	</form:label>
-	<form:input path="createMoment" placeholder="yyyy/MM/dd"
-		readonly="true" />
-	<form:errors cssClass="error" path="createMoment" />
+	<form:input path="organisedMoment" placeholder="yyyy/MM/dd" />
+	<form:errors cssClass="error" path="organisedMoment" />
 	<br />
 	<br />
 
-	<form:label path="displayedMoment">
-		<spring:message code="xxx.displayedMoment" />:
+	<form:label path="draftMode">
+		<spring:message code="rendezvouse.draftMode" />:
 	</form:label>
-	<form:input path="displayedMoment" placeholder="yyyy/MM/dd HH:mm" />
-	<form:errors cssClass="error" path="displayedMoment" />
+	<form:select id="draftMode" path="draftMode">	
+		<form:option value="1" label="YES"/>
+		<form:option value="0" label="NO"/> 
+	</form:select>  
+	<br /> 
+	
+		<form:label path="forAdult">
+		<spring:message code="rendezvouse.forAdult" />:
+	</form:label>
+	<form:select id="forAdult" path="forAdult">	
+		<form:option value="1" label="YES"/>
+		<form:option value="0" label="NO"/> 
+	</form:select>  
+	<br /> 
+	
+		<form:label path="gps.longitude">
+		<spring:message code="rendezvouse.location.longitude" />:
+	</form:label>
+	<form:input path="gps.longitude" />
+	<form:errors cssClass="error" path="gps.longitude" />
 	<br />
+	
+	<form:label path="gps.latitude">
+		<spring:message code="rendezvouse.location.latitude" />:
+	</form:label>
+	<form:input path="gps.latitude" />
+	<form:errors cssClass="error" path="gps.latitude" />
 	<br />
+	
 
+	<form:label path="similarRendezvouses">
+		<spring:message code="rendezvous.similarRendezvouses" />:
+	</form:label>
+	<form:select id="similarRendezvouses" path="similarRendezvouses" >
+		<form:option value="0" label="----" />			
+		<form:options items="${similarRendezvouses}" itemValue="id" itemLabel="name" />		
+	</form:select>
+	<form:errors cssClass="error" path="similarRendezvouses" />
+	<br />
+	<br />  
 
-	<jstl:if test="${(row.trip == null)}">
-		<h2>
-			<spring:message code="xxx.trip.display" />
-		</h2>
-		<form:label path="trip">
-			<spring:message code="xxx.trip.display" />:
- </form:label>
-		<form:select id="trip" path="trip">
-			<form:option value="0" label="----" />
-			<form:options items="${trips}" itemValue="id" itemLabel="title" />
-		</form:select>
-		<form:errors cssClass="error" path="trip" />
-		<br />
-		<br />
-	</jstl:if>
 	<!-- botones -->
 
 	<input type="submit" name="save"
-		value="<spring:message code="xxx.save"/>" />&nbsp;
+		value="<spring:message code="rendezvous.save"/>" />&nbsp;
 		
-	<jstl:if test="${XXX.id !=0 }">
+	<jstl:if test="${rendezvouse.id !=0 }">
 		<input type="submit" name="delete"
-			value="<spring:message code="xxx.delete"/>"
-			onclick="javascript: return confirm('<spring:message code="xxx.confirm.delete"/>')" />&nbsp;
+			value="<spring:message code="rendezvous.delete"/>"
+			onclick="javascript: return confirm('<spring:message code="rendezvous.confirm.delete"/>')" />&nbsp;
 	</jstl:if>
 
 	<input type="button" name="cancel"
-		value="<spring:message code="xxx.cancel"/>"
-		onclick="javascript: window.location.replace('xxx/manager/list.do')" />
+		value="<spring:message code="rendezvous.cancel"/>"
+		onclick="javascript: window.location.replace('rendezvous/user/list.do')" />
 	<br />
 
 </form:form>
+
+
