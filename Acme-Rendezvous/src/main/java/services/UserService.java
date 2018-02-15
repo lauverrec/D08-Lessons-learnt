@@ -50,6 +50,7 @@ public class UserService {
 		
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
+		result.setUserAccount(userAccount);
 		result.setRendezvousesCreated(rendezvousesCreated);
 		result.setRendezvousesAssisted(rendezvousesAssisted);
 		

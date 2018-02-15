@@ -27,8 +27,8 @@ public class User extends Actor {
 
 	@NotNull
 	@Past
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getBirthDate() {
 		return this.birthDate;
 	}

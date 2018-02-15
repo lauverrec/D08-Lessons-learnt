@@ -34,14 +34,18 @@
 	<spring:message code="user.surname" var="surnameHeader" />:
 	<display:column property="surname" title="${surnameHeader}" sortable="true" />
 	
-	<spring:message code="user.postalAddress" var="postalAddressHeader" />:
-	<display:column property="postalAddress" title="${postalAddressHeader}" sortable="true" />
+	<!-- Action links -->
+
+		
+	<spring:message code="user.profile" var="profileHeader" />
+	<display:column title="${profileHeader}" sortable="true">
+		
+		<spring:url value="user/display.do" var="profileURL">
+		<spring:param name="userId" value="${row.id}"/>
+		</spring:url>
+		<a href="${profileURL}"><spring:message code="user.profile"/></a>
+		
+	</display:column>	
 	
-	
-	<spring:message code="user.phoneNumber" var="phoneNumberHeader" />:
-	<display:column property="phoneNumber" title="${phoneNumberHeader}" sortable="true" />
-	
-	<spring:message code="user.emailAddress" var="emailAddressHeader" />:
-	<display:column property="emailAddress" title="${emailAddressHeader}" sortable="true" />
 	
 </display:table>
