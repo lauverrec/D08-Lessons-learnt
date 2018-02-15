@@ -38,8 +38,8 @@
 	
 	
 	<!-- Attributes -->
-	<spring:message code="question.question" var="questionHeader" />
-	<display:column property="question" title="${questionHeader}" sortable="true" />
+	<spring:message code="question.question" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}" sortable="true" />
 	
 </display:table>
 <security:authorize access="hasRole('USER')">

@@ -14,21 +14,22 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Question extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
-	private String	question;
+	private String	name;
 
 
 	@NotBlank
-	public String getQuestion() {
-		return this.question;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
 	//-----------------------------Relationships-----------------------------
 	private Rendezvouse	rendezvouse;
+
 	private User		user;
 
 

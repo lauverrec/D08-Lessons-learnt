@@ -67,7 +67,6 @@ public class QuestionService {
 		Assert.notNull(question);
 		Question result;
 		result = this.questionRepository.save(question);
-		Assert.notNull(question);
 		return result;
 	}
 

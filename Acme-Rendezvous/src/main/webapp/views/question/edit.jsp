@@ -24,21 +24,18 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="user"/>
-	<form:hidden path="rendezvouse"/>
 	
 <!-- ATRIBUTOS -->
 
 	
-	<form:label path="question">
+	<form:label path="name">
 		<spring:message code="question.question" />:
 	</form:label>
-	<form:input path="question" />
-	<form:errors cssClass="error" path="question" />
+	<form:input path="name" />
+	<form:errors cssClass="error" path="name" />
 	<br />
 	<br />
 	
-
-
 <h2><spring:message code="question.rendezvouse" /></h2>
 	<form:label path="rendezvouse">
 		<spring:message code="question.rendezvouse" />:

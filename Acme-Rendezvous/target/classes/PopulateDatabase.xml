@@ -412,31 +412,31 @@
 
 	<!-- Questions -->
 	<bean id="question1" class="domain.Question">
-		<property name="question" value="question 1 for rendezvouse 1" />
+		<property name="name" value="question 1 for rendezvouse 1" />
 		<property name="rendezvouse" ref="rendezvouse1" />
 		<property name="user" ref="user1" />
 	</bean>
 	
 	<bean id="question2" class="domain.Question">
-		<property name="question" value="question 2 for rendezvouse 2" />
+		<property name="name" value="question 2 for rendezvouse 2" />
 		<property name="rendezvouse" ref="rendezvouse2" />
 		<property name="user" ref="user2" />
 	</bean>
 	
 	<bean id="question3" class="domain.Question">
-		<property name="question" value="question 3 for rendezvouse 2" />
+		<property name="name" value="question 3 for rendezvouse 2" />
 		<property name="rendezvouse" ref="rendezvouse2" />
 		<property name="user" ref="user2" />
 	</bean>
 	
 	<bean id="question4" class="domain.Question">
-		<property name="question" value="question 1 for rendezvouse 4" />
+		<property name="name" value="question 1 for rendezvouse 4" />
 		<property name="rendezvouse" ref="rendezvouse4" />
 		<property name="user" ref="user4" />
 	</bean>
 	
 	<bean id="question5" class="domain.Question">
-		<property name="question" value="question 2 for rendezvouse 4" />
+		<property name="name" value="question 2 for rendezvouse 4" />
 		<property name="rendezvouse" ref="rendezvouse4" />
 		<property name="user" ref="user4" />
 	</bean>
