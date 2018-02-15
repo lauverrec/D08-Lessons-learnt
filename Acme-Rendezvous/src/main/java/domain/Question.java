@@ -29,7 +29,6 @@ public class Question extends DomainEntity {
 
 	//-----------------------------Relationships-----------------------------
 	private Rendezvouse	rendezvouse;
-
 	private User		user;
 
 

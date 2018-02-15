@@ -35,14 +35,15 @@
 		<a href="${editURL}"><spring:message code="question.edit"/></a>
 		</display:column>		
 	</security:authorize>
-	
-	<%-- <spring:message code="question.display" var="Display" />
-		<display:column title="${Display}" sortable="true">
-		<spring:url value="question/user/display.do" var="displayURL">
-		<spring:param name="questionId" value="${row.id}"/>
+
+	<spring:message code="question.answer" var="answerHeader" />
+	<display:column title="${answerHeader}" sortable="true">
+		<spring:url value="answer/display.do" var="auditRecordURL">
+			<spring:param name="questionId" value="${row.id}" />
 		</spring:url>
-		<a href="${displayURL}"><spring:message code="question.display"/></a>
-		</display:column> --%>
+			<a href="${auditRecordURL}"><spring:message code="question.answer" /></a>
+	</display:column>
+	
 	
 	<!-- Attributes -->
 	<spring:message code="question.name" var="nameHeader" />

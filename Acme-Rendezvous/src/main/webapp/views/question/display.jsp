@@ -33,14 +33,6 @@
 	<br/> 
 		
 		
-		<%-- <!-- Display -->
-	<jstl:if test="${!(row.trip == null)}">
-	<spring:message code="question.trip" var="tripHeader" />
-	<display:column title="${tripHeader}" class="<%= estilo %>">
-		<spring:url value="trip/display.do" var="displayURL">
-		<spring:param name="tripId" value="${row.trip.id}"/>
-		</spring:url>
-		<a href="${displayURL}"><spring:message code="question.trip"/></a>
-	</display:column>
- 	</jstl:if> --%>
+	
+
 </display:table>

@@ -20,26 +20,25 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<display:table name="Question" class="displaytag"
+<display:table name="Answer" class="displaytag"
   requestURI="${requestURI}" id="row">
   	
   	
 	<!-- Attributes -->
 
-	
-		<spring:message code="question.name" var="nameHeader" />
-		<display:column property="name" title="${nameHeader}" sortable="true"/>
+		<spring:message code="answer.reply" var="replyHeader" />
+		<display:column property="reply" title="${replyHeader}" sortable="true"/>
 		
 		
-		
-		<%-- <!-- Display -->
-	<jstl:if test="${!(row.trip == null)}">
-	<spring:message code="question.trip" var="tripHeader" />
-	<display:column title="${tripHeader}" class="<%= estilo %>">
-		<spring:url value="trip/display.do" var="displayURL">
-		<spring:param name="tripId" value="${row.trip.id}"/>
+	<spring:message code="answer.user" var="profileHeader" />
+	<display:column  title="${profileHeader}" sortable="true">
+		<spring:url value="user/display.do" var="profileURL">
+		<spring:param name="userId" value="${row.user.id}"/>
 		</spring:url>
-		<a href="${displayURL}"><spring:message code="question.trip"/></a>
-	</display:column>
- 	</jstl:if> --%>
+		<a href="${profileURL}"><spring:message code="answer.user"/></a>
+		
+	</display:column>	
+		
+		
+
 </display:table>
