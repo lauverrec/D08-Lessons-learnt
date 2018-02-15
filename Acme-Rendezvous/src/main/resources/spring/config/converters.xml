@@ -27,8 +27,8 @@
 		<bean class="converters.AnnouncementToStringConverter" />  
 		<bean class="converters.StringToAnnouncementConverter" />  
 		
-		<!-- <bean class="converters.CommentToStringConverter" /> --> 
- 		<!-- <bean class="converters.StringToCommentConverter" /> --> 
+		<bean class="converters.CommentToStringConverter" />
+ 		<bean class="converters.StringToCommentConverter" /> 
 		
 		<bean class="converters.GPSToStringConverter" /> 
 		<bean class="converters.StringToGPSConverter" />
@@ -44,6 +44,12 @@
 		
 		<bean class="converters.UserToStringConverter" /> 
 		<bean class="converters.StringToUserConverter" />
+		
+		<bean class="converters.AuthorityToStringConverter" /> 
+		<bean class="converters.StringToAuthorityConverter" />
+		
+		<bean class="converters.UserAccountToStringConverter" /> 
+		<bean class="converters.StringToUserAccountConverter" />
 		 
 	</util:list>
 	
