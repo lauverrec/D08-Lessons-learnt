@@ -47,15 +47,7 @@
 		
 	</display:column>
 	
-	<spring:message code="user.rendezvouse" var="renHeader" />
-	<display:column title="${renHeader}" sortable="true">
-		
-		<spring:url value="rendezvous_/list.do" var="renURL">
-		<spring:param name="userId" value="${row.id}"/>
-		</spring:url>
-		<a href="${renURL}"><spring:message code="user.rendezvouse"/></a>
-		
-	</display:column>	
+	
 	
 	
 </display:table>

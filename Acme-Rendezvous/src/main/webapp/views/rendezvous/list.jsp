@@ -69,7 +69,13 @@
 				<a href="${editURL}"><spring:message code="rendezvous.createAnnouncement1" /></a>
 		</display:column>		
 	</security:authorize>
-
+<spring:message code="rendezvouse.question" var="Question" />
+	<display:column title="${Question}" sortable="true">
+		<spring:url value="rendezvous_/question.do" var="editURL">
+			<spring:param name="rendezvouseId" value="${row.id}" />
+		</spring:url>
+		<a href="${editURL}"><spring:message code="rendezvouse.question" /></a>
+	</display:column>
 </display:table>
 <security:authorize access="hasRole('USER')">
 	<div>

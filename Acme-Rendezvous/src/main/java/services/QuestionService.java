@@ -98,4 +98,11 @@ public class QuestionService {
 		return questions;
 	}
 
+	public Collection<Question> findAllQuestionsByRendezvous(int rendezvouseId) {
+		Collection<Question> questions;
+
+		questions = this.questionRepository.findAllQuestionsByRendezvous(rendezvouseId);
+		return questions;
+	}
+
 }

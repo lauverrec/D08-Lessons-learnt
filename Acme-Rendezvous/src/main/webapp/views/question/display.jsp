@@ -25,14 +25,20 @@
   	
   	
 	<!-- Attributes -->
-<display:column>
+	<spring:message code="question.name" var="Question" />
+<display:column title="${Question}" sortable="true">
 	<B><spring:message code="question.name" />:
 		<jstl:out value="${row.name}"></jstl:out></B>
 	<p>
-</display:column>	
-	<br/> 
-		
-		
 	
+	<spring:message code="question.answer" var="Answer" />
+	<display:column title="${Answer}" sortable="true">
+		<spring:url value="rendezvous_/answer.do" var="editURL">
+			<spring:param name="questionId" value="${row.id}" />
+		</spring:url>
+		<a href="${editURL}"><spring:message code="question.answer" /></a>
+	</display:column> 
+</display:column>
+
 
 </display:table>
