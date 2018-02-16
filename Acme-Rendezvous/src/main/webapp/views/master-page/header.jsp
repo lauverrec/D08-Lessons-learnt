@@ -24,8 +24,18 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="administrator/edit.do"><spring:message code="master.page.administrator.edit" /></a></li>
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.statistics" /></a>
 				</ul>
+				
+				<li><a class="fNiv"><spring:message
+						code="master.page.accounts" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="administrator/create.do"><spring:message
+								code="master.page.administratorProfile.administrator.create" /></a></li>
+				</ul>
+				
 			</li>
 		</security:authorize>
 		

@@ -30,6 +30,22 @@ public class AdministratorService {
 
 
 	// Simple CRUD methods------------------------------------------------
+	public Administrator create() {
+		Administrator result;
+		UserAccount userAccount;
+		Authority authority;
+
+		result = new Administrator();
+		userAccount = new UserAccount();
+		authority = new Authority();
+
+		authority.setAuthority(Authority.ADMINISTRATOR);
+		userAccount.addAuthority(authority);
+		result.setUserAccount(userAccount);
+
+		return result;
+	}
+
 	public Collection<Administrator> findAll() {
 		Collection<Administrator> result;
 		result = this.administratorRepository.findAll();
