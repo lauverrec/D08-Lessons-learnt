@@ -50,6 +50,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Collection<Rendezvouse> findRendezvousesWithMore75PerCent();
 
 	//B/3 The rendezvouses that are linked to a number of rendezvouses that is great-er than the average plus 10%.
+	//TODO Aun no la se
 	@Query("select r from Rendezvouse r")
 	Collection<Rendezvouse> findRendezvousesWithAreLinked();
 
