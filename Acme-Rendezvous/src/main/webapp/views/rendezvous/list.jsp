@@ -26,11 +26,14 @@
 
 <security:authorize access="hasRole('USER')">
 	<spring:message code="rendezvous.edit" var="Edit" />
+	
 	<display:column title="${Edit}" sortable="true">
+	<jstl:if test="${row.draftMode==true }">
 		<spring:url value="rendezvous/user/edit.do" var="editURL">
 			<spring:param name="rendezvouseId" value="${row.id}" />
 		</spring:url>
 		<a href="${editURL}"><spring:message code="rendezvous.edit" /></a>
+		</jstl:if>
 	</display:column>
 	</security:authorize>
 	

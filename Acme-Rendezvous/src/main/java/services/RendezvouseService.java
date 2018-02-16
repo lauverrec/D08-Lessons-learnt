@@ -73,9 +73,11 @@ public class RendezvouseService {
 		Rendezvouse result;
 		User user;
 		user = this.userService.findByPrincipal();
-		rendezvouse.getAssistants().add(user);
+		if (rendezvouse.getId() == 0)
+			rendezvouse.getAssistants().add(user);
 		result = this.rendezvousRepository.save(rendezvouse);
-		user.getRendezvousesCreated().add(result);
+		if (rendezvouse.getId() == 0)
+			user.getRendezvousesCreated().add(result);
 		return result;
 	}
 
