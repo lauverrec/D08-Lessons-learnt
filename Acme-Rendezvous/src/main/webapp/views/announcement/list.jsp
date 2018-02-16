@@ -22,17 +22,33 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="announcements" requestURI="${RequestUri}" id="row">
+	name="announcements" requestURI="${requestURI}" id="row">
 
-	<spring:message code="announcement.title" var="titleHeader1" />
-	<display:column property="title" title="${titleHeader1}" sortable="true" />
-		
+	<security:authorize access="hasRole('USER')">
+	<spring:message code="announcement.edit" var="Edit" />
+	
+	<display:column title="${Edit}" sortable="true">
+		<spring:url value="announcement/user/edit.do" var="editURL">
+			<spring:param name="announcementId" value="${row.id}" />
+		</spring:url>
+		<a href="${editURL}"><spring:message code="announcement.edit" /></a>
+	</display:column>
+	</security:authorize>
+	
 	<spring:message code="announcement.format.madeMoment" var="pattern"></spring:message>
 	<spring:message code="announcement.madeMoment" var="momentHeader2" />
 	<display:column property="madeMoment" title="${momentHeader2}" sortable="true" format="${pattern}" />
+	
+	<spring:message code="announcement.title" var="titleHeader1" />
+	<display:column property="title" title="${titleHeader1}" sortable="true" />
+		
 	
 	<spring:message code="announcement.description" var="titleHeader3" />
 	<display:column property="description" title="${titleHeader3}" sortable="true" />
 		
 </display:table>
+
+<input type="button" name="cancel"
+		value="<spring:message code="announcement.back" />"
+		onclick="javascript: window.location.replace('rendezvous/user/list.do');" />
 

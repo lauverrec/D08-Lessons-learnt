@@ -1,6 +1,9 @@
 
 package controllers.user;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,21 @@ public class AnnouncementUserController extends AbstractController {
 		return result;
 	}
 
+	//Edition--------------------------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int announcementId) {
+		ModelAndView result;
+		Announcement announcement;
+		//User user;
+
+		//user = this.userService.findByPrincipal();
+		announcement = this.announcementService.findOne(announcementId);
+		//Assert.isTrue(user.getRendezvousesCreated().contains(announcement), "Cannot commit this operation, because it's illegal");
+		Assert.notNull(announcement);
+		result = this.createEditModelAndView(announcement);
+		return result;
+	}
+
 	// Save -----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Announcement announcement, BindingResult binding) {
@@ -54,10 +72,25 @@ public class AnnouncementUserController extends AbstractController {
 		else
 			try {
 				this.announcementService.save(announcement);
-				result = new ModelAndView("redirect:list.do?rendezvouseId=" + announcement.getRendezvouse().getId());
+				result = new ModelAndView("redirect:list.do?rendezvousId=" + announcement.getRendezvouse().getId());
 			} catch (Throwable oops) {
 				result = this.createEditModelAndView(announcement, "announcement.commit.error");
 			}
+		return result;
+	}
+
+	// Listing ----------------------------------------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int rendezvousId) {
+		ModelAndView result;
+		Collection<Announcement> announcements;
+
+		announcements = new ArrayList<>(this.announcementService.findAnnouncementByRendezvousId(rendezvousId));
+
+		result = new ModelAndView("announcement/list");
+		result.addObject("announcements", announcements);
+		result.addObject("requestURI", "announcement/user/list.do");
+
 		return result;
 	}
 

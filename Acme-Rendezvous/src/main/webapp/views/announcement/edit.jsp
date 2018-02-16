@@ -36,8 +36,8 @@
 	<form:label path="title">
 		<spring:message code="announcement.title" />:
 	</form:label>
-	<form:input path="title" readonly="true" />
-	<form:errors cssClass="error" path="code" />
+	<form:input path="title" readonly="false" />
+	<form:errors cssClass="error" path="title" />
 	<br />
 	<br />
 
@@ -47,6 +47,7 @@
 	</form:label>
 	<form:textarea rows="5px" cols="24px" path="description" />
 	<form:errors cssClass="error" path="description" />
+	<br />
 	<br />
 
 	
