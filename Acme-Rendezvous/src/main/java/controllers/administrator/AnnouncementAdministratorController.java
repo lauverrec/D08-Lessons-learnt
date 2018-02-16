@@ -1,6 +1,9 @@
 
 package controllers.administrator;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnnouncementService;
@@ -24,8 +28,35 @@ public class AnnouncementAdministratorController extends AbstractController {
 	private AnnouncementService	announcementService;
 
 
+	// Listing ----------------------------------------------------------------
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Announcement> announcements;
+
+		announcements = new ArrayList<>(this.announcementService.findAll());
+
+		result = new ModelAndView("announcement/list");
+		result.addObject("announcements", announcements);
+		result.addObject("requestURI", "announcement/administrator/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int announcementId) {
+		ModelAndView result;
+		Announcement announcement;
+
+		announcement = this.announcementService.findOne(announcementId);
+		Assert.notNull(announcement);
+		result = this.createEditModelAndView(announcement);
+		return result;
+	}
+
 	// Delete -----------------------------------------------------------------
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@Valid Announcement announcement, BindingResult binding) {
 		ModelAndView result;
 		int rendezvouseId = announcement.getRendezvouse().getId();
@@ -74,7 +105,7 @@ public class AnnouncementAdministratorController extends AbstractController {
 
 		ModelAndView result;
 
-		result = new ModelAndView("announcement/edit");
+		result = new ModelAndView("announcement/delete");
 		result.addObject("announcement", announcement);
 		result.addObject("message", messageCode);
 		return result;

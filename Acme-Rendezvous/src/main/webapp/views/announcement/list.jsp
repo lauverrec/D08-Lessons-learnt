@@ -35,6 +35,20 @@
 	</display:column>
 	</security:authorize>
 	
+	
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+	<spring:message code="announcement.delete" var="delete" />
+	<display:column title="${delete}" sortable="true">
+		<spring:url value="announcement/administrator/delete.do" var="editURL">
+			<spring:param name="announcementId" value="${row.id}" />
+		</spring:url>
+		<a href="${editURL}"><spring:message code="announcement.edit" /></a>
+	
+		
+	</display:column>
+	</security:authorize>
+	
+	
 	<spring:message code="announcement.format.madeMoment" var="pattern"></spring:message>
 	<spring:message code="announcement.madeMoment" var="momentHeader2" />
 	<display:column property="madeMoment" title="${momentHeader2}" sortable="true" format="${pattern}" />
@@ -48,7 +62,8 @@
 		
 </display:table>
 
+<security:authorize access="hasRole('USER')">
 <input type="button" name="cancel"
 		value="<spring:message code="announcement.back" />"
 		onclick="javascript: window.location.replace('rendezvous/user/list.do');" />
-
+</security:authorize>
