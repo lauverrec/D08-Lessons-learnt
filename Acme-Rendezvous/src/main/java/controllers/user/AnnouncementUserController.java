@@ -32,13 +32,13 @@ public class AnnouncementUserController extends AbstractController {
 
 	// Create -----------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int rendezvouseId) {
+	public ModelAndView create(@RequestParam int rendezvousId) {
 		ModelAndView result;
-		Rendezvouse rendezvouse;
+		Rendezvouse rendezvous;
 		Announcement announcement;
 
-		rendezvouse = this.rendezvouseService.findOne(rendezvouseId);
-		announcement = this.announcementService.create(rendezvouse);
+		rendezvous = this.rendezvouseService.findOne(rendezvousId);
+		announcement = this.announcementService.create(rendezvous);
 
 		result = this.createEditModelAndView(announcement);
 		return result;

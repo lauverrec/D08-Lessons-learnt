@@ -36,12 +36,3 @@
 		
 </display:table>
 
-<%-- 
-<security:authorize access="hasRole('USER)">
-	<div>
-		<a href="rendezvous/user/create.do"> <spring:message
-				code="announcement.create" />
-		</a>
-	</div>
-</security:authorize> --%>
-

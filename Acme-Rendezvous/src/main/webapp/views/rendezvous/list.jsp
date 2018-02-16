@@ -49,13 +49,26 @@
 	<display:column property="picture" title="${titleHeader}"
 		sortable="true" />
 		
-
-
+	<spring:message code="rendezvous.announcement" var="announcements" />
+	<display:column title="${announcements}" sortable="true">
+		<spring:url value="announcement/list.do" var="announcementURL">
+			<spring:param name="rendezvousId" value="${row.id }" />
+		</spring:url>
+			<a href="${announcementURL}"><spring:message code="rendezvous.announcement" /></a>
+	</display:column>
+	
+	<security:authorize access="hasRole('USER')">
+	<spring:message code="rendezvous.createAnnouncement" var="createAnnouncement" />
+		<display:column title="${createAnnouncement}" sortable="true">
+				<spring:url value="announcement/user/create.do" var="editURL">
+					<spring:param name="rendezvousId" value="${row.id}" />
+				</spring:url>
+				<a href="${editURL}"><spring:message code="rendezvous.createAnnouncement1" /></a>
+		</display:column>		
+	</security:authorize>
 
 </display:table>
 <security:authorize access="hasRole('USER')">
-
-
 	<div>
 		<a href="rendezvous/user/create.do"> <spring:message
 				code="rendezvous.create" />

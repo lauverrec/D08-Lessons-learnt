@@ -26,11 +26,11 @@ public class AnnouncementController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam int rendezvouseId) {
+	public ModelAndView list(@RequestParam int rendezvousId) {
 		ModelAndView result;
 		Collection<Announcement> announcements;
 
-		announcements = new ArrayList<>(this.announcementService.findAnnouncementByRendezvousId(rendezvouseId));
+		announcements = new ArrayList<>(this.announcementService.findAnnouncementByRendezvousId(rendezvousId));
 
 		result = new ModelAndView("announcement/list");
 		result.addObject("announcements", announcements);
