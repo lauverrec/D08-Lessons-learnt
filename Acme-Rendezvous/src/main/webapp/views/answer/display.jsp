@@ -25,22 +25,10 @@
   	
   	
 	<!-- Attributes -->
-	
-
-		
 		<spring:message code="answer.reply" var="replyHeader" />
 		<display:column property="reply" title="${replyHeader}" sortable="true"/>
 		
-		
-	<%-- <spring:message code="answer.user" var="profileHeader" />
-	<display:column  title="${profileHeader}" sortable="true">
-		<spring:url value="user/display.do" var="profileURL">
-		<spring:param name="userId" value="${row.user.id}"/>
-		</spring:url>
-		<a href="${profileURL}"><spring:message code="answer.user"/></a>
-		
-	</display:column> --%>	
-		
-		
+		<spring:message code="answer.user" var="userHeader" />
+		<display:column property="user.name" title="${userHeader}" sortable="true"/>
 
 </display:table>
