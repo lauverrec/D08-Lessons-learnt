@@ -100,10 +100,28 @@ public class RendezvousesUserController extends AbstractController {
 			this.rendezvouseService.delete(rendezvouse);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(rendezvouse, "contactEmergency.commit.error");
+			result = this.createEditModelAndView(rendezvouse, "rendezvouse.commit.error");
 		}
 
 		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "deletevirtual")
+	public ModelAndView deletevirtual(@ModelAttribute final Rendezvouse rendezvouse, final BindingResult bindingResult) {
+		ModelAndView result;
+
+		if (bindingResult.hasErrors())
+			result = this.createEditModelAndView(rendezvouse);
+		else
+			try {
+				this.rendezvouseService.deletevirtual(rendezvouse);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(rendezvouse, "rendezvouse.commit.error");
+			}
+
+		return result;
+
 	}
 	//ancially methods---------------------------------------------------------------------------
 

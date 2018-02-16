@@ -81,8 +81,18 @@ public class RendezvouseService {
 
 	public void delete(final Rendezvouse rendezvouse) {
 		User user;
+		Collection<Rendezvouse> empty;
+		Collection<User> emptyAsistants;
+		empty = new ArrayList<Rendezvouse>();
+		emptyAsistants = new ArrayList<User>();
 		user = this.userService.findByPrincipal();
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse));
+
+		user.getRendezvousesCreated().remove(rendezvouse);
+		user.getRendezvousesAssisted().remove(rendezvouse);
+		rendezvouse.setSimilarRendezvouses(empty);
+		rendezvouse.setAssistants(emptyAsistants);
+
 		this.rendezvousRepository.delete(rendezvouse);
 
 	}
@@ -113,5 +123,14 @@ public class RendezvouseService {
 		res = this.rendezvousRepository.findRendezvousesAssitedByUser2(userId);
 		return res;
 
+	}
+
+	public Rendezvouse deletevirtual(final Rendezvouse rendezvouse) {
+		Rendezvouse result;
+		Assert.notNull(rendezvouse);
+		boolean aux = true;
+		rendezvouse.setDeleted(aux);
+		result = this.rendezvousRepository.save(rendezvouse);
+		return result;
 	}
 }

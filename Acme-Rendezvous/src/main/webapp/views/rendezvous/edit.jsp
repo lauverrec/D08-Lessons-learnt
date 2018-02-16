@@ -114,7 +114,7 @@
 		value="<spring:message code="rendezvous.save"/>" />&nbsp;
 		
 	<jstl:if test="${rendezvouse.id !=0 }">
-		<input type="submit" name="delete"
+		<input type="submit" name="deletevirtual"
 			value="<spring:message code="rendezvous.delete"/>"
 			onclick="javascript: return confirm('<spring:message code="rendezvous.confirm.delete"/>')" />&nbsp;
 	</jstl:if>
