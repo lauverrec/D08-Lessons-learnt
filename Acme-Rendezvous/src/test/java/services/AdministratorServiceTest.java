@@ -15,7 +15,6 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 import domain.Administrator;
 import domain.Rendezvouse;
-import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -107,7 +106,7 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	@Test
 	public void findTop10RendezvouseWithRSVPd() {
-		Collection<User> res;
+		Collection<Rendezvouse> res;
 		res = this.administratorService.findTop10RendezvouseWithRSVPd();
 		Assert.notNull(res);
 	}

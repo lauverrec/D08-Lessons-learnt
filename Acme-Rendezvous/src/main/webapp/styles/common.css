@@ -17,3 +17,8 @@
 	color: red;
 	font-weight: bolder;
 }
+
+.caption {
+	font-size: 35px;
+	font-family: sans-serif;
+}

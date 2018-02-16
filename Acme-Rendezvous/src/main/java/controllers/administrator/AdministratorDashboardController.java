@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AdministratorService;
 import controllers.AbstractController;
 import domain.Rendezvouse;
-import domain.User;
 
 @Controller
 @RequestMapping(value = "/administrator")
@@ -35,7 +34,7 @@ public class AdministratorDashboardController extends AbstractController {
 		Double findRatioUsersWithRendezvousesAndNotRendezvouses;
 		Double findAvgStddevOfTheNumOfAssistansPerRendezvouse;
 		Double findAvgStddevOfTheNumOfRendezvouseAssitedPerUser[];
-		Collection<User> findTop10RendezvouseWithRSVPd;
+		Collection<Rendezvouse> findTop10RendezvouseWithRSVPd;
 		Double findAvgStddevOfTheNumOfAnnouncementsPerRendezvous[];
 		Collection<Rendezvouse> findRendezvousesWithMore75PerCent;
 		Collection<Rendezvouse> findRendezvousesWithAreLinked;
@@ -58,7 +57,7 @@ public class AdministratorDashboardController extends AbstractController {
 		result.addObject("findAvgStddevOfTheNumOfRendezvouseCreatedPerUser", findAvgStddevOfTheNumOfRendezvouseCreatedPerUser);
 		result.addObject("findRatioUsersWithRendezvousesAndNotRendezvouses", findRatioUsersWithRendezvousesAndNotRendezvouses);
 		result.addObject("findAvgStddevOfTheNumOfAssistansPerRendezvouse", findAvgStddevOfTheNumOfAssistansPerRendezvouse);
-		result.addObject("findRatOfApplicationsAccepted", findAvgStddevOfTheNumOfRendezvouseAssitedPerUser);
+		result.addObject("findAvgStddevOfTheNumOfRendezvouseAssitedPerUser", findAvgStddevOfTheNumOfRendezvouseAssitedPerUser);
 		result.addObject("findTop10RendezvouseWithRSVPd", findTop10RendezvouseWithRSVPd);
 		result.addObject("findAvgStddevOfTheNumOfAnnouncementsPerRendezvous", findAvgStddevOfTheNumOfAnnouncementsPerRendezvous);
 		result.addObject("findRendezvousesWithMore75PerCent", findRendezvousesWithMore75PerCent);
