@@ -68,8 +68,8 @@ public class AnswerService {
 
 		user = this.userService.findByPrincipal();
 
-		answer.setUser(user);
 		result = this.answerRepository.save(answer);
+		answer.setUser(user);
 		Assert.notNull(answer);
 		return result;
 	}

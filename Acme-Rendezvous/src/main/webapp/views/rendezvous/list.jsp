@@ -96,6 +96,7 @@
 		</spring:url>
 		<a href="${editURL}"><spring:message code="rendezvouse.question" /></a>
 	</display:column>
+	
 
 <spring:message code="rendezvouse.assistans" var="ASS" />
 	<display:column title="${ASS}" sortable="true">
