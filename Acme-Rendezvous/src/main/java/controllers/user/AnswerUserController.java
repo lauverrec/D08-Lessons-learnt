@@ -17,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AnswerService;
 import services.QuestionService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Answer;
 import domain.Question;
+import domain.User;
 
 @Controller
 @RequestMapping("/answer/user")
@@ -33,9 +35,9 @@ public class AnswerUserController extends AbstractController {
 	@Autowired
 	private QuestionService	questionService;
 
+	@Autowired
+	private UserService		userService;
 
-	//	@Autowired
-	//	private UserService		userService;
 
 	//Constructor--------------------------------------------------------
 
@@ -75,11 +77,14 @@ public class AnswerUserController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int answerId) {
 		ModelAndView result;
 		Answer answer;
+		User user;
 
+		user = this.userService.findByPrincipal();
 		answer = this.answerService.findOne(answerId);
 		Assert.notNull(answer);
+		Assert.isTrue(this.answerService.findAllAnswersByUserId().contains(answer), "Cannot commit this operation because it's illegal");
 		result = this.createEditModelAndView(answer);
-
+		result.addObject("user", user);
 		return result;
 	}
 
