@@ -39,6 +39,15 @@
 					<li><a href="administrator/create.do"><spring:message
 								code="master.page.administratorProfile.administrator.create" /></a></li>
 				</ul></li>
+				
+			<li><a class="fNiv"><spring:message
+						code="master.page.announcements" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="announcement/administrator/list.do"><spring:message
+								code="master.page.announcement.administrator.list" /></a></li>
+				</ul>	
+			</li>
 			
 			<li><a class="fNiv"><spring:message
 						code="master.page.rendezvous" /></a>
