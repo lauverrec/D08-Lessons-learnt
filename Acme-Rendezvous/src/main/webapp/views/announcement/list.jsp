@@ -35,20 +35,6 @@
 	</display:column>
 	</security:authorize>
 	
-	
-	<security:authorize access="hasRole('ADMINISTRATOR')">
-	<spring:message code="announcement.delete" var="delete" />
-	<display:column title="${delete}" sortable="true">
-		<spring:url value="announcement/administrator/delete.do" var="editURL">
-			<spring:param name="announcementId" value="${row.id}" />
-		</spring:url>
-		<a href="${editURL}"><spring:message code="announcement.edit" /></a>
-	
-		
-	</display:column>
-	</security:authorize>
-	
-	
 	<spring:message code="announcement.format.madeMoment" var="pattern"></spring:message>
 	<spring:message code="announcement.madeMoment" var="momentHeader2" />
 	<display:column property="madeMoment" title="${momentHeader2}" sortable="true" format="${pattern}" />
@@ -59,6 +45,18 @@
 	
 	<spring:message code="announcement.description" var="titleHeader3" />
 	<display:column property="description" title="${titleHeader3}" sortable="true" />
+	
+		<!-- Boton de delete para el administrador ya que puede borrar las Announcement que quiera pero no editarlas -->
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<spring:message code="announcement.delete" var="delete" />
+
+		<display:column title="${delete}" sortable="true">
+				<spring:url value="announcement/administrator/delete.do" var="editURL">
+					<spring:param name="announcementId" value="${row.id}" />
+				</spring:url>
+				<a href="${editURL}"><spring:message code="announcement.delete" /></a>
+		</display:column>
+	</security:authorize>
 		
 </display:table>
 
