@@ -46,14 +46,15 @@
 	<display:column property="description" title="${titleHeader}"
 		sortable="true" />
 
+	<spring:message code="ren.format.date" var="pattern"></spring:message>
 	<spring:message code="rendezvouse.organisedMoment" var="titleHeader" />
 	<display:column property="organisedMoment" title="${titleHeader}"
-		sortable="true" />
+		sortable="true" format="${pattern}"/>
 
 	<spring:message code="rendezvouse.picture" var="titleHeader" />
-	<display:column property="picture" title="${titleHeader}"
-		sortable="true" />
-
+	<display:column title="${titleHeader}">
+	<a href="${row.picture}"><spring:message code="rendezvouse.picture"/></a>
+</display:column>
 <!-- ENLACES -->
 	<security:authorize access="isAnonymous()">
 	<spring:message code="rendezvous.announcement" var="announcements" />
