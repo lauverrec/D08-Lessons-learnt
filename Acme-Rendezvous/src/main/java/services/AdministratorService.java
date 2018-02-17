@@ -18,7 +18,6 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Rendezvouse;
-import domain.User;
 
 @Service
 @Transactional
@@ -132,9 +131,9 @@ public class AdministratorService {
 		return result;
 	}
 
-	public Collection<User> findTop10RendezvouseWithRSVPd() {
-		Collection<User> result;
-		final Page<User> resPage;
+	public Collection<Rendezvouse> findTop10RendezvouseWithRSVPd() {
+		Collection<Rendezvouse> result;
+		final Page<Rendezvouse> resPage;
 		final Pageable pageable;
 
 		pageable = new PageRequest(0, 10);

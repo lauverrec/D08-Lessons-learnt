@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
 import domain.Rendezvouse;
-import domain.User;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
@@ -37,7 +36,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	//C/5 The top-10 rendezvouses in terms of users who have RSVPd them.
 	@Query("select r from Rendezvouse r where r.assistants.size!=0 order by r.assistants.size desc")
-	Page<User> findTop10RendezvouseWithRSVPd(Pageable pageable);
+	Page<Rendezvouse> findTop10RendezvouseWithRSVPd(Pageable pageable);
 
 	//B/1 The average and the standard deviation of announcements per rendezvous.
 	//TODO No tengo navegabilidad de rendezvous a announcement para hacerlo con select avg(r.announcements.size), stddev(r.announcements.size) from Rendezvous r
