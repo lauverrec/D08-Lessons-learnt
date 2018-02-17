@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.RendezvouseRepository;
+import domain.Announcement;
 import domain.Rendezvouse;
 import domain.User;
 
@@ -39,11 +40,15 @@ public class RendezvouseService {
 		Rendezvouse result;
 		Collection<User> assistants;
 		Collection<Rendezvouse> similarRendezvouses;
+		Collection<Announcement> announcements;
+
+		announcements = new ArrayList<Announcement>();
 		similarRendezvouses = new ArrayList<Rendezvouse>();
 		assistants = new ArrayList<User>();
-
 		result = new Rendezvouse();
+
 		result.setAssistants(assistants);
+		result.setAnnouncements(announcements);
 		result.setSimilarRendezvouses(similarRendezvouses);
 		result.setDeleted(false);
 
