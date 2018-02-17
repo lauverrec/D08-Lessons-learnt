@@ -93,6 +93,7 @@ public class RendezvouseService {
 		empty = new ArrayList<Rendezvouse>();
 		emptyAsistants = new ArrayList<User>();
 		user = this.userService.findByPrincipal();
+		Assert.isTrue(rendezvouse.isDraftMode() == true);
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse));
 
 		user.getRendezvousesCreated().remove(rendezvouse);
@@ -144,6 +145,7 @@ public class RendezvouseService {
 		Rendezvouse result;
 		Assert.notNull(rendezvouse);
 		boolean aux = true;
+		Assert.isTrue(rendezvouse.isDraftMode() == true);
 		rendezvouse.setDeleted(aux);
 		result = this.rendezvousRepository.save(rendezvouse);
 		return result;

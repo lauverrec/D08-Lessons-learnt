@@ -77,34 +77,5 @@
 		</display:column>
 	<p>
 	
-	<%-- <spring:message code="rendezvouse.name" var="titleHeader" />
-	<display:column property="name" title="${titleHeader}" sortable="true" /> --%>
-
-	<%-- <spring:message code="rendezvouse.description" var="titleHeader" />
-	<display:column property="description" title="${titleHeader}"
-		sortable="true" />
-
-	<spring:message code="ren.format.date" var="pattern"></spring:message>
-	<spring:message code="rendezvouse.organisedMoment" var="titleHeader" />
-	<display:column property="organisedMoment" title="${titleHeader}"
-		sortable="true" format="${pattern}"/>
-
-	<spring:message code="rendezvouse.location.longitude" var="gpsHeader" />
-	<display:column property="gps.longitude" title="${gpsHeader}"
-		sortable="true" />
-		
-	<spring:message code="rendezvouse.draftMode" var="draftModeHeader" />
-	<display:column property="draftMode" title="${draftModeHeader}"
-		sortable="true" />
-		
-	<spring:message code="rendezvouse.deleted" var="deletedHeader" />
-	<display:column property="deleted" title="${deletedHeader}"
-		sortable="true" />
-		
-	<spring:message code="rendezvouse.forAdult" var="forAdultHeader" />
-	<display:column property="forAdult" title="${forAdultHeader}"
-		sortable="true" />
-	
- --%>
 
 </display:table>
