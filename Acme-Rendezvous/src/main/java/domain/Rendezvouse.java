@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -103,8 +104,9 @@ public class Rendezvouse extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Collection<User>		assistants;
-	private Collection<Rendezvouse>	similarRendezvouses;
+	private Collection<User>			assistants;
+	private Collection<Rendezvouse>		similarRendezvouses;
+	private Collection<Announcement>	announcements;
 
 
 	@Valid
@@ -127,6 +129,17 @@ public class Rendezvouse extends DomainEntity {
 
 	public void setSimilarRendezvouses(final Collection<Rendezvouse> similarRendezvouses) {
 		this.similarRendezvouses = similarRendezvouses;
+	}
+
+	@Valid
+	@NotNull
+	@OneToMany
+	public Collection<Announcement> getAnnouncements() {
+		return this.announcements;
+	}
+
+	public void setAnnouncements(Collection<Announcement> announcements) {
+		this.announcements = announcements;
 	}
 
 }

@@ -103,6 +103,15 @@
 								code="master.page.mi.rendezvous" /></a></li>
 
 				</ul></li>
+				
+				<li><a class="fNiv"><spring:message
+						code="master.page.announcementsUser" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="announcement/user/listAll.do"><spring:message
+								code="master.page.mi.announcementUser" /></a></li>
+
+				</ul></li>
 		</security:authorize>
 
 
