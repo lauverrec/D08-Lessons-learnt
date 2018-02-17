@@ -24,19 +24,19 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestURI }" id="row">
 
-<security:authorize access="hasRole('USER')">
-	<spring:message code="rendezvous.edit" var="Edit" />
-	
-	<display:column title="${Edit}" sortable="true">
-	<jstl:if test="${row.draftMode==true }">
-		<spring:url value="rendezvous/user/edit.do" var="editURL">
-			<spring:param name="rendezvouseId" value="${row.id}" />
-		</spring:url>
-		<a href="${editURL}"><spring:message code="rendezvous.edit" /></a>
-		</jstl:if>
-	</display:column>
+	<security:authorize access="hasRole('USER')">
+		<spring:message code="rendezvous.edit" var="Edit" />
+
+		<display:column title="${Edit}" sortable="true">
+			<jstl:if test="${row.draftMode==true }">
+				<spring:url value="rendezvous/user/edit.do" var="editURL">
+					<spring:param name="rendezvouseId" value="${row.id}" />
+				</spring:url>
+				<a href="${editURL}"><spring:message code="rendezvous.edit" /></a>
+			</jstl:if>
+		</display:column>
 	</security:authorize>
-	
+
 	<spring:message code="rendezvouse.name" var="titleHeader" />
 	<display:column property="name" title="${titleHeader}" sortable="true" />
 
@@ -51,31 +51,47 @@
 	<spring:message code="rendezvouse.picture" var="titleHeader" />
 	<display:column property="picture" title="${titleHeader}"
 		sortable="true" />
-		
+
 	<spring:message code="rendezvous.announcement" var="announcements" />
 	<display:column title="${announcements}" sortable="true">
 		<spring:url value="announcement/user/list.do" var="announcementURL">
 			<spring:param name="rendezvousId" value="${row.id }" />
 		</spring:url>
-			<a href="${announcementURL}"><spring:message code="rendezvous.announcement" /></a>
+		<a href="${announcementURL}"><spring:message
+				code="rendezvous.announcement" /></a>
 	</display:column>
-	
+
 	<security:authorize access="hasRole('USER')">
-	<spring:message code="rendezvous.createAnnouncement" var="createAnnouncement" />
+		<spring:message code="rendezvous.createAnnouncement"
+			var="createAnnouncement" />
 		<display:column title="${createAnnouncement}" sortable="true">
-				<spring:url value="announcement/user/create.do" var="editURL">
-					<spring:param name="rendezvousId" value="${row.id}" />
-				</spring:url>
-				<a href="${editURL}"><spring:message code="rendezvous.createAnnouncement1" /></a>
-		</display:column>		
+			<spring:url value="announcement/user/create.do" var="editURL">
+				<spring:param name="rendezvousId" value="${row.id}" />
+			</spring:url>
+			<a href="${editURL}"><spring:message
+					code="rendezvous.createAnnouncement1" /></a>
+		</display:column>
 	</security:authorize>
-<spring:message code="rendezvouse.question" var="Question" />
+	<spring:message code="rendezvouse.question" var="Question" />
 	<display:column title="${Question}" sortable="true">
 		<spring:url value="rendezvous_/question.do" var="editURL">
 			<spring:param name="rendezvouseId" value="${row.id}" />
 		</spring:url>
 		<a href="${editURL}"><spring:message code="rendezvouse.question" /></a>
 	</display:column>
+
+	<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<spring:message code="rendezvous.delete" var="delete" />
+
+		<display:column title="${delete}" sortable="true">
+				<spring:url value="rendezvous/administrator/delete.do" var="editURL">
+					<spring:param name="rendezvousId" value="${row.id}" />
+				</spring:url>
+				<a href="${editURL}"><spring:message code="rendezvous.delete" /></a>
+		</display:column>
+	</security:authorize>
+
 </display:table>
 <security:authorize access="hasRole('USER')">
 	<div>
