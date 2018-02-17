@@ -19,32 +19,28 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="${requestURI}" modelAttribute="Answer">
+<form:form action="answer/user/edit.do" modelAttribute="Answer">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="user"/>
+	<form:hidden path="question"/>
 	
 <!-- ATRIBUTOS -->
 
-<form:label path="question.name">
-		<spring:message code="answer.question" />:
-	</form:label>
-	<form:input path="question.name" readonly="true"/>
-	<form:errors cssClass="error" path="question.name" />
-	<br />
-	<br />
-	
 	
 	<form:label path="reply">
 		<spring:message code="answer.reply" />:
 	</form:label>
-	<form:input path="reply" readonly="true"/>
+	<form:input path="reply"/>
 	<form:errors cssClass="error" path="reply" />
 	<br />
 	<br />
 
 <!-- BOTONES -->	
+<input type="submit" name="save"
+		value="<spring:message code="answer.save"/>" />&nbsp;
+		
 	<jstl:if test="${Answer.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message code="answer.delete" />"
@@ -53,6 +49,6 @@
 	
 	<input type="button" name="cancel"
 		value="<spring:message code="answer.cancel" />"
-		onclick="javascript:  window.location.replace('answer/user/list.do');" />
+		onclick="javascript:  window.location.replace('rendezvous/user/list-RSVP.do');" />
 	<br />
 </form:form>

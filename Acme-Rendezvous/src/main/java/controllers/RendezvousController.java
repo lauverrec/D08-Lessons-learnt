@@ -34,12 +34,12 @@ public class RendezvousController extends AbstractController {
 	public ModelAndView list(int userId) {
 
 		ModelAndView result;
-		Collection<Rendezvouse> users;
+		Collection<Rendezvouse> rens;
 
-		users = this.rendezvouseService.findRendezvousesAssitedByUser2(userId);
+		rens = this.rendezvouseService.findRendezvousesAssitedByUser2(userId);
 
 		result = new ModelAndView("rendezvous/list");
-		result.addObject("rendezvous", users);
+		result.addObject("rendezvous", rens);
 		result.addObject("requestURI", "rendezvous_/list.do");
 
 		return result;

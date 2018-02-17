@@ -24,6 +24,7 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestURI }" id="row">
 
+<!-- ENLACE EDITAR -->
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="rendezvous.edit" var="Edit" />
 
@@ -37,6 +38,7 @@
 		</display:column>
 	</security:authorize>
 
+<!-- ATRIBUTOS -->
 	<spring:message code="rendezvouse.name" var="titleHeader" />
 	<display:column property="name" title="${titleHeader}" sortable="true" />
 
@@ -52,6 +54,7 @@
 	<display:column property="picture" title="${titleHeader}"
 		sortable="true" />
 
+<!-- ENLACES -->
 	<security:authorize access="isAnonymous()">
 	<spring:message code="rendezvous.announcement" var="announcements" />
 	<display:column title="${announcements}" sortable="true">
@@ -106,6 +109,8 @@
 	</security:authorize>
 
 </display:table>
+
+
 <security:authorize access="hasRole('USER')">
 	<div>
 		<a href="rendezvous/user/create.do"> <spring:message

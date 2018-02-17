@@ -38,7 +38,7 @@
 
 	<spring:message code="question.answer" var="answerHeader" />
 	<display:column title="${answerHeader}" sortable="true">
-		<spring:url value="answer/display.do" var="auditRecordURL">
+		<spring:url value="answer/list.do" var="auditRecordURL">
 			<spring:param name="questionId" value="${row.id}" />
 		</spring:url>
 			<a href="${auditRecordURL}"><spring:message code="question.answer" /></a>

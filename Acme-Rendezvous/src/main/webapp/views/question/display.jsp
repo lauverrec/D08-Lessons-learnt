@@ -25,11 +25,29 @@
   	
   	
 	<!-- Attributes -->
+
 	<spring:message code="question.name" var="Question" />
 <display:column title="${Question}" sortable="true">
 	<B><spring:message code="question.name" />:
 		<jstl:out value="${row.name}"></jstl:out></B>
-	<p>
+</display:column>
+	
+	
+	<security:authorize access="hasRole('USER')">
+	<spring:message code="question.answer.create" var="Answer" />
+	<display:column title="${Answer}" sortable="true">
+	
+		<spring:url value="answer/user/create.do" var="editURL">
+			<spring:param name="questionId" value="${row.id}" />
+		</spring:url>
+		<a href="${editURL}"><spring:message code="question.answer.create.reply" /></a>
+	
+	</display:column> 
+	</security:authorize>
+	
+	
+	
+	
 	
 	<spring:message code="question.answer" var="Answer" />
 	<display:column title="${Answer}" sortable="true">
@@ -38,7 +56,7 @@
 		</spring:url>
 		<a href="${editURL}"><spring:message code="question.answer" /></a>
 	</display:column> 
-</display:column>
-
+	
+	
 
 </display:table>

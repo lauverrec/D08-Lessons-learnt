@@ -50,6 +50,25 @@ public class RendezvousesUserController extends AbstractController {
 		return result;
 
 	}
+
+	//Listing-----------------------------------------------------------
+
+	@RequestMapping(value = "/list-RSVP", method = RequestMethod.GET)
+	public ModelAndView list2() {
+
+		ModelAndView result;
+		Collection<Rendezvouse> rens;
+
+		rens = this.rendezvouseService.findRendezvousesAssitedByUser();
+
+		result = new ModelAndView("rendezvous/list");
+		result.addObject("rendezvous", rens);
+		result.addObject("requestURI", "rendezvous/user/list-RSVP.do");
+
+		return result;
+
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;

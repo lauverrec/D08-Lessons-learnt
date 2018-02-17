@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.AnswerRepository;
 import domain.Answer;
+import domain.Question;
 import domain.User;
 
 @Service
@@ -35,13 +36,14 @@ public class AnswerService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Answer create() {
+	public Answer create(Question question) {
 		Answer result;
 		User user;
 
 		user = this.userService.findByPrincipal();
 		result = new Answer();
 
+		result.setQuestion(question);
 		result.setUser(user);
 		return result;
 	}
@@ -62,6 +64,11 @@ public class AnswerService {
 	public Answer save(Answer answer) {
 		Assert.notNull(answer);
 		Answer result;
+		User user;
+
+		user = this.userService.findByPrincipal();
+
+		answer.setUser(user);
 		result = this.answerRepository.save(answer);
 		Assert.notNull(answer);
 		return result;

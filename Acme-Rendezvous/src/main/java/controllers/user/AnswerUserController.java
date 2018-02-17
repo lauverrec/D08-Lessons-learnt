@@ -3,6 +3,8 @@ package controllers.user;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -14,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnswerService;
-import services.UserService;
+import services.QuestionService;
 import controllers.AbstractController;
 import domain.Answer;
-import domain.User;
+import domain.Question;
 
 @Controller
 @RequestMapping("/answer/user")
@@ -29,8 +31,11 @@ public class AnswerUserController extends AbstractController {
 	private AnswerService	answerService;
 
 	@Autowired
-	private UserService		userService;
+	private QuestionService	questionService;
 
+
+	//	@Autowired
+	//	private UserService		userService;
 
 	//Constructor--------------------------------------------------------
 
@@ -50,40 +55,53 @@ public class AnswerUserController extends AbstractController {
 		result.addObject("answers", answers);
 		return result;
 	}
-
-	//Creation-----------------------------------------------------------
+	//Create-----------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int questionId) {
 		ModelAndView result;
 		Answer answer;
-		answer = this.answerService.create();
+		Question question;
+
+		question = this.questionService.findOne(questionId);
+
+		answer = this.answerService.create(question);
 		result = this.createEditModelAndView(answer);
-		result.addObject("requestURI", "answer/user/create.do");
+
 		return result;
-
 	}
-
-	//Edition -----------------------------------------------------------------
+	//Edition--------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int answerId) {
+	public ModelAndView edit(@RequestParam final int answerId) {
 		ModelAndView result;
 		Answer answer;
 
-		User user;
-
-		user = this.userService.findByPrincipal();
 		answer = this.answerService.findOne(answerId);
-		//Assert.isTrue(manager.getXxxs().contains(answer), "Cannot commit this operation, because it's illegal");
 		Assert.notNull(answer);
 		result = this.createEditModelAndView(answer);
-		result.addObject("requestURI", "answer/user/edit.do");
-		result.addObject("user", user);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Answer answer, BindingResult bindingResult) {
+		ModelAndView result;
+
+		if (bindingResult.hasErrors())
+			result = this.createEditModelAndView(answer);
+		else
+			try {
+				this.answerService.save(answer);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(answer, "answer.commit.error");
+			}
+
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@ModelAttribute Answer answer, final BindingResult bindingResult) {
+	public ModelAndView delete(@ModelAttribute Answer answer, BindingResult bindingResult) {
 		ModelAndView result;
 
 		try {
@@ -95,24 +113,42 @@ public class AnswerUserController extends AbstractController {
 
 		return result;
 	}
-	// Ancillary methods ------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "deletevirtual")
+	public ModelAndView deletevirtual(@ModelAttribute Answer answer, BindingResult bindingResult) {
+		ModelAndView result;
+
+		if (bindingResult.hasErrors())
+			result = this.createEditModelAndView(answer);
+		else
+			try {
+				this.answerService.delete(answer);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(answer, "answer.commit.error");
+			}
+
+		return result;
+
+	}
+	//ancially methods---------------------------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(Answer answer) {
-		assert answer != null;
+		Assert.notNull(answer);
 		ModelAndView result;
 		result = this.createEditModelAndView(answer, null);
 		return result;
+
 	}
 
-	protected ModelAndView createEditModelAndView(final Answer answer, final String message) {
+	protected ModelAndView createEditModelAndView(Answer answer, String message) {
+		Assert.notNull(answer);
 
-		assert answer != null;
 		ModelAndView result;
-
 		result = new ModelAndView("Answer/edit");
+
 		result.addObject("Answer", answer);
 		result.addObject("message", message);
-
 		return result;
 
 	}
