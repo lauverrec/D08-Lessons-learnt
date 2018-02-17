@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Rendezvouse;
+import domain.User;
 
 @Repository
 public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Integer> {
@@ -22,5 +23,9 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	// devuelve las rendevouz a las que asiste un usuario sin comprobar que sea el principal y que no esten eliminadas
 	@Query("select r from User u join u.rendezvousesCreated r where u.id=?1 and r.deleted=false")
 	Collection<Rendezvouse> findRendezvousesAssitedByUser2(int userId);
+
+	//Te devuelve todos los asistentes dada una cita concreta 
+	@Query("select r.assistants from Rendezvouse r where r.id=?1")
+	Collection<User> findAllAssistantsByRendezvous(int rendezvousId);
 
 }

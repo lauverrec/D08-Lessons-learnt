@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RendezvouseService;
 import domain.Rendezvouse;
+import domain.User;
 
 @Controller
 @RequestMapping("/rendezvous_")
@@ -31,7 +33,7 @@ public class RendezvousController extends AbstractController {
 	//Listing-----------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(int userId) {
+	public ModelAndView list(@RequestParam int userId) {
 
 		ModelAndView result;
 		Collection<Rendezvouse> rens;
@@ -57,6 +59,22 @@ public class RendezvousController extends AbstractController {
 		result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("requestURI", "rendezvous_/list-unregister.do");
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/listAssistants", method = RequestMethod.GET)
+	public ModelAndView list2(@RequestParam int rendezvousId) {
+
+		ModelAndView result;
+		Collection<User> assistants;
+
+		assistants = this.rendezvouseService.findAllAssistantsByRendezvous(rendezvousId);
+
+		result = new ModelAndView("user/list");
+		result.addObject("users", assistants);
+		result.addObject("requestURI", "rendezvous_/listAssistants.do");
 
 		return result;
 

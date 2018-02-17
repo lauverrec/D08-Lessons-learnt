@@ -88,6 +88,7 @@
 					code="rendezvous.createAnnouncement1" /></a>
 		</display:column>
 	</security:authorize>
+	
 	<spring:message code="rendezvouse.question" var="Question" />
 	<display:column title="${Question}" sortable="true">
 		<spring:url value="question/list.do" var="editURL">
@@ -95,6 +96,16 @@
 		</spring:url>
 		<a href="${editURL}"><spring:message code="rendezvouse.question" /></a>
 	</display:column>
+
+<spring:message code="rendezvouse.assistans" var="ASS" />
+	<display:column title="${ASS}" sortable="true">
+		<spring:url value="rendezvous_/listAssistants.do" var="editURL">
+			<spring:param name="rendezvousId" value="${row.id}" />
+		</spring:url>
+		<a href="${editURL}"><spring:message code="rendezvouse.assistans" /></a>
+	</display:column>
+
+
 
 	<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
 	<security:authorize access="hasRole('ADMINISTRATOR')">

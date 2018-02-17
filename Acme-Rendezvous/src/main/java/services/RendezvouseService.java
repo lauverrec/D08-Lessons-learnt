@@ -127,6 +127,14 @@ public class RendezvouseService {
 
 	}
 
+	public Collection<User> findAllAssistantsByRendezvous(int rendezvousId) {
+		Collection<User> res;
+
+		res = this.rendezvousRepository.findAllAssistantsByRendezvous(rendezvousId);
+		return res;
+
+	}
+
 	public Rendezvouse deletevirtual(final Rendezvouse rendezvouse) {
 		Rendezvouse result;
 		Assert.notNull(rendezvouse);
