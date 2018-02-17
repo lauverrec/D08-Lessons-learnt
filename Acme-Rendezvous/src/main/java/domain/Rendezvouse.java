@@ -121,7 +121,7 @@ public class Rendezvouse extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToMany
+	@ManyToMany
 	public Collection<Rendezvouse> getSimilarRendezvouses() {
 		return this.similarRendezvouses;
 	}
