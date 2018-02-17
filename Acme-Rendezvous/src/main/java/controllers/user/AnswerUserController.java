@@ -82,7 +82,7 @@ public class AnswerUserController extends AbstractController {
 		user = this.userService.findByPrincipal();
 		answer = this.answerService.findOne(answerId);
 		Assert.notNull(answer);
-		Assert.isTrue(this.answerService.findAllAnswersByUserId().contains(answer), "Cannot commit this operation because it's illegal");
+		Assert.isTrue(this.answerService.findAllAnswersByUserId().contains(answer), "Cannot commit this operation because that is not one of your answers");
 		result = this.createEditModelAndView(answer);
 		result.addObject("user", user);
 		return result;
