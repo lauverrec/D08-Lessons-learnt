@@ -223,6 +223,12 @@
 			<list>
 			</list>
 		</property>
+		<property name="announcements">
+			<list>
+			<ref bean="announcement1"></ref>
+			<ref bean="announcement2"></ref>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="rendezvouse2" class="domain.Rendezvouse">
@@ -241,6 +247,10 @@
 			</list>
 		</property>
 		<property name="similarRendezvouses">
+			<list>
+			</list>
+		</property>
+		<property name="announcements">
 			<list>
 			</list>
 		</property>
@@ -265,6 +275,11 @@
 			<list>
 			</list>
 		</property>
+		<property name="announcements">
+			<list>
+			<ref bean="announcement3"></ref>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="rendezvouse4" class="domain.Rendezvouse">
@@ -284,6 +299,11 @@
 		</property>
 		<property name="similarRendezvouses">
 			<list>
+			</list>
+		</property>
+		<property name="announcements">
+			<list>
+			<ref bean="announcement4"></ref>
 			</list>
 		</property>
 	</bean>
@@ -307,13 +327,18 @@
 			<list>
 			</list>
 		</property>
+		<property name="announcements">
+			<list>
+			<ref bean="announcement5"></ref>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Announcements -->
 	<bean id="announcement1" class="domain.Announcement">
 		<property name="title" value="announcement1" />
 		<property name="description" value="description 1" />
-		<property name="madeMoment" value="2017/07/21 12:00" />
+		<property name="madeMoment" value="2017/07/21 11:00" />
 		<property name="rendezvouse" ref="rendezvouse1" />
 	</bean>
 
@@ -334,14 +359,14 @@
 	<bean id="announcement4" class="domain.Announcement">
 		<property name="title" value="announcement4" />
 		<property name="description" value="description 4" />
-		<property name="madeMoment" value="2017/07/21 12:00" />
+		<property name="madeMoment" value="2017/07/21 11:00" />
 		<property name="rendezvouse" ref="rendezvouse4" />
 	</bean>
 
 	<bean id="announcement5" class="domain.Announcement">
-		<property name="title" value="announcement1" />
-		<property name="description" value="description 1" />
-		<property name="madeMoment" value="2017/07/21 12:00" />
+		<property name="title" value="announcement5" />
+		<property name="description" value="description 5" />
+		<property name="madeMoment" value="2018/01/21 13:00" />
 		<property name="rendezvouse" ref="rendezvouse5" />
 	</bean>
 

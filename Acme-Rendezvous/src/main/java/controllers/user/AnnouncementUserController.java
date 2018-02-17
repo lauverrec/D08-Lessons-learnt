@@ -94,7 +94,26 @@ public class AnnouncementUserController extends AbstractController {
 
 		result = new ModelAndView("announcement/list");
 		result.addObject("announcements", announcements);
+		result.addObject("editar", true);
+		result.addObject("boton", true);
 		result.addObject("requestURI", "announcement/user/list.do");
+
+		return result;
+	}
+
+	//announcement/user/listAll.do
+	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Announcement> announcements;
+
+		announcements = new ArrayList<>(this.announcementService.findAnnouncementByUserIdForRendezvousesAssits());
+
+		result = new ModelAndView("announcement/list");
+		result.addObject("announcements", announcements);
+		result.addObject("boton", false);
+		result.addObject("editar", false);
+		result.addObject("requestURI", "announcement/user/listAll.do");
 
 		return result;
 	}

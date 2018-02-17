@@ -24,6 +24,7 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="announcements" requestURI="${requestURI}" id="row">
 
+<jstl:if test="${editar}">
 	<security:authorize access="hasRole('USER')">
 	<spring:message code="announcement.edit" var="Edit" />
 	
@@ -34,6 +35,7 @@
 		<a href="${editURL}"><spring:message code="announcement.edit" /></a>
 	</display:column>
 	</security:authorize>
+</jstl:if>
 	
 	<spring:message code="announcement.format.madeMoment" var="pattern"></spring:message>
 	<spring:message code="announcement.madeMoment" var="momentHeader2" />
@@ -61,18 +63,21 @@
 </display:table>
 
 
-
+<jstl:if test="${boton}">
 <security:authorize access="hasRole('USER')">
 <br />
 <input type="button" name="cancel"
 		value="<spring:message code="announcement.back" />"
 		onclick="javascript: window.location.replace('rendezvous/user/list.do');" />
 </security:authorize>
+</jstl:if>
 
 
 
 <security:authorize access="isAnonymous()">
 <br />
+
+
 <input type="button" name="back"
 		value="<spring:message code="rendezvous.back" />"
 		onclick="javascript: window.location.replace('rendezvous_/list-unregister.do');" />

@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.AnnouncementRepository;
 import domain.Announcement;
 import domain.Rendezvouse;
+import domain.User;
 
 @Service
 @Transactional
@@ -25,6 +26,8 @@ public class AnnouncementService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private AdministratorService	administratorService;
+	@Autowired
+	private UserService				userService;
 
 
 	// Constructors------------------------------------------------------------
@@ -50,6 +53,7 @@ public class AnnouncementService {
 		Announcement result;
 		Date madeMoment;
 
+		//Capar que un usuario solo pueda editar sus anuncios
 		madeMoment = new Date(System.currentTimeMillis() - 1000);
 		announcement.setMadeMoment(madeMoment);
 
@@ -83,6 +87,15 @@ public class AnnouncementService {
 	public Collection<Announcement> findAnnouncementByRendezvousId(int rendezvouseId) {
 		Collection<Announcement> result;
 		result = new ArrayList<>(this.announcementRepository.findAnnouncementByRendezvousId(rendezvouseId));
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Collection<Announcement> findAnnouncementByUserIdForRendezvousesAssits() {
+		Collection<Announcement> result;
+		User user;
+		user = this.userService.findByPrincipal();
+		result = new ArrayList<>(this.announcementRepository.findAnnouncementByUserIdForRendezvousesAssits(user.getId()));
 		Assert.notNull(result);
 		return result;
 	}
