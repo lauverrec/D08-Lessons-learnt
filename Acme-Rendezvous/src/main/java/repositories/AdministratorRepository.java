@@ -40,6 +40,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	//B/1 The average and the standard deviation of announcements per rendezvous.
 	//TODO No tengo navegabilidad de rendezvous a announcement para hacerlo con select avg(r.announcements.size), stddev(r.announcements.size) from Rendezvous r
+	//select (select count(a) from Announcement a where a.rendezvouse.id=r.id) from Rendezvouse r 
 	@Query("select avg(u.rendezvousesAssisted.size), stddev(u.rendezvousesAssisted.size) from User u")
 	Double[] findAvgStddevOfTheNumOfAnnouncementsPerRendezvous();
 
