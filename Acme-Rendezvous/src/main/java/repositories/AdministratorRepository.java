@@ -38,15 +38,12 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select r from Rendezvouse r where r.assistants.size!=0 order by r.assistants.size desc")
 	Page<Rendezvouse> findTop10RendezvouseWithRSVPd(Pageable pageable);
 
-	//B/1 The average and the standard deviation of announcements per rendezvous.
-	//TODO No tengo navegabilidad de rendezvous a announcement para hacerlo con select avg(r.announcements.size), stddev(r.announcements.size) from Rendezvous r
-	//select (select count(a) from Announcement a where a.rendezvouse.id=r.id) from Rendezvouse r 
-	@Query("select avg(u.rendezvousesAssisted.size), stddev(u.rendezvousesAssisted.size) from User u")
+	//B/1 The average and the standard deviation of announcements per rendezvous. 
+	@Query("select avg(r.announcements.size), stddev(r.announcements.size) from Rendezvouse r")
 	Double[] findAvgStddevOfTheNumOfAnnouncementsPerRendezvous();
 
 	//B/2 The rendezvouses that whose number of announcements is above 75% the average number of announcements per rendezvous.
-	//TODO Necesito navegabilidad de Rendezvouse a Announcement
-	@Query("select r from Rendezvouse r")
+	@Query("select r from Rendezvouse r where r.announcements.size>(select 0.75 * avg(r.announcements.size) from Rendezvouse r)")
 	Collection<Rendezvouse> findRendezvousesWithMore75PerCent();
 
 	//B/3 The rendezvouses that are linked to a number of rendezvouses that is great-er than the average plus 10%.
