@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AnswerService;
-import services.QuestionService;
 import services.RendezvouseService;
-import domain.Answer;
-import domain.Question;
 import domain.Rendezvouse;
 
 @Controller
@@ -24,12 +20,6 @@ public class RendezvousController extends AbstractController {
 
 	@Autowired
 	private RendezvouseService	rendezvouseService;
-
-	@Autowired
-	private QuestionService		questionService;
-
-	@Autowired
-	private AnswerService		answerService;
 
 
 	//Constructor--------------------------------------------------------
@@ -70,40 +60,6 @@ public class RendezvousController extends AbstractController {
 
 		return result;
 
-	}
-
-	//Listing-----------------------------------------------------------
-
-	@RequestMapping(value = "/question", method = RequestMethod.GET)
-	public ModelAndView question(int rendezvouseId) {
-
-		ModelAndView result;
-		Collection<Question> questions;
-
-		questions = this.questionService.findAllQuestionsByRendezvous(rendezvouseId);
-
-		result = new ModelAndView("Question/display");
-		result.addObject("Question", questions);
-		result.addObject("requestURI", "rendezvous_/question.do");
-
-		return result;
-	}
-
-	//Listing-----------------------------------------------------------
-
-	@RequestMapping(value = "/answer", method = RequestMethod.GET)
-	public ModelAndView answer(int questionId) {
-
-		ModelAndView result;
-		Collection<Answer> answers;
-
-		answers = this.answerService.findAllAnswerByQuestionId(questionId);
-
-		result = new ModelAndView("Answer/display");
-		result.addObject("Answer", answers);
-		result.addObject("requestURI", "rendezvous_/answer.do");
-
-		return result;
 	}
 
 }

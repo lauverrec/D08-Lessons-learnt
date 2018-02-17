@@ -74,7 +74,7 @@
 	</security:authorize>
 	<spring:message code="rendezvouse.question" var="Question" />
 	<display:column title="${Question}" sortable="true">
-		<spring:url value="rendezvous_/question.do" var="editURL">
+		<spring:url value="question/list.do" var="editURL">
 			<spring:param name="rendezvouseId" value="${row.id}" />
 		</spring:url>
 		<a href="${editURL}"><spring:message code="rendezvouse.question" /></a>

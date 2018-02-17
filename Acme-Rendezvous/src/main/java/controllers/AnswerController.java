@@ -31,7 +31,7 @@ public class AnswerController extends AbstractController {
 
 	// Display ----------------------------------------------------------------
 
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam int questionId) {
 		ModelAndView result;
 		Collection<Answer> answers;
@@ -39,7 +39,7 @@ public class AnswerController extends AbstractController {
 		answers = this.answerService.findAllAnswerByQuestionId(questionId);
 
 		result = new ModelAndView("Answer/display");
-		result.addObject("requestURI", "answer/display.do");
+		result.addObject("requestURI", "answer/list.do");
 		result.addObject("Answer", answers);
 
 		return result;
