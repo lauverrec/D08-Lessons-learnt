@@ -225,8 +225,8 @@
 		</property>
 		<property name="announcements">
 			<list>
-			<ref bean="announcement1"></ref>
-			<ref bean="announcement2"></ref>
+				<ref bean="announcement1"></ref>
+				<ref bean="announcement2"></ref>
 			</list>
 		</property>
 	</bean>
@@ -277,7 +277,7 @@
 		</property>
 		<property name="announcements">
 			<list>
-			<ref bean="announcement3"></ref>
+				<ref bean="announcement3"></ref>
 			</list>
 		</property>
 	</bean>
@@ -294,6 +294,7 @@
 		<property name="forAdult" value="1" />
 		<property name="assistants">
 			<list>
+				<ref bean="user1"></ref>
 				<ref bean="user4"></ref>
 			</list>
 		</property>
@@ -303,7 +304,7 @@
 		</property>
 		<property name="announcements">
 			<list>
-			<ref bean="announcement4"></ref>
+				<ref bean="announcement4"></ref>
 			</list>
 		</property>
 	</bean>
@@ -325,11 +326,12 @@
 		</property>
 		<property name="similarRendezvouses">
 			<list>
+				<ref bean="rendezvouse1"></ref>
 			</list>
 		</property>
 		<property name="announcements">
 			<list>
-			<ref bean="announcement5"></ref>
+				<ref bean="announcement5"></ref>
 			</list>
 		</property>
 	</bean>
