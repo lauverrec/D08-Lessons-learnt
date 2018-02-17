@@ -116,8 +116,8 @@ public class QuestionUserController extends AbstractController {
 
 		user = this.userService.findByPrincipal();
 		question = this.questionService.findOne(questionId);
-		//Assert.isTrue(manager.getXxxs().contains(question), "Cannot commit this operation, because it's illegal");
 		Assert.notNull(question);
+		Assert.isTrue(this.questionService.findAllQuestionsByUser().contains(question), "Cannot commit this operation because that is not your question");
 		result = this.createEditModelAndView(question);
 		result.addObject("requestURI", "question/user/edit.do");
 		result.addObject("user", user);
