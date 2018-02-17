@@ -50,7 +50,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Collection<Rendezvouse> findRendezvousesWithMore75PerCent();
 
 	//B/3 The rendezvouses that are linked to a number of rendezvouses that is great-er than the average plus 10%.
-	@Query("select r.id from Rendezvouse r where r.similarRendezvouses.size > (select avg(r.similarRendezvouses.size)*1.1 from Rendezvouse r)")
+	@Query("select r from Rendezvouse r where r.similarRendezvouses.size > (select avg(r.similarRendezvouses.size)*1.1 from Rendezvouse r)")
 	Collection<Rendezvouse> findRendezvousesWithAreLinked();
 
 	//A/1 The average and the standard deviation of the number of questions per ren-dezvous.
