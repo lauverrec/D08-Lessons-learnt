@@ -52,6 +52,18 @@
 	<display:column property="picture" title="${titleHeader}"
 		sortable="true" />
 
+	<security:authorize access="isAnonymous()">
+	<spring:message code="rendezvous.announcement" var="announcements" />
+	<display:column title="${announcements}" sortable="true">
+		<spring:url value="announcement/list.do" var="announcementURL">
+			<spring:param name="rendezvousId" value="${row.id }" />
+		</spring:url>
+		<a href="${announcementURL}"><spring:message
+				code="rendezvous.announcement" /></a>
+	</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('USER')">
 	<spring:message code="rendezvous.announcement" var="announcements" />
 	<display:column title="${announcements}" sortable="true">
 		<spring:url value="announcement/user/list.do" var="announcementURL">
@@ -60,6 +72,7 @@
 		<a href="${announcementURL}"><spring:message
 				code="rendezvous.announcement" /></a>
 	</display:column>
+	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="rendezvous.createAnnouncement"

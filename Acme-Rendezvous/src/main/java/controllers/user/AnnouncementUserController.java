@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AnnouncementService;
 import services.RendezvouseService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Announcement;
 import domain.Rendezvouse;
@@ -32,6 +33,9 @@ public class AnnouncementUserController extends AbstractController {
 	@Autowired
 	private RendezvouseService	rendezvouseService;
 
+	@Autowired
+	private UserService			userService;
+
 
 	// Create -----------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -39,6 +43,7 @@ public class AnnouncementUserController extends AbstractController {
 		ModelAndView result;
 		Rendezvouse rendezvous;
 		Announcement announcement;
+		this.userService.checkPrincipal();
 
 		rendezvous = this.rendezvouseService.findOne(rendezvousId);
 		announcement = this.announcementService.create(rendezvous);

@@ -60,8 +60,20 @@
 		
 </display:table>
 
+
+
 <security:authorize access="hasRole('USER')">
+<br />
 <input type="button" name="cancel"
 		value="<spring:message code="announcement.back" />"
 		onclick="javascript: window.location.replace('rendezvous/user/list.do');" />
+</security:authorize>
+
+
+
+<security:authorize access="isAnonymous()">
+<br />
+<input type="button" name="back"
+		value="<spring:message code="rendezvous.back" />"
+		onclick="javascript: window.location.replace('rendezvous_/list-unregister.do');" />
 </security:authorize>
