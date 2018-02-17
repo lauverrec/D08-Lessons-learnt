@@ -22,62 +22,89 @@
 
 
 
-<display:table name="XXX" class="displaytag"
-	requestURI="xxx/manager/display.do" id="row">
+<display:table name="rendezvous" class="displaytag"
+	requestURI="${requestURI}" id="row">
 
 	<!-- Attributes -->
 
-	<%!String	estilo;%>
-	<jstl:choose>
 
-		<jstl:when test="${row.gauge=='1'}">
-			<%=estilo = "grey"%>
 
-		</jstl:when>
 
-		<jstl:when test="${row.gauge=='2'}">
-
-			<%=estilo = "yellow"%>
-		</jstl:when>
-
-		<jstl:when test="${row.gauge=='3'}">
-			<%=estilo = "green"%>
-		</jstl:when>
-
-	</jstl:choose>
-	<spring:message code="xxx.code" var="codeHeader" />
-	<display:column property="code" title="${codeHeader}" sortable="true"
-		class="<%= estilo %>" />
-
-	<spring:message code="xxx.format.date2" var="pattern"></spring:message>
-	<spring:message code="xxx.createMoment" var="createMomentHeader" />
-	<display:column property="createMoment" title="${createMomentHeader}"
-		sortable="true" format="${pattern}" class="<%= estilo %>">
-	</display:column>
-
-	<spring:message code="xxx.gauge" var="gaugeHeader" />
-	<display:column property="gauge" title="${gaugeHeader}" sortable="true"
-		class="<%= estilo %>" />
-
-	<spring:message code="xxx.text" var="textHeader" />
-	<display:column property="text" title="${textHeader}" sortable="true"
-		class="<%= estilo %>" />
-
-	<spring:message code="xxx.format.date" var="pattern"></spring:message>
-	<spring:message code="xxx.displayedMoment" var="displayedMomentHeader" />
-	<display:column property="displayedMoment"
-		title="${displayedMomentHeader}" sortable="true" format="${pattern}"
-		class="<%= estilo %>">
-	</display:column>
-
-	<!-- Display -->
-	<jstl:if test="${!(row.trip == null)}">
-		<spring:message code="xxx.trip.display" var="tripHeader" />
-		<display:column title="${tripHeader}" class="<%= estilo %>">
-			<spring:url value="trip/display.do" var="displayURL">
-				<spring:param name="tripId" value="${row.trip.id}" />
-			</spring:url>
-			<a href="${displayURL}"><spring:message code="xxx.trip.display" /></a>
+<spring:message code="rendezvouse.picture" var="titleHeader" />
+	<display:column title="${titleHeader}">
+	
+	<div
+  style="position: relative; width: 500px; height: 300px; margin-left: auto; margin-right: auto;">
+  			
+		  <img src="${row.picture}"width= "500" height="300">
+		  </div>
+</display:column>
+	<display:column>
+	<B><spring:message code="rendezvouse.name" />:</B>
+		<jstl:out value="${row.name}"></jstl:out>
+		<p>
+	<B><spring:message code="rendezvouse.description" />:</B>
+		<jstl:out value="${row.description}"></jstl:out>
+		
+	<p>
+	<B><spring:message code="rendezvouse.organisedMoment" />:</B>
+		<jstl:out value="${row.organisedMoment}"></jstl:out>
+		
+	<p>
+	<B><spring:message code="rendezvouse.location.longitude" />:</B>
+		<jstl:out value="${row.gps.longitude}"></jstl:out>
+	<p>
+		
+	<B><spring:message code="rendezvouse.location.latitude" />:</B>
+		<jstl:out value="${row.gps.latitude}"></jstl:out>
+		
+	<p>
+		
+	<B><spring:message code="rendezvouse.draftMode" />:</B>
+		<jstl:out value="${row.draftMode}"></jstl:out>
+		
+	<p>
+		
+	<B><spring:message code="rendezvouse.deleted" />:</B>
+		<jstl:out value="${row.deleted}"></jstl:out>
+		
+	<p>
+		
+	<B><spring:message code="rendezvouse.forAdult" />:</B>
+		<jstl:out value="${row.forAdult}"></jstl:out>
+							
+		
 		</display:column>
-	</jstl:if>
+	<p>
+	
+	<%-- <spring:message code="rendezvouse.name" var="titleHeader" />
+	<display:column property="name" title="${titleHeader}" sortable="true" /> --%>
+
+	<%-- <spring:message code="rendezvouse.description" var="titleHeader" />
+	<display:column property="description" title="${titleHeader}"
+		sortable="true" />
+
+	<spring:message code="ren.format.date" var="pattern"></spring:message>
+	<spring:message code="rendezvouse.organisedMoment" var="titleHeader" />
+	<display:column property="organisedMoment" title="${titleHeader}"
+		sortable="true" format="${pattern}"/>
+
+	<spring:message code="rendezvouse.location.longitude" var="gpsHeader" />
+	<display:column property="gps.longitude" title="${gpsHeader}"
+		sortable="true" />
+		
+	<spring:message code="rendezvouse.draftMode" var="draftModeHeader" />
+	<display:column property="draftMode" title="${draftModeHeader}"
+		sortable="true" />
+		
+	<spring:message code="rendezvouse.deleted" var="deletedHeader" />
+	<display:column property="deleted" title="${deletedHeader}"
+		sortable="true" />
+		
+	<spring:message code="rendezvouse.forAdult" var="forAdultHeader" />
+	<display:column property="forAdult" title="${forAdultHeader}"
+		sortable="true" />
+	
+ --%>
+
 </display:table>

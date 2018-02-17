@@ -24,7 +24,7 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestURI }" id="row">
 
-<!-- ENLACE EDITAR -->
+<!-- ENLACE EDITAR Y DISPLAY-->
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="rendezvous.edit" var="Edit" />
 
@@ -37,6 +37,15 @@
 			</jstl:if>
 		</display:column>
 	</security:authorize>
+	
+	<spring:message code="rendezvous.display" var="Display" />
+		<display:column title="${Display}" sortable="true">
+				<spring:url value="rendezvous/user/display.do" var="editURL">
+					<spring:param name="rendezvousId" value="${row.id}" />
+				</spring:url>
+				<a href="${editURL}"><spring:message code="rendezvous.display" /></a>
+
+		</display:column>
 
 <!-- ATRIBUTOS -->
 	<spring:message code="rendezvouse.name" var="titleHeader" />
