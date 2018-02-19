@@ -131,7 +131,7 @@
 						code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message
 						code="master.page.user.list" /></a></li>
-			<li><a class="fNiv" href="user/edit.do"><spring:message
+			<li><a class="fNiv" href="user/create.do"><spring:message
 						code="master.page.user.register" /></a></li>
 			<li><a class="fNiv" href="rendezvous/list-unregister.do"><spring:message
 						code="master.page.rendezvouss.list" /></a></li>

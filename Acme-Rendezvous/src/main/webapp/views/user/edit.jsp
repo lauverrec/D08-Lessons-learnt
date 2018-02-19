@@ -21,36 +21,51 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="user/edit.do" modelAttribute="user">
+<form:form action="user/edit.do" modelAttribute="userForm">
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="userAccount"/>
-	<form:hidden path="userAccount.authorities"/>
-	<form:hidden path="rendezvousesCreated"/>
-	<form:hidden path="rendezvousesAssisted"/>
+	<form:hidden path="user.id" />
+	<form:hidden path="user.rendezvousesCreated"/>
+	<form:hidden path="user.rendezvousesAssisted"/>
 	
+<%--  	<jstl:if test="${userFormuser.id == 0}">
 	
-	<jstl:if test="${user.id == 0}">
-	
-		<acme:textbox code="user.username" path="userAccount.username"/>
+		<acme:textbox code="user.username" path="userForm.userAccount.username"/>
 			<br />	
 			
-		<acme:password code="user.password" path="userAccount.password"/>
+		<acme:password code="user.password" path="userForm.userAccount.password"/>
 		<br />
-	</jstl:if>	
+	</jstl:if> --%>
 	
-	<acme:textbox code="user.name" path="name"/>
+	<jstl:choose>
+			<jstl:when test="${userForm.user.id != 0}">
+				<acme:textbox path="user.userAccount.username"
+					code="user.username" readonly="true" /><br/>
+			</jstl:when>
+			<jstl:otherwise>
+				<acme:textbox path="user.userAccount.username"
+					code="user.username" /><br/>
+			</jstl:otherwise>
+		</jstl:choose>
+		<jstl:choose>
+			<jstl:when test="${userForm.user.id==0}">
+				<acme:password code="user.password"
+					path="user.userAccount.password" /><br/>
+				<acme:password code="user.password" path="passwordCheck" /><br/>
+			</jstl:when>
+			<jstl:otherwise></jstl:otherwise>
+		</jstl:choose>	
+	
+	<acme:textbox code="user.name" path="user.name"/>
 	<br />
-	<acme:textbox code="user.surname" path="surname"/>
-	<br />´
-	<acme:textbox code="user.birthDate" path="birthDate" />
+	<acme:textbox code="user.surname" path="user.surname"/>
 	<br />
-	<acme:textbox code="user.postalAddress" path="postalAddress"/>
+	<acme:textbox code="user.birthDate" path="user.birthDate" />
 	<br />
-	<acme:textbox code="user.phoneNumber" path="phoneNumber"/>
+	<acme:textbox code="user.postalAddress" path="user.postalAddress"/>
 	<br />
-	<acme:textbox code="user.emailAddress" path="emailAddress"/>
+	<acme:textbox code="user.phoneNumber" path="user.phoneNumber"/>
+	<br />
+	<acme:textbox code="user.emailAddress" path="user.emailAddress"/>
 	<br />
 	
 	<acme:submit name="save" code="user.save"/>

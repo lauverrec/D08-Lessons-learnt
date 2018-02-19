@@ -5,17 +5,22 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
+import security.UserAccount;
 import services.RendezvouseService;
 import services.UserService;
 import domain.User;
+import forms.UserForm;
 
 @Controller
 @RequestMapping("/user")
@@ -69,35 +74,87 @@ public class UserController extends AbstractController{
 			return result;
 		}
 		
-		//Edition------------------------------------------------------------
-
-		@RequestMapping(value = "/edit", method = RequestMethod.GET)
-		public ModelAndView create() {
+		//Create----------------------
+		@RequestMapping(value = "/create", method = RequestMethod.GET)
+		public ModelAndView createUser() {
 			ModelAndView result;
 			User user;
 
 			user = this.userService.create();
-			Assert.notNull(user);
-			result = this.createEditModelAndView(user);
+
+			UserForm cf;
+			cf = new UserForm(user);
+
+			result = new ModelAndView("user/edit");
+			result.addObject("userForm", cf);
 
 			return result;
 		}
+		
+		//Edition------------------------------------------------------------
+
+		@RequestMapping(value = "/edit", method = RequestMethod.GET)
+		public ModelAndView edit() {
+			ModelAndView result;
+			User user;
+
+			user = this.userService.findByPrincipal();
+			UserForm userForm;
+			userForm = new UserForm(user);
+			result = new ModelAndView("user/edit");
+			result.addObject("userForm", userForm);
+
+			return result;
+			
+		}
 
 		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-		public ModelAndView save(@Valid final User user, final BindingResult bindingResult) {
+		public ModelAndView saveCustomer(@ModelAttribute("userForm") UserForm userForm, final BindingResult binding) {
 			ModelAndView result;
+			final Md5PasswordEncoder encoder;
+			final String hash;
+			User user;
 
-			if (bindingResult.hasErrors())
-				result = this.createEditModelAndView(user);
-			else
+			userForm = this.userService.reconstruct(userForm, binding);
+			user = userForm.getUser();
+
+			if (user.getId() == 0 && !userForm.getPasswordCheck().equals(userForm.getUser().getUserAccount().getPassword())) {
+				result = new ModelAndView("user/edit");
+				result.addObject("userForm", userForm);
+				result.addObject("message", "user.password.match");
+
+			} else if (binding.hasErrors()) {
+				result = new ModelAndView("user/edit");
+				result.addObject("userForm", userForm);
+			} else if (userForm.getConditions() != null && !userForm.getConditions() && user.getId() == 0) {
+				result = new ModelAndView("user/edit");
+				result.addObject("userForm", userForm);
+				result.addObject("message", "actor.conditions.accept");
+			} else
 				try {
-					this.userService.save(user);
-					result = new ModelAndView("redirect:/welcome/index.do");
+					//Codificación del password a MD5
+					if (user.getId() != 0) {
+						User u;
+						User userSaved;
+						u = this.userService.reconstructPass(user, binding);
+						userSaved = this.userService.save(u);
+						result = new ModelAndView("redirect:/");
+					} else {
+//						encoder = new Md5PasswordEncoder();
+//						hash = encoder.encodePassword(user.getUserAccount().getPassword(), null);
+//						user.getUserAccount().setPassword(hash);
+						User u;
+						u = this.userService.save(user);
+
+						result = new ModelAndView("redirect:/security/login.do");
+					}
 				} catch (final Throwable oops) {
 					if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
 						result = this.createEditModelAndView(user, "user.commit.error.duplicateProfile");
 					else
-						result = this.createEditModelAndView(user, "user.commit.error");
+						result = new ModelAndView("user/edit");
+						result.addObject("userForm", userForm);
+						result.addObject("message", "user.commit.error");
 				}
 
 			return result;
