@@ -39,16 +39,15 @@
 					<li><a href="administrator/create.do"><spring:message
 								code="master.page.administratorProfile.administrator.create" /></a></li>
 				</ul></li>
-				
+
 			<li><a class="fNiv"><spring:message
 						code="master.page.announcements" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="announcement/administrator/list.do"><spring:message
 								code="master.page.announcement.administrator.list" /></a></li>
-				</ul>	
-			</li>
-			
+				</ul></li>
+
 			<li><a class="fNiv"><spring:message
 						code="master.page.rendezvous" /></a>
 				<ul>
@@ -57,8 +56,8 @@
 								code="master.page.administrator.rendezvous" /></a></li>
 
 				</ul></li>
-				
-				<li><a class="fNiv"><spring:message
+
+			<li><a class="fNiv"><spring:message
 						code="master.page.comment" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -66,8 +65,8 @@
 								code="master.page.administrator.comments" /></a></li>
 
 				</ul></li>
-				
-				
+
+
 
 
 		</security:authorize>
@@ -96,26 +95,27 @@
 								code="master.page.answer.list" /></a></li>
 
 				</ul></li>
-				
-				<li><a class="fNiv"><spring:message
-						code="master.page.ren" /></a>
+
+			<li><a class="fNiv"><spring:message code="master.page.ren" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="rendezvous/user/list-RSVP.do"><spring:message
 								code="master.page.ren.list" /></a></li>
 
-				</ul></li> 
-				
+				</ul></li>
+
 			<li><a class="fNiv"><spring:message
 						code="master.page.rendezvous" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="rendezvous/user/list.do"><spring:message
 								code="master.page.mi.rendezvous" /></a></li>
+					<li><a href="rendezvous/user/listasis.do"><spring:message
+								code="master.page.mi.rendezvous.asis" /></a></li>
 
 				</ul></li>
-				
-				<li><a class="fNiv"><spring:message
+
+			<li><a class="fNiv"><spring:message
 						code="master.page.announcementsUser" /></a>
 				<ul>
 					<li class="arrow"></li>
