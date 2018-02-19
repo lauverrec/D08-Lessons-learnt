@@ -19,6 +19,8 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
@@ -28,11 +30,8 @@
 	
 	<!-- Attributes -->
 
-	<spring:message code="user.name" var="nameHeader" />:
-	<display:column property="name" title="${nameHeader}" sortable="true" />
-	
-	<spring:message code="user.surname" var="surnameHeader" />:
-	<display:column property="surname" title="${surnameHeader}" sortable="true" />
+	<acme:column code="user.name" property="name"/>
+	<acme:column code="user.surname" property="surname"/>
 	
 	<!-- Action links -->
 
