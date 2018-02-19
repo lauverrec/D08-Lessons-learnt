@@ -67,10 +67,10 @@ public class CommentAdministratorController extends AbstractController {
 
 	protected ModelAndView listWithMessage(final String message) {
 		final ModelAndView result;
-		Collection<Comment> comment;
-		comment = this.commentService.findAll();
+		Collection<Comment> comments;
+		comments = this.commentService.findAll();
 		result = new ModelAndView("comment/list");
-		result.addObject("comment", comment);
+		result.addObject("comments", comments);
 		result.addObject("requestURI", "/comment/administrator/list.do");
 		result.addObject("message", message);
 		return result;
