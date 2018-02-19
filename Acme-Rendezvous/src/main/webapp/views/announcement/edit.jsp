@@ -19,7 +19,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
 <form:form action="announcement/user/edit.do" modelAttribute="announcement">
@@ -30,23 +30,12 @@
 	<form:hidden path="madeMoment" />
 
 
+	<acme:textbox code="announcement.title1" path="title"/>
 
-
-
-	<form:label path="title">
-		<spring:message code="announcement.title" />:
-	</form:label>
-	<form:input path="title" readonly="false" />
-	<form:errors cssClass="error" path="title" />
 	<br />
-	<br />
+	
+	<acme:textarea code="announcement.description1" path="description"/>
 
-	<form:label path="description">
-		<spring:message code="announcement.description" />:
-		<br />
-	</form:label>
-	<form:textarea rows="5px" cols="24px" path="description" />
-	<form:errors cssClass="error" path="description" />
 	<br />
 	<br />
 
@@ -55,10 +44,5 @@
 
 	<input type="submit" name="save"
 		value="<spring:message code="announcement.save"/>" />&nbsp;
-
-	<%-- <input type="button" name="cancel"
-		value="<spring:message code="announcement.cancel" />"
-		onclick="javascript:  window.location.replace('announcement/user/list.do');" />
-	<br /> --%>
 
 </form:form>

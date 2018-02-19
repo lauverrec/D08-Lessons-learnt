@@ -20,6 +20,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
+
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="announcements" requestURI="${requestURI}" id="row">
@@ -37,18 +40,20 @@
 	</security:authorize>
 </jstl:if>
 	
+	<!-- Attributes -->
+	
+	
+	
 	<spring:message code="announcement.format.madeMoment" var="pattern"></spring:message>
 	<spring:message code="announcement.madeMoment" var="momentHeader2" />
 	<display:column property="madeMoment" title="${momentHeader2}" sortable="true" format="${pattern}" />
 	
-	<spring:message code="announcement.title" var="titleHeader1" />
-	<display:column property="title" title="${titleHeader1}" sortable="true" />
-		
+	<acme:column code="announcement.title" property="title"/>
 	
-	<spring:message code="announcement.description" var="titleHeader3" />
-	<display:column property="description" title="${titleHeader3}" sortable="true" />
+	<acme:column code="announcement.description" property="description"/>
 	
-		<!-- Boton de delete para el administrador ya que puede borrar las Announcement que quiera pero no editarlas -->
+	
+	<!-- Boton de delete para el administrador ya que puede borrar las Announcement que quiera pero no editarlas -->
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<spring:message code="announcement.delete" var="delete" />
 
