@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,9 +78,14 @@ public class RendezvouseService {
 		Assert.notNull(rendezvouse);
 		Rendezvouse result;
 		User user;
+		Date now;
+
+		now = new Date();
 		user = this.userService.findByPrincipal();
 		if (rendezvouse.getId() == 0)
 			rendezvouse.getAssistants().add(user);
+
+		Assert.isTrue(rendezvouse.getOrganisedMoment().after(now), "future");
 		result = this.rendezvousRepository.save(rendezvouse);
 		if (rendezvouse.getId() == 0)
 			user.getRendezvousesCreated().add(result);

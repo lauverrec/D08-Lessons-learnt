@@ -124,7 +124,10 @@ public class RendezvousesUserController extends AbstractController {
 				this.rendezvouseService.save(rendezvous);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(rendezvous, "rendezvouse.commit.error");
+				if (oops.getMessage().equals("future"))
+					result = this.createEditModelAndView(rendezvous, "rendezvous.future.error");
+				else
+					result = this.createEditModelAndView(rendezvous, "rendezvouse.commit.error");
 			}
 
 		return result;
