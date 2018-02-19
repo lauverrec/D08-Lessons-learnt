@@ -64,6 +64,9 @@ public class AnnouncementService {
 	public void delete(final Announcement announcement) {
 		Assert.notNull(announcement);
 		Assert.isTrue(announcement.getId() != 0);
+		Rendezvouse rendezvouse;
+		rendezvouse = announcement.getRendezvouse();
+		rendezvouse.getAnnouncements().remove(announcement);
 		//Sólo un admin podrá borrar un announcement
 		this.administratorService.checkPrincipal();
 		this.announcementRepository.delete(announcement);
