@@ -51,9 +51,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Collection<Rendezvouse> findRendezvousesWithAreLinked();
 
 	//A/1 The average and the standard deviation of the number of questions per ren-dezvous.
-	//TODO Necesito navegabilidad de rendezvous a questions
-	@Query("select avg(u.rendezvousesAssisted.size), stddev(u.rendezvousesAssisted.size) from User u")
-	Double[] findAvgStddevOfTheNumOfQuestionsPerRendezvous();
+	@Query("select (select count(q) from Question q where q.rendezvouse.id=r.id) from Rendezvouse r")
+	Collection<Long> findAvgStddevOfTheNumOfQuestionsPerRendezvous();
 
 	//A/2 The average and the standard deviation of the number of answers to the questions per rendezvous.
 	//TODO Necesito navegabilidad de rendezvous a questions y de questions a answer

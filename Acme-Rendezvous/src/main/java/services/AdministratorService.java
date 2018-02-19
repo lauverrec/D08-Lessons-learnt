@@ -148,7 +148,6 @@ public class AdministratorService {
 		Assert.notNull(result);
 		return result;
 	}
-
 	public Collection<Rendezvouse> findRendezvousesWithMore75PerCent() {
 		Collection<Rendezvouse> result;
 		result = this.administratorRepository.findRendezvousesWithMore75PerCent();
@@ -164,12 +163,20 @@ public class AdministratorService {
 	}
 
 	public Double[] findAvgStddevOfTheNumOfQuestionsPerRendezvous() {
-		Double[] result;
-		result = this.administratorRepository.findAvgStddevOfTheNumOfQuestionsPerRendezvous();
-		Assert.notNull(result);
+		Collection<Long> resultQuery;
+		final Double[] result;
+		final Double avg;
+		final Double stdev;
+
+		resultQuery = this.administratorRepository.findAvgStddevOfTheNumOfQuestionsPerRendezvous();
+		Assert.notNull(resultQuery);
+		avg = AdministratorService.calculateAvg(resultQuery);
+		stdev = AdministratorService.calculateStdev(resultQuery);
+		result = new Double[] {
+			avg, stdev
+		};
 		return result;
 	}
-
 	public Double[] findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous() {
 		Double[] result;
 		result = this.administratorRepository.findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous();
@@ -184,4 +191,19 @@ public class AdministratorService {
 		return result;
 	}
 
+	public static double calculateAvg(final Collection<Long> resultQuery) {
+		double sum = 0;
+		for (final Long num : resultQuery)
+			sum += num;
+		return sum / resultQuery.size();
+	}
+	public static double calculateStdev(final Collection<Long> resultQuery) {
+		double sum = 0.0;
+		double standardDeviation = 0.0;
+		final double avg = AdministratorService.calculateAvg(resultQuery);
+		for (final double num : resultQuery)
+			sum += (num - avg) * (num - avg);
+		standardDeviation = Math.sqrt(sum / resultQuery.size());
+		return standardDeviation;
+	}
 }

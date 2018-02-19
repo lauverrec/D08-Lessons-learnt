@@ -30,36 +30,28 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	// Tests ----------------------------------------------
 
-	//	@Test
-	//	public void testCreate() {
-	//		Administrator administrator;
-	//		administrator = this.administratorService.create();
-	//		Assert.notNull(administrator);
-	//	}
-	//
-	//	@Test
-	//	public void testSave() {
-	//		Administrator administrator;
-	//		administrator = this.administratorService.create();
-	//
-	//		administrator.setName("name");
-	//		administrator.setSurname("surname");
-	//		administrator.setEmail("email@gmail.com");
-	//		administrator.setPhone("31333");
-	//		administrator.setAddress("address");
-	//
-	//		administrator = this.administratorService.save(administrator);
-	//		Assert.notNull(administrator.getId());
-	//
-	//	}
-	//
-	//	@Test
-	//	public void testDelete() {
-	//		Administrator administrator;
-	//		administrator = this.administratorService.findOne(super.getEntityId("administrator1"));
-	//		this.administratorService.delete(administrator);
-	//
-	//	}
+	@Test
+	public void testCreate() {
+		Administrator administrator;
+		administrator = this.administratorService.create();
+		Assert.notNull(administrator);
+	}
+
+	@Test
+	public void testSave() {
+		Administrator administrator;
+		administrator = this.administratorService.create();
+
+		administrator.setName("name");
+		administrator.setSurname("surname");
+		administrator.setEmailAddress("email@gmail.com");
+		administrator.setPhoneNumber("31333");
+		administrator.setPostalAddress("address");
+
+		administrator = this.administratorService.save(administrator);
+		Assert.notNull(administrator.getId());
+
+	}
 
 	@Test
 	public void testFindAll() {
