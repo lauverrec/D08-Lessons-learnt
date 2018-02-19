@@ -85,6 +85,8 @@ public class CommentService {
 
 		this.administratorService.checkPrincipal();
 
+		this.commentRepository.delete(comment);
+
 	}
 	public Comment findOne(int commentId) {
 		Assert.isTrue(commentId != 0);
