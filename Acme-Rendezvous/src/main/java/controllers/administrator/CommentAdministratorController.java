@@ -21,7 +21,7 @@ public class CommentAdministratorController extends AbstractController {
 	// Services---------------------------------------------------------
 
 	@Autowired
-	private CommentService	commenteService;
+	private CommentService	commentService;
 
 
 	//constructor-------------------------------------------------------------------------
@@ -33,11 +33,14 @@ public class CommentAdministratorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		Collection<Comment> comment;
-		comment = this.commenteService.findAll();
+		Collection<Comment> comments;
+
+		comments = this.commentService.findAll();
 		result = new ModelAndView("comment/list");
-		result.addObject("comment", comment);
+
+		result.addObject("comments", comments);
 		result.addObject("requestURI", "/comment/administrator/list.do");
+
 		return result;
 
 	}
@@ -46,15 +49,15 @@ public class CommentAdministratorController extends AbstractController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(final int commentId) {
 		ModelAndView result;
-		final Comment commente;
+		final Comment comment;
 
-		commente = this.commenteService.findOne(commentId);
-		Assert.notNull(commente);
+		comment = this.commentService.findOne(commentId);
+		Assert.notNull(comment);
 		try {
-			this.commenteService.delete(commente);
+			this.commentService.delete(comment);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = this.listWithMessage("commente.commit.error");
+			result = this.listWithMessage("comment.commit.error");
 		}
 
 		return result;
@@ -65,7 +68,7 @@ public class CommentAdministratorController extends AbstractController {
 	protected ModelAndView listWithMessage(final String message) {
 		final ModelAndView result;
 		Collection<Comment> comment;
-		comment = this.commenteService.findAll();
+		comment = this.commentService.findAll();
 		result = new ModelAndView("comment/list");
 		result.addObject("comment", comment);
 		result.addObject("requestURI", "/comment/administrator/list.do");
