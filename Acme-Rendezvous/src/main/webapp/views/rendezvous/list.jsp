@@ -135,6 +135,17 @@
 				<a href="${editURL}"><spring:message code="rendezvous.delete" /></a>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('USER')">
+		<spring:message code="rendezvouse.comments" var="Comment" />
+	<display:column title="${Comment}" sortable="true">
+		<spring:url value="comment/user/list.do" var="listCommentURL">
+			<spring:param name="rendezvouseId" value="${row.id}" />
+		</spring:url>
+		<a href="${listCommentURL}"><spring:message code="rendezvouse.comments" /></a>
+	</display:column>
+	
+	</security:authorize>
 
 </display:table>
 

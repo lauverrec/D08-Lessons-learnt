@@ -16,7 +16,8 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
@@ -25,29 +26,46 @@
 	name="comments" requestURI="${requestURI}" id="row">
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
-	<spring:message code="comment.delete" var="delete" />
-	
-	<display:column title="${deleteURL}" sortable="true">
-		<spring:url value="comment/administrator/delete.do" var="deleteURL">
-			<spring:param name="commentId" value="${row.id}" />
-		</spring:url>
-		<a href="${deleteURL}"><spring:message code="comment.delete" /></a>
-	</display:column>
+		<spring:message code="comment.delete" var="delete" />
+
+		<display:column title="${deleteURL}" sortable="true">
+			<spring:url value="comment/administrator/delete.do" var="deleteURL">
+				<spring:param name="commentId" value="${row.id}" />
+			</spring:url>
+			<a href="${deleteURL}"><spring:message code="comment.delete" /></a>
+		</display:column>
 	</security:authorize>
-	
+
 	<spring:message code="comment.format.writtenMoment" var="pattern"></spring:message>
 	<spring:message code="comment.writtenMoment" var="momentHeader" />
-	<display:column property="writtenMoment" title="${momentHeader}" sortable="true" format="${pattern}" />
-	
+	<display:column property="writtenMoment" title="${momentHeader}"
+		sortable="true" format="${pattern}" />
+
 	<spring:message code="comment.text" var="textHeader" />
 	<display:column property="text" title="${textHeader}" sortable="true" />
-		
-	
+
+
 	<spring:message code="comment.picture" var="pictureHeader" />
-	<display:column property="picture" title="${pictureHeader}" sortable="true" />
-	
-		
-		
+	<display:column property="picture" title="${pictureHeader}"
+		sortable="true" />
+
+	<spring:message code="comment.picture" var="pictureHeader" />
+	<display:column property="picture" title="${pictureHeader}"
+		sortable="true" />
+
+
+
 </display:table>
+
+<div>
+
+	<security:authorize access="hasRole('USER')">
+			<spring:url value="comment/user/create.do" var="createURL">
+				<spring:param name="commentId" value="${row.id}" />
+			</spring:url>
+			<a href="${createURL}"><spring:message code="comment.create" /></a>
+	</security:authorize>
+
+</div>
 
 

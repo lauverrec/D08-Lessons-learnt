@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,12 +55,14 @@ public class CommentService {
 
 	}
 	public Comment save(Comment comment) {
+		Date moment;
+		moment = new Date();
 
 		Assert.notNull(comment);
 		User userConnected;
-
 		Comment result;
 
+		moment = new Date(System.currentTimeMillis() - 1000);
 		userConnected = this.userService.findByPrincipal();
 
 		Assert.isTrue(comment.getUser().getUserAccount().getAuthorities().contains(Authority.USER));
@@ -67,7 +70,7 @@ public class CommentService {
 		Assert.isTrue(comment.getId() == 0);
 
 		//TODO: Los comentarios deben tener un rendezvous que se haya confirmado la asistencia.
-
+		comment.setWrittenMoment(moment);
 		result = this.commentRepository.save(comment);
 
 		return result;
@@ -97,6 +100,16 @@ public class CommentService {
 		result = this.commentRepository.findAll();
 
 		return result;
+	}
+
+	//Other methods bussisnes
+
+	public Collection<Comment> commentsOfThisRendezvouse(int rendezvouseId) {
+		Collection<Comment> commentsOfThisRendezvouse;
+
+		commentsOfThisRendezvouse = this.commentRepository.commentsOfThisRendezvouse(rendezvouseId);
+
+		return commentsOfThisRendezvouse;
 	}
 
 	public Collection<Comment> findAllCommentsByRendezvousId(int rendezvousId) {
