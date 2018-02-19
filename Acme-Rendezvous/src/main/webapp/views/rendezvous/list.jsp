@@ -40,7 +40,7 @@
 	
 	<spring:message code="rendezvous.display" var="Display" />
 		<display:column title="${Display}" sortable="true">
-				<spring:url value="rendezvous/user/display.do" var="editURL">
+				<spring:url value="rendezvous_/display.do" var="editURL">
 					<spring:param name="rendezvousId" value="${row.id}" />
 				</spring:url>
 				<a href="${editURL}"><spring:message code="rendezvous.display" /></a>

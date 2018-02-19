@@ -52,16 +52,14 @@
 	
 	<p>
 		<spring:message code="user.rendezvouse.name"></spring:message>:
-		<jstl:forEach var="rendezvouse" items="${row.rendezvousesAssisted}">
-			<jstl:out value="${rendezvouse.name}"></jstl:out><br/>
-		</jstl:forEach>	
-	</p>
-	
-	
 		<spring:url value="rendezvous_/list.do" var="renURL">
 		<spring:param name="userId" value="${row.id}"/>
 		</spring:url>
 		<a href="${renURL}"><spring:message code="user.rendezvouse"/></a>
+	</p>
+	
+	
+		
 		
 
 

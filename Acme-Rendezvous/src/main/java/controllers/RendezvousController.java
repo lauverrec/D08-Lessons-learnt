@@ -79,5 +79,21 @@ public class RendezvousController extends AbstractController {
 		return result;
 
 	}
+	
+	// Display ----------------------------------------------------------------
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam int rendezvousId) {
+		ModelAndView result;
+		Rendezvouse ren = new Rendezvouse();
+
+		ren = this.rendezvouseService.findOne(rendezvousId);
+
+		result = new ModelAndView("rendezvous/display");
+		result.addObject("rendezvous", ren);
+		result.addObject("requestURI", "rendezvous/user/display.do");
+
+		return result;
+	}
 
 }
