@@ -27,6 +27,8 @@
 	<form:hidden path="user" />
 	<form:hidden path="replys" />
 	<form:hidden path="commentTo" />
+	<form:hidden path="rendezvouse"/>
+	<form:hidden path="writtenMoment"/>
 	
 
 	<!-- ATRIBUTOS -->

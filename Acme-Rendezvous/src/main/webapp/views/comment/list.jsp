@@ -57,15 +57,5 @@
 
 </display:table>
 
-<div>
-
-	<security:authorize access="hasRole('USER')">
-			<spring:url value="comment/user/create.do" var="createURL">
-				<spring:param name="commentId" value="${row.id}" />
-			</spring:url>
-			<a href="${createURL}"><spring:message code="comment.create" /></a>
-	</security:authorize>
-
-</div>
 
 

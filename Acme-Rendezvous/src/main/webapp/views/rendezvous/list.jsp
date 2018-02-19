@@ -24,7 +24,7 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestURI }" id="row">
 
-<!-- ENLACE EDITAR Y DISPLAY-->
+	<!-- ENLACE EDITAR Y DISPLAY-->
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="rendezvous.edit" var="Edit" />
 
@@ -37,17 +37,17 @@
 			</jstl:if>
 		</display:column>
 	</security:authorize>
-	
+
 	<spring:message code="rendezvous.display" var="Display" />
-		<display:column title="${Display}" sortable="true">
-				<spring:url value="rendezvous/display.do" var="editURL">
-					<spring:param name="rendezvousId" value="${row.id}" />
-				</spring:url>
-				<a href="${editURL}"><spring:message code="rendezvous.display" /></a>
+	<display:column title="${Display}" sortable="true">
+		<spring:url value="rendezvous/display.do" var="editURL">
+			<spring:param name="rendezvousId" value="${row.id}" />
+		</spring:url>
+		<a href="${editURL}"><spring:message code="rendezvous.display" /></a>
 
-		</display:column>
+	</display:column>
 
-<!-- ATRIBUTOS -->
+	<!-- ATRIBUTOS -->
 	<spring:message code="rendezvouse.name" var="titleHeader" />
 	<display:column property="name" title="${titleHeader}" sortable="true" />
 
@@ -58,33 +58,34 @@
 	<spring:message code="ren.format.date" var="pattern"></spring:message>
 	<spring:message code="rendezvouse.organisedMoment" var="titleHeader" />
 	<display:column property="organisedMoment" title="${titleHeader}"
-		sortable="true" format="${pattern}"/>
+		sortable="true" format="${pattern}" />
 
 	<spring:message code="rendezvouse.picture" var="titleHeader" />
 	<display:column title="${titleHeader}">
-	<a href="${row.picture}"><spring:message code="rendezvouse.picture"/></a>
-</display:column>
-<!-- ENLACES -->
+		<a href="${row.picture}"><spring:message
+				code="rendezvouse.picture" /></a>
+	</display:column>
+	<!-- ENLACES -->
 	<security:authorize access="isAnonymous()">
-	<spring:message code="rendezvous.announcement" var="announcements" />
-	<display:column title="${announcements}" sortable="true">
-		<spring:url value="announcement/list.do" var="announcementURL">
-			<spring:param name="rendezvousId" value="${row.id }" />
-		</spring:url>
-		<a href="${announcementURL}"><spring:message
-				code="rendezvous.announcement" /></a>
-	</display:column>
+		<spring:message code="rendezvous.announcement" var="announcements" />
+		<display:column title="${announcements}" sortable="true">
+			<spring:url value="announcement/list.do" var="announcementURL">
+				<spring:param name="rendezvousId" value="${row.id }" />
+			</spring:url>
+			<a href="${announcementURL}"><spring:message
+					code="rendezvous.announcement" /></a>
+		</display:column>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('USER')">
-	<spring:message code="rendezvous.announcement" var="announcements" />
-	<display:column title="${announcements}" sortable="true">
-		<spring:url value="announcement/user/list.do" var="announcementURL">
-			<spring:param name="rendezvousId" value="${row.id }" />
-		</spring:url>
-		<a href="${announcementURL}"><spring:message
-				code="rendezvous.announcement" /></a>
-	</display:column>
+		<spring:message code="rendezvous.announcement" var="announcements" />
+		<display:column title="${announcements}" sortable="true">
+			<spring:url value="announcement/user/list.do" var="announcementURL">
+				<spring:param name="rendezvousId" value="${row.id }" />
+			</spring:url>
+			<a href="${announcementURL}"><spring:message
+					code="rendezvous.announcement" /></a>
+		</display:column>
 	</security:authorize>
 
 	<security:authorize access="hasRole('USER')">
@@ -98,7 +99,7 @@
 					code="rendezvous.createAnnouncement1" /></a>
 		</display:column>
 	</security:authorize>
-	
+
 	<spring:message code="rendezvouse.question" var="Question" />
 	<display:column title="${Question}" sortable="true">
 		<spring:url value="question/list.do" var="editURL">
@@ -106,9 +107,9 @@
 		</spring:url>
 		<a href="${editURL}"><spring:message code="rendezvouse.question" /></a>
 	</display:column>
-	
 
-<spring:message code="rendezvouse.assistans" var="ASS" />
+
+	<spring:message code="rendezvouse.assistans" var="ASS" />
 	<display:column title="${ASS}" sortable="true">
 		<spring:url value="rendezvous/listAssistants.do" var="editURL">
 			<spring:param name="rendezvousId" value="${row.id}" />
@@ -116,12 +117,12 @@
 		<a href="${editURL}"><spring:message code="rendezvouse.assistans" /></a>
 	</display:column>
 
-<spring:message code="user.maker" var="Maker" />
+	<spring:message code="user.maker" var="Maker" />
 	<display:column title="${Maker}" sortable="true">
 		<spring:url value="rendezvous/listMaker.do" var="renURL">
-		<spring:param name="rendezvousId" value="${row.id}"/>
+			<spring:param name="rendezvousId" value="${row.id}" />
 		</spring:url>
-		<a href="${renURL}"><spring:message code="user.rendezvouse"/></a>
+		<a href="${renURL}"><spring:message code="user.rendezvouse" /></a>
 	</display:column>
 
 	<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
@@ -129,23 +130,33 @@
 		<spring:message code="rendezvous.delete" var="delete" />
 
 		<display:column title="${delete}" sortable="true">
-				<spring:url value="rendezvous/administrator/delete.do" var="editURL">
-					<spring:param name="rendezvousId" value="${row.id}" />
-				</spring:url>
-				<a href="${editURL}"><spring:message code="rendezvous.delete" /></a>
+			<spring:url value="rendezvous/administrator/delete.do" var="editURL">
+				<spring:param name="rendezvousId" value="${row.id}" />
+			</spring:url>
+			<a href="${editURL}"><spring:message code="rendezvous.delete" /></a>
 		</display:column>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="rendezvouse.comments" var="Comment" />
-	<display:column title="${Comment}" sortable="true">
-		<spring:url value="comment/user/list.do" var="listCommentURL">
-			<spring:param name="rendezvouseId" value="${row.id}" />
-		</spring:url>
-		<a href="${listCommentURL}"><spring:message code="rendezvouse.comments" /></a>
-	</display:column>
-	
+		<display:column title="${Comment}" sortable="true">
+			<spring:url value="comment/user/list.do" var="listCommentURL">
+				<spring:param name="rendezvouseId" value="${row.id}" />
+			</spring:url>
+			<a href="${listCommentURL}"><spring:message
+					code="rendezvouse.comments" /></a>
+		</display:column>
+
+		<spring:message code="rendezvouse.createComment" var="CreateComments" />
+		<display:column title="${CreateComments}" sortable="true">
+			<spring:url value="comment/user/create.do" var="createCommentURL">
+				<spring:param name="rendezvouseId" value="${row.id}" />
+			</spring:url>
+			<a href="${createCommentURL}"><spring:message
+					code="rendezvouse.comment.create" /></a>
+		</display:column>
 	</security:authorize>
+
 
 </display:table>
 

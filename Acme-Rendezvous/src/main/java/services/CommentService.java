@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
-import security.Authority;
 import domain.Comment;
 import domain.User;
 
@@ -43,13 +42,16 @@ public class CommentService {
 		Comment result;
 		Collection<Comment> replys;
 		User user;
+		Date moment;
 
+		moment = new Date(System.currentTimeMillis() - 1000);
 		result = new Comment();
 		replys = new ArrayList<Comment>();
 		user = this.userService.findByPrincipal();
 
 		result.setReplys(replys);
 		result.setUser(user);
+		result.setWrittenMoment(moment);
 
 		return result;
 
@@ -65,7 +67,7 @@ public class CommentService {
 		moment = new Date(System.currentTimeMillis() - 1000);
 		userConnected = this.userService.findByPrincipal();
 
-		Assert.isTrue(comment.getUser().getUserAccount().getAuthorities().contains(Authority.USER));
+		this.userService.checkPrincipal();
 		Assert.isTrue(comment.getUser().equals(userConnected));
 		Assert.isTrue(comment.getId() == 0);
 
@@ -84,6 +86,10 @@ public class CommentService {
 		Assert.isTrue(this.commentRepository.findOne(comment.getId()) != null);
 
 		this.administratorService.checkPrincipal();
+
+		if (comment.getReplys().size() != 0)
+			for (Comment c : comment.getReplys())
+				this.commentRepository.delete(c);
 
 		this.commentRepository.delete(comment);
 
