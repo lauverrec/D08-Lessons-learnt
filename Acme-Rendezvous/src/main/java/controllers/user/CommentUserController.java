@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CommentService;
+import services.RendezvouseService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Comment;
+import domain.Rendezvouse;
 import domain.User;
 
 @Controller
@@ -26,10 +28,13 @@ public class CommentUserController extends AbstractController {
 	// Services---------------------------------------------------------
 
 	@Autowired
-	private CommentService	commentService;
+	private CommentService		commentService;
 
 	@Autowired
-	private UserService		userService;
+	private UserService			userService;
+
+	@Autowired
+	private RendezvouseService	rendezvouseService;
 
 
 	//constructor-------------------------------------------------------------------------
@@ -56,11 +61,14 @@ public class CommentUserController extends AbstractController {
 
 	// Creation ---------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int rendezvouseId) {
 		ModelAndView result;
 		Comment comment;
+		Rendezvouse rendezvouse;
 
+		rendezvouse = this.rendezvouseService.findOne(rendezvouseId);
 		comment = this.commentService.create();
+		comment.setRendezvouse(rendezvouse);
 
 		result = this.createEditModelAndView(comment);
 
@@ -78,7 +86,7 @@ public class CommentUserController extends AbstractController {
 		else
 			try {
 				this.commentService.save(comment);
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:list.do?rendezvouseId=" + comment.getRendezvouse().getId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(comment, "comment.commit.error");
 			}
@@ -97,13 +105,15 @@ public class CommentUserController extends AbstractController {
 		ModelAndView result;
 
 		User user;
-		Collection<Comment> comments;
+		Rendezvouse rendezvouse;
 
+		rendezvouse = comment.getRendezvouse();
 		user = this.userService.findByPrincipal();
 
 		result = new ModelAndView("comment/edit");
 		result.addObject("comment", comment);
 		result.addObject("user", user);
+		result.addObject("rendezvouse", rendezvouse);
 		result.addObject("message", message);
 
 		return result;

@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,10 +52,11 @@ public class CommentServiceTest extends AbstractTest {
 	}
 
 	@Test
+	@Rollback(false)
 	public void testDelete() {
 		this.authenticate("admin");
 		Comment comment;
-		comment = this.commentService.findOne(this.getEntityId("comment5"));
+		comment = this.commentService.findOne(this.getEntityId("comment1"));
 
 		this.commentService.delete(comment);
 
