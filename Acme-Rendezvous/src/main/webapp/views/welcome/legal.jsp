@@ -16,7 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h1><strong>CONDICIONES GENERALES DE USO DEL SITIO WEB DE ACME</strong></h1>
+<h1><strong>CONDICIONES GENERALES DE USO DEL SITIO WEB DE ACME-RENDEZVOUS</strong></h1>
 
 <span><strong>www.acme.com</strong></span>
 

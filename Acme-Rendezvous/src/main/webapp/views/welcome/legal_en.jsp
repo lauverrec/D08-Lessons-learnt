@@ -16,7 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h1> <strong> GENERAL CONDITIONS OF USE OF THE Acme Car'n Go WEB SITE </strong> </h1>
+<h1> <strong> GENERAL CONDITIONS OF USE OF THE ACME-RENDEZVOUS WEB SITE </strong> </h1>
 
 <span> <strong> www.acmecarngo.com </strong> </span>
 
