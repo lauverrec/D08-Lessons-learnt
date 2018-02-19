@@ -178,9 +178,18 @@ public class AdministratorService {
 		return result;
 	}
 	public Double[] findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous() {
-		Double[] result;
-		result = this.administratorRepository.findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous();
-		Assert.notNull(result);
+		Collection<Long> resultQuery;
+		final Double[] result;
+		final Double avg;
+		final Double stdev;
+
+		resultQuery = this.administratorRepository.findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous();
+		Assert.notNull(resultQuery);
+		avg = AdministratorService.calculateAvg(resultQuery);
+		stdev = AdministratorService.calculateStdev(resultQuery);
+		result = new Double[] {
+			avg, stdev
+		};
 		return result;
 	}
 

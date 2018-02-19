@@ -55,9 +55,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Collection<Long> findAvgStddevOfTheNumOfQuestionsPerRendezvous();
 
 	//A/2 The average and the standard deviation of the number of answers to the questions per rendezvous.
-	//TODO Necesito navegabilidad de rendezvous a questions y de questions a answer
-	@Query("select avg(u.rendezvousesAssisted.size), stddev(u.rendezvousesAssisted.size) from User u")
-	Double[] findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous();
+	@Query("select (select count (a) from Answer a where a.question.rendezvouse.id=r.id) from Rendezvouse r")
+	Collection<Long> findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous();
 
 	//A/3 The average and the standard deviation of replies per comment.
 	@Query("select avg(c.replys.size), stddev(c.replys.size) from Comment c")
