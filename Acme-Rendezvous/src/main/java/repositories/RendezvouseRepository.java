@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Announcement;
 import domain.Rendezvouse;
 import domain.User;
 
@@ -30,6 +31,12 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 
 	@Query("select r from Rendezvouse r where r.organisedMoment>CURRENT_TIMESTAMP")
 	Collection<Rendezvouse> AllRendezvousesICanAssist();
+	//te devuelve las rendezvous similares que contienen una rendezvous
+	@Query("select r from Rendezvouse r where ?1 member of r.similarRendezvouses")
+	Collection<Rendezvouse> SimilarRendezvouseWhereIS(int rendezvousId);
+
+	@Query("select r.announcements from Rendezvouse r where r.id=?1")
+	Collection<Announcement> AnnoucemntofRendezvouse(int rendezvouse);
 
 	//select u from User u join u.rendezvousesAssisted r where 45 not member of u.rendezvousesAssisted and r.deleted=false and r.organisedMoment>CURRENT_TIMESTAMP;
 }

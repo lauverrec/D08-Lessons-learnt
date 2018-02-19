@@ -110,17 +110,20 @@ public class RendezvouseService {
 		Collection<User> assistant;
 		Collection<Question> questions;
 		Collection<Comment> comments;
+		Collection<Rendezvouse> similarrendezvous;
+		Collection<Announcement> announcements;
 
+		similarrendezvous = this.SimilarRendezvouseWhereIS(rendezvouse);
+		announcements = this.AnnoucemntofRendezvouse(rendezvouse);
 		questions = this.questionService.findAllQuestionsByRendezvous(rendezvouse.getId());
 		comments = this.commentService.findAllCommentsByRendezvousId(rendezvouse.getId());
 
-		assistant = new ArrayList<User>(this.rendezvousRepository.findAllAssistantsByRendezvous(rendezvouse.getId()));
+		assistant = this.rendezvousRepository.findAllAssistantsByRendezvous(rendezvouse.getId());
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse));
 
 		user.getRendezvousesCreated().remove(rendezvouse);
-
-		for (Rendezvouse r : rendezvouse.getSimilarRendezvouses())
-			rendezvouse.getSimilarRendezvouses().remove(r);
+		for (Rendezvouse r : similarrendezvous)
+			r.getSimilarRendezvouses().remove(rendezvouse);
 
 		for (Comment c : comments)
 			this.commentService.delete(c);
@@ -128,10 +131,11 @@ public class RendezvouseService {
 		for (Question q : questions)
 			this.questionService.delete(q);
 
-		for (Announcement a : rendezvouse.getAnnouncements())
+		for (Announcement a : announcements)
 			//			rendezvouse.getAnnouncements().remove(a);
 			this.announcementService.delete(a);
-		rendezvouse.getAssistants().removeAll(assistant);
+		for (User u : assistant)
+			u.getRendezvousesAssisted().remove(rendezvouse);
 		this.rendezvousRepository.delete(rendezvouse);
 
 	}
@@ -186,5 +190,17 @@ public class RendezvouseService {
 		Collection<Rendezvouse> result;
 		result = this.rendezvousRepository.AllRendezvousesICanAssist();
 		return result;
+	}
+	public Collection<Rendezvouse> SimilarRendezvouseWhereIS(Rendezvouse rendezvouse) {
+		Collection<Rendezvouse> result;
+		result = this.rendezvousRepository.SimilarRendezvouseWhereIS(rendezvouse.getId());
+		return result;
+	}
+	public Collection<Announcement> AnnoucemntofRendezvouse(Rendezvouse rendezvouse) {
+		Collection<Announcement> res;
+		res = this.rendezvousRepository.AnnoucemntofRendezvouse(rendezvouse.getId());
+
+		return res;
+
 	}
 }
