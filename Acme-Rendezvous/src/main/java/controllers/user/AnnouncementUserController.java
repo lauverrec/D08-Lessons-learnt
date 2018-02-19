@@ -57,9 +57,7 @@ public class AnnouncementUserController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int announcementId) {
 		ModelAndView result;
 		Announcement announcement;
-		//User user;
 
-		//user = this.userService.findByPrincipal();
 		announcement = this.announcementService.findOne(announcementId);
 		//Assert.isTrue(user.getRendezvousesCreated().contains(announcement), "Cannot commit this operation, because it's illegal");
 		Assert.notNull(announcement);
@@ -76,6 +74,9 @@ public class AnnouncementUserController extends AbstractController {
 			result = this.createEditModelAndView(announcement);
 		else
 			try {
+				Collection<Announcement> announcementsOfUser;
+				announcementsOfUser = this.announcementService.findAnnouncementByUserId();
+				Assert.isTrue(announcementsOfUser.contains(announcement));
 				this.announcementService.save(announcement);
 				result = new ModelAndView("redirect:list.do?rendezvousId=" + announcement.getRendezvouse().getId());
 			} catch (Throwable oops) {
@@ -107,7 +108,7 @@ public class AnnouncementUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Announcement> announcements;
 
-		announcements = new ArrayList<>(this.announcementService.findAnnouncementByUserIdForRendezvousesAssits());
+		announcements = new ArrayList<>(this.announcementService.findAnnouncementByUserId());
 
 		result = new ModelAndView("announcement/list");
 		result.addObject("announcements", announcements);

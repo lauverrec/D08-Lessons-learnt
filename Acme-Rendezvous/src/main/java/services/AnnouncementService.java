@@ -102,4 +102,14 @@ public class AnnouncementService {
 		Assert.notNull(result);
 		return result;
 	}
+
+	public Collection<Announcement> findAnnouncementByUserId() {
+		Collection<Announcement> result;
+		User user;
+		user = this.userService.findByPrincipal();
+		result = new ArrayList<>(this.announcementRepository.findAnnouncementByUserId(user.getId()));
+		Assert.notNull(result);
+		return result;
+	}
+
 }

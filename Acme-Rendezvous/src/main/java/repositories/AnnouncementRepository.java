@@ -17,4 +17,8 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Inte
 
 	@Query("select r.announcements from Rendezvouse r join r.assistants a where a.id=?1 order by madeMoment desc")
 	Collection<Announcement> findAnnouncementByUserIdForRendezvousesAssits(int userId);
+
+	@Query("select b from User u join u.rendezvousesCreated a join a.announcements b where u.id=?1")
+	Collection<Announcement> findAnnouncementByUserId(int userId);
+
 }
