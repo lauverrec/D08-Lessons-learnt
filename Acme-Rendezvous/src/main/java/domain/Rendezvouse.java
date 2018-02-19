@@ -120,7 +120,6 @@ public class Rendezvouse extends DomainEntity {
 		this.assistants = assistants;
 	}
 
-	@NotNull
 	@Valid
 	@ManyToMany
 	public Collection<Rendezvouse> getSimilarRendezvouses() {
