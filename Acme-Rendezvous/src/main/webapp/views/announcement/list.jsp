@@ -80,5 +80,5 @@
 
 <input type="button" name="back"
 		value="<spring:message code="rendezvous.back" />"
-		onclick="javascript: window.location.replace('rendezvous_/list-unregister.do');" />
+		onclick="javascript: window.location.replace('rendezvous/list-unregister.do');" />
 </security:authorize>

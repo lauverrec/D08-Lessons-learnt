@@ -15,7 +15,7 @@ import domain.Rendezvouse;
 import domain.User;
 
 @Controller
-@RequestMapping("/rendezvous_")
+@RequestMapping("/rendezvous")
 public class RendezvousController extends AbstractController {
 
 	// Services---------------------------------------------------------
@@ -42,7 +42,7 @@ public class RendezvousController extends AbstractController {
 
 		result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvous", rens);
-		result.addObject("requestURI", "rendezvous_/list.do");
+		result.addObject("requestURI", "rendezvous/list.do");
 
 		return result;
 
@@ -58,7 +58,7 @@ public class RendezvousController extends AbstractController {
 
 		result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvous", rendezvous);
-		result.addObject("requestURI", "rendezvous_/list-unregister.do");
+		result.addObject("requestURI", "rendezvous/list-unregister.do");
 
 		return result;
 
@@ -74,12 +74,12 @@ public class RendezvousController extends AbstractController {
 
 		result = new ModelAndView("user/list");
 		result.addObject("users", assistants);
-		result.addObject("requestURI", "rendezvous_/listAssistants.do");
+		result.addObject("requestURI", "rendezvous/listAssistants.do");
 
 		return result;
 
 	}
-	
+
 	// Display ----------------------------------------------------------------
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
