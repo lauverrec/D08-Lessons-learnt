@@ -51,6 +51,59 @@ public class RendezvousesUserController extends AbstractController {
 
 	}
 
+	@RequestMapping(value = "/listasis", method = RequestMethod.GET)
+	public ModelAndView listasis() {
+		final ModelAndView result;
+		Collection<Rendezvouse> rendezvous;
+		User principal;
+		principal = this.userService.findByPrincipal();
+		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
+		result = new ModelAndView("rendezvous/listasis");
+		result.addObject("rendezvous", rendezvous);
+		result.addObject("registered", true);
+		result.addObject("requestURI", "rendezvous/user/listasis.do");
+		return result;
+
+	}
+
+	@RequestMapping(value = "/listnotasis", method = RequestMethod.GET)
+	public ModelAndView listnotasis() {
+		final ModelAndView result;
+		Collection<Rendezvouse> rendezvous;
+		User principal;
+		principal = this.userService.findByPrincipal();
+		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
+		result = new ModelAndView("rendezvous/listasis");
+		result.addObject("rendezvous", rendezvous);
+		result.addObject("registered", false);
+		result.addObject("requestURI", "rendezvous/user/listasis.do");
+		return result;
+
+	}
+
+	@RequestMapping(value = "/notassist", method = RequestMethod.GET)
+	public ModelAndView notassist() {
+		final ModelAndView result;
+		Collection<Rendezvouse> rendezvous;
+		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
+		result = new ModelAndView("rendezvous/listasis");
+		result.addObject("rendezvous", rendezvous);
+		result.addObject("requestURI", "rendezvous/user/listasis.do");
+		return result;
+
+	}
+
+	@RequestMapping(value = "/assist", method = RequestMethod.GET)
+	public ModelAndView assist() {
+		final ModelAndView result;
+		Collection<Rendezvouse> rendezvous;
+		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
+		result = new ModelAndView("rendezvous/listasis");
+		result.addObject("rendezvous", rendezvous);
+		result.addObject("requestURI", "rendezvous/user/listasis.do");
+		return result;
+
+	}
 	//Listing-----------------------------------------------------------
 
 	@RequestMapping(value = "/list-RSVP", method = RequestMethod.GET)

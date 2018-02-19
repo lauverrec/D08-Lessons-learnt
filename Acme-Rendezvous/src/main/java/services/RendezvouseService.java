@@ -181,4 +181,10 @@ public class RendezvouseService {
 		result = this.rendezvousRepository.save(rendezvouse);
 		return result;
 	}
+
+	public Collection<Rendezvouse> AllRendezvousesICanAssist() {
+		Collection<Rendezvouse> result;
+		result = this.rendezvousRepository.AllRendezvousesICanAssist();
+		return result;
+	}
 }

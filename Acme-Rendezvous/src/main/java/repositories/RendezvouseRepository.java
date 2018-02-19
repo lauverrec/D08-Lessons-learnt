@@ -28,4 +28,8 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	@Query("select r.assistants from Rendezvouse r where r.id=?1")
 	Collection<User> findAllAssistantsByRendezvous(int rendezvousId);
 
+	@Query("select r from Rendezvouse r where r.organisedMoment>CURRENT_TIMESTAMP")
+	Collection<Rendezvouse> AllRendezvousesICanAssist();
+
+	select r from User u join u.rendezvousesAssisted r where u.id=45 and r.deleted=false and r.organisedMoment>CURRENT_TIMESTAMP
 }
