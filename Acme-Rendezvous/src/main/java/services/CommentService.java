@@ -98,4 +98,11 @@ public class CommentService {
 
 		return result;
 	}
+
+	public Collection<Comment> findAllCommentsByRendezvousId(int rendezvousId) {
+		Collection<Comment> result;
+		result = this.commentRepository.findAllCommentsByRendezvousId(rendezvousId);
+		return result;
+
+	}
 }

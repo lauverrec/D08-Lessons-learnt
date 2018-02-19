@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -110,7 +111,6 @@ public class Rendezvouse extends DomainEntity {
 
 
 	@Valid
-	@NotNull
 	@ManyToMany
 	public Collection<User> getAssistants() {
 		return this.assistants;
@@ -131,8 +131,7 @@ public class Rendezvouse extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
-	@OneToMany
+	@OneToMany(mappedBy = "rendezvouse", cascade = CascadeType.REMOVE)
 	public Collection<Announcement> getAnnouncements() {
 		return this.announcements;
 	}

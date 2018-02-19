@@ -12,6 +12,8 @@ import org.springframework.util.Assert;
 
 import repositories.RendezvouseRepository;
 import domain.Announcement;
+import domain.Comment;
+import domain.Question;
 import domain.Rendezvouse;
 import domain.User;
 
@@ -27,6 +29,15 @@ public class RendezvouseService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private UserService				userService;
+
+	@Autowired
+	private AnnouncementService		announcementService;
+
+	@Autowired
+	private QuestionService			questionService;
+
+	@Autowired
+	private CommentService			commentService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -94,19 +105,33 @@ public class RendezvouseService {
 
 	public void delete(final Rendezvouse rendezvouse) {
 		User user;
-		Collection<Rendezvouse> empty;
-		Collection<User> emptyAsistants;
-		empty = new ArrayList<Rendezvouse>();
-		emptyAsistants = new ArrayList<User>();
-		user = this.userService.findByPrincipal();
-		Assert.isTrue(rendezvouse.isDraftMode() == true);
+		user = this.userService.UserForRendezvous(rendezvouse);
+
+		Collection<User> assistant;
+		Collection<Question> questions;
+		Collection<Comment> comments;
+
+		questions = this.questionService.findAllQuestionsByRendezvous(rendezvouse.getId());
+		comments = this.commentService.findAllCommentsByRendezvousId(rendezvouse.getId());
+
+		assistant = new ArrayList<User>(this.rendezvousRepository.findAllAssistantsByRendezvous(rendezvouse.getId()));
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse));
 
 		user.getRendezvousesCreated().remove(rendezvouse);
-		user.getRendezvousesAssisted().remove(rendezvouse);
-		rendezvouse.setSimilarRendezvouses(empty);
-		rendezvouse.setAssistants(emptyAsistants);
 
+		for (Rendezvouse r : rendezvouse.getSimilarRendezvouses())
+			rendezvouse.getSimilarRendezvouses().remove(r);
+
+		for (Comment c : comments)
+			this.commentService.delete(c);
+
+		for (Question q : questions)
+			this.questionService.delete(q);
+
+		for (Announcement a : rendezvouse.getAnnouncements())
+			//			rendezvouse.getAnnouncements().remove(a);
+			this.announcementService.delete(a);
+		rendezvouse.getAssistants().removeAll(assistant);
 		this.rendezvousRepository.delete(rendezvouse);
 
 	}
