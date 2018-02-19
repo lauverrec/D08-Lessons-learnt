@@ -105,7 +105,7 @@ public class RendezvouseService {
 
 	public void delete(final Rendezvouse rendezvouse) {
 		User user;
-		user = this.userService.UserForRendezvous(rendezvouse);
+		user = this.userService.findUserByRendezvousId(rendezvouse.getId());
 
 		Collection<User> assistant;
 		Collection<Question> questions;
