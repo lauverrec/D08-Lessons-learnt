@@ -62,10 +62,10 @@ public class AnnouncementAdministratorController extends AbstractController {
 
 	protected ModelAndView listWithMessage(final String message) {
 		final ModelAndView result;
-		Collection<Announcement> announcement;
-		announcement = this.announcementService.findAll();
+		Collection<Announcement> announcements;
+		announcements = this.announcementService.findAll();
 		result = new ModelAndView("announcement/list");
-		result.addObject("announcement", announcement);
+		result.addObject("announcements", announcements);
 		result.addObject("requestURI", "/announcement/administrator/list.do");
 		result.addObject("message", message);
 		return result;
