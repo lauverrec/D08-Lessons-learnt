@@ -57,11 +57,6 @@
 		</spring:url>
 		<a href="${renURL}"><spring:message code="user.rendezvouse"/></a>
 	</p>
-	
-	
-		
-		
-
 
 </display:column>
   

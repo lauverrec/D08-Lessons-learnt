@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RendezvouseService;
+import services.UserService;
 import domain.Rendezvouse;
 import domain.User;
 
@@ -22,6 +23,9 @@ public class RendezvousController extends AbstractController {
 
 	@Autowired
 	private RendezvouseService	rendezvouseService;
+
+	@Autowired
+	private UserService			userService;
 
 
 	//Constructor--------------------------------------------------------
@@ -75,6 +79,22 @@ public class RendezvousController extends AbstractController {
 		result = new ModelAndView("user/list");
 		result.addObject("users", assistants);
 		result.addObject("requestURI", "rendezvous/listAssistants.do");
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/listMaker", method = RequestMethod.GET)
+	public ModelAndView list3(@RequestParam int rendezvousId) {
+
+		ModelAndView result;
+		User user;
+
+		user = this.userService.findUserByRendezvousId(rendezvousId);
+
+		result = new ModelAndView("user/display");
+		result.addObject("user", user);
+		result.addObject("requestUri", "rendezvous/listMaker.do");
 
 		return result;
 

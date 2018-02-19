@@ -116,7 +116,13 @@
 		<a href="${editURL}"><spring:message code="rendezvouse.assistans" /></a>
 	</display:column>
 
-
+<spring:message code="user.maker" var="Maker" />
+	<display:column title="${Maker}" sortable="true">
+		<spring:url value="rendezvous/listMaker.do" var="renURL">
+		<spring:param name="rendezvousId" value="${row.id}"/>
+		</spring:url>
+		<a href="${renURL}"><spring:message code="user.rendezvouse"/></a>
+	</display:column>
 
 	<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
 	<security:authorize access="hasRole('ADMINISTRATOR')">

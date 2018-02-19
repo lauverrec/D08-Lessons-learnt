@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -19,86 +20,86 @@ import domain.User;
 @Service
 @Transactional
 public class UserService {
-	
+
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private UserRepository userRepository;
-	
+	private UserRepository	userRepository;
+
+
 	// Supporting services ----------------------------------------------------
-	
+
 	// Constructors -----------------------------------------------------------
-	
-	public UserService(){
+
+	public UserService() {
 		super();
 	}
-	
+
 	// Simple CRUD methods ----------------------------------------------------
-	
+
 	public User create() {
-		
+
 		User result;
 		UserAccount userAccount;
 		Authority authority;
 		Collection<Rendezvouse> rendezvousesCreated;
 		Collection<Rendezvouse> rendezvousesAssisted;
-		
+
 		result = new User();
 		userAccount = new UserAccount();
 		authority = new Authority();
 		rendezvousesCreated = new ArrayList<>();
 		rendezvousesAssisted = new ArrayList<>();
-		
+
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
 		result.setUserAccount(userAccount);
 		result.setRendezvousesCreated(rendezvousesCreated);
 		result.setRendezvousesAssisted(rendezvousesAssisted);
-		
+
 		return result;
-		
+
 	}
-	
+
 	public Collection<User> findAll() {
-		
+
 		Collection<User> result;
-		
+
 		result = this.userRepository.findAll();
-		
+
 		return result;
-		
+
 	}
-	
-	public User findOne(int userId){
-		
+
+	public User findOne(int userId) {
+
 		Assert.isTrue(userId != 0);
 		User result;
 		result = this.userRepository.findOne(userId);
 
 		return result;
-		
+
 	}
-	
-	public User save(User user){
-		
+
+	public User save(User user) {
+
 		Assert.notNull(user);
-		
+
 		User result;
 		Md5PasswordEncoder encoder;
 		String passwordHash;
-		
+
 		encoder = new Md5PasswordEncoder();
 		passwordHash = encoder.encodePassword(user.getUserAccount().getPassword(), null);
 		user.getUserAccount().setPassword(passwordHash);
-		
+
 		result = this.userRepository.save(user);
-		
+
 		Assert.notNull(result);
 
 		return result;
-		
-		
+
 	}
-	
+
 	public void delete(final User user) {
 
 		Assert.notNull(user);
@@ -106,36 +107,40 @@ public class UserService {
 		this.userRepository.delete(user);
 
 	}
-	
-	
+
 	// Other business methods----------------------------------
 
-		public User findByPrincipal() {
+	public User findByPrincipal() {
 
-			User result;
-			UserAccount userAccount;
+		User result;
+		UserAccount userAccount;
 
-			userAccount = LoginService.getPrincipal();
-			Assert.notNull(userAccount);
-			result = this.userRepository.findByUserAccountId(userAccount.getId());
-			Assert.notNull(result);
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		result = this.userRepository.findByUserAccountId(userAccount.getId());
+		Assert.notNull(result);
 
-			return result;
-		}
+		return result;
+	}
 
-		public void checkPrincipal() {
+	public void checkPrincipal() {
 
-			final UserAccount userAccount = LoginService.getPrincipal();
-			Assert.notNull(userAccount);
+		final UserAccount userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
 
-			final Collection<Authority> authorities = userAccount.getAuthorities();
-			Assert.notNull(authorities);
+		final Collection<Authority> authorities = userAccount.getAuthorities();
+		Assert.notNull(authorities);
 
-			final Authority auth = new Authority();
-			auth.setAuthority(Authority.USER);
+		final Authority auth = new Authority();
+		auth.setAuthority(Authority.USER);
 
-			Assert.isTrue(authorities.contains(auth));
-		}
-	
+		Assert.isTrue(authorities.contains(auth));
+	}
+
+	public User findUserByRendezvousId(int rendezvousId) {
+		User user;
+		user = this.userRepository.findUserByRendezvousId(rendezvousId);
+		return user;
+	}
 
 }
