@@ -49,7 +49,25 @@ public class CommentUserController extends AbstractController {
 		final ModelAndView result;
 		Collection<Comment> comments;
 
-		comments = this.commentService.commentsOfThisRendezvouse(rendezvouseId);
+		comments = this.commentService.commentsOfThisRendezvouseWithCommentNull(rendezvouseId);
+		result = new ModelAndView("comment/list");
+
+		result.addObject("comments", comments);
+		result.addObject("requestURI", "/comment/user/list.do");
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/listReplys", method = RequestMethod.GET)
+	public ModelAndView listReplys(@RequestParam int commentId) {
+		final ModelAndView result;
+		Collection<Comment> comments;
+		Comment comment;
+
+		comment = this.commentService.findOne(commentId);
+
+		comments = comment.getReplys();
 		result = new ModelAndView("comment/list");
 
 		result.addObject("comments", comments);
@@ -71,6 +89,22 @@ public class CommentUserController extends AbstractController {
 		comment.setRendezvouse(rendezvouse);
 
 		result = this.createEditModelAndView(comment);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
+	public ModelAndView createReply(@RequestParam int commentId) {
+		ModelAndView result;
+		Comment comment;
+		Comment resultComment;
+
+		comment = this.commentService.findOne(commentId);
+		resultComment = this.commentService.create();
+		resultComment.setRendezvouse(comment.getRendezvouse());
+		resultComment.setCommentTo(comment);
+
+		result = this.createEditModelAndView(resultComment);
 
 		return result;
 	}

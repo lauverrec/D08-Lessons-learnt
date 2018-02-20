@@ -148,14 +148,6 @@
 					code="rendezvouse.comments" /></a>
 		</display:column>
 
-		<spring:message code="rendezvouse.createComment" var="CreateComments" />
-		<display:column title="${CreateComments}" sortable="true">
-			<spring:url value="comment/user/create.do" var="createCommentURL">
-				<spring:param name="rendezvouseId" value="${row.id}" />
-			</spring:url>
-			<a href="${createCommentURL}"><spring:message
-					code="rendezvouse.comment.create" /></a>
-		</display:column>
 	</security:authorize>
 
 

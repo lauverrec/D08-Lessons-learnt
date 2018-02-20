@@ -58,14 +58,17 @@ public class CommentService {
 	}
 	public Comment save(Comment comment) {
 		Date moment;
+		User userConnected;
+
 		moment = new Date();
+		userConnected = this.userService.findByPrincipal();
 
 		Assert.notNull(comment);
-		User userConnected;
+		Assert.isTrue(comment.getRendezvouse().getAssistants().contains(userConnected));
+
 		Comment result;
 
 		moment = new Date(System.currentTimeMillis() - 1000);
-		userConnected = this.userService.findByPrincipal();
 
 		this.userService.checkPrincipal();
 		Assert.isTrue(comment.getUser().equals(userConnected));
@@ -125,5 +128,13 @@ public class CommentService {
 		result = this.commentRepository.findAllCommentsByRendezvousId(rendezvousId);
 		return result;
 
+	}
+
+	public Collection<Comment> commentsOfThisRendezvouseWithCommentNull(int rendezvouseId) {
+		Collection<Comment> commentsOfThisRendezvouse;
+
+		commentsOfThisRendezvouse = this.commentRepository.commentsOfThisRendezvouseWithCommentNull(rendezvouseId);
+
+		return commentsOfThisRendezvouse;
 	}
 }
