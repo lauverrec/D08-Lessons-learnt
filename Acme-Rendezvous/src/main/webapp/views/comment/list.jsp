@@ -47,10 +47,8 @@
 	<spring:message code="comment.text" var="textHeader" />
 	<display:column property="text" title="${textHeader}" sortable="true" />
 
-	<!-- Boton para comentar en este rendezvouse si es que es asistente -->
-
+<!-- Boton para responder a un comentario -->
 	<security:authorize access="hasRole('USER')">
-
 		<spring:message code="createComments" var="CreateComments" />
 		<display:column title="${CreateComments}" sortable="true">
 			<spring:url value="comment/user/createReply.do"

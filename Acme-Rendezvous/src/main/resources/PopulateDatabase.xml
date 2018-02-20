@@ -114,6 +114,7 @@
 		<property name="rendezvousesAssisted">
 			<list>
 				<ref bean="rendezvouse1"></ref>
+				<ref bean="rendezvouse4"></ref>
 			</list>
 		</property>
 	</bean>
