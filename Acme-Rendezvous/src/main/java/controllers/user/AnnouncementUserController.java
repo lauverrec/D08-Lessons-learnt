@@ -74,9 +74,11 @@ public class AnnouncementUserController extends AbstractController {
 			result = this.createEditModelAndView(announcement);
 		else
 			try {
-				Collection<Announcement> announcementsOfUser;
-				announcementsOfUser = this.announcementService.findAnnouncementByUserId();
-				Assert.isTrue(announcementsOfUser.contains(announcement));
+				if (announcement.getId() != 0) {
+					Collection<Announcement> announcementsOfUser;
+					announcementsOfUser = this.announcementService.findAnnouncementByUserId();
+					Assert.isTrue(announcementsOfUser.contains(announcement));
+				}
 				this.announcementService.save(announcement);
 				result = new ModelAndView("redirect:list.do?rendezvousId=" + announcement.getRendezvouse().getId());
 			} catch (Throwable oops) {
