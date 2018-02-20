@@ -124,7 +124,8 @@
 
 
 	<display:column>
-		<security:authorize access="hasRole('USER')">
+		<jstl:if test="${assist}">
+
 			<spring:message code="rendezvouse.comments" var="Comment" />
 			<display:column title="${Comment}" sortable="true">
 				<spring:url value="comment/user/list.do" var="listCommentURL">
@@ -133,9 +134,8 @@
 				<a href="${listCommentURL}"><spring:message
 						code="rendezvouse.comments" /></a>
 			</display:column>
-		</security:authorize>
-		
-		<jstl:if test="${assist}">
+
+
 			<spring:url value="rendezvous/user/notassist.do" var="editURL">
 				<spring:param name="rendezvousId" value="${row.id}" />
 			</spring:url>
@@ -171,6 +171,8 @@
 
 	<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
 	<security:authorize access="hasRole('ADMINISTRATOR')">
+	
+	
 		<spring:message code="rendezvous.delete" var="delete" />
 
 		<display:column title="${delete}" sortable="true">

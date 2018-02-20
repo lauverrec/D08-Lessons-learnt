@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CommentService;
@@ -36,6 +37,21 @@ public class CommentAdministratorController extends AbstractController {
 		Collection<Comment> comments;
 
 		comments = this.commentService.findAll();
+		result = new ModelAndView("comment/list");
+
+		result.addObject("comments", comments);
+		result.addObject("requestURI", "/comment/administrator/list.do");
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/listByRendezvouse", method = RequestMethod.GET)
+	public ModelAndView listByRendezvouse(@RequestParam int rendezvouseId) {
+		final ModelAndView result;
+		Collection<Comment> comments;
+
+		comments = this.commentService.commentsOfThisRendezvouse(rendezvouseId);
 		result = new ModelAndView("comment/list");
 
 		result.addObject("comments", comments);
