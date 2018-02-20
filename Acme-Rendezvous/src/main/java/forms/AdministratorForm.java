@@ -8,7 +8,7 @@ import domain.Administrator;
 public class AdministratorForm {
 
 	@Valid
-	private Administrator	admin;
+	private Administrator	administrator;
 	private String			passwordCheck;
 	private Boolean			conditions;
 
@@ -17,18 +17,18 @@ public class AdministratorForm {
 		super();
 	}
 
-	public AdministratorForm(final Administrator admin) {
-		this.admin = admin;
+	public AdministratorForm(final Administrator administrator) {
+		this.administrator = administrator;
 		this.passwordCheck = "";
 		this.conditions = false;
 	}
 
 	public Administrator getAdministrator() {
-		return this.admin;
+		return this.administrator;
 	}
 
-	public void setAdministrator(final Administrator admin) {
-		this.admin = admin;
+	public void setAdministrator(final Administrator administrator) {
+		this.administrator = administrator;
 	}
 
 	public String getPasswordCheck() {

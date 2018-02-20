@@ -11,6 +11,8 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AdministratorRepository;
 import security.Authority;
@@ -18,6 +20,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Rendezvouse;
+import forms.AdministratorForm;
 
 @Service
 @Transactional
@@ -26,6 +29,10 @@ public class AdministratorService {
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private AdministratorRepository	administratorRepository;
+
+	//Importar la que pertenece a Spring
+	@Autowired
+	private Validator				validator;
 
 
 	// Simple CRUD methods------------------------------------------------
@@ -214,5 +221,28 @@ public class AdministratorService {
 			sum += (num - avg) * (num - avg);
 		standardDeviation = Math.sqrt(sum / resultQuery.size());
 		return standardDeviation;
+	}
+
+	public AdministratorForm reconstruct(final AdministratorForm administratorForm, final BindingResult bindingResult) {
+		final AdministratorForm result;
+		Administrator admin;
+
+		if (administratorForm.getAdministrator().getId() == 0)
+			admin = administratorForm.getAdministrator();
+		else {
+			admin = this.administratorRepository.findOne(administratorForm.getAdministrator().getId());
+			admin.setName(administratorForm.getAdministrator().getName());
+			admin.setSurname(administratorForm.getAdministrator().getSurname());
+			admin.setPostalAddress((administratorForm.getAdministrator().getPostalAddress()));
+			admin.setName(administratorForm.getAdministrator().getName());
+			admin.setPhoneNumber(administratorForm.getAdministrator().getPhoneNumber());
+			admin.setEmailAddress(administratorForm.getAdministrator().getEmailAddress());
+			admin.setUserAccount(administratorForm.getAdministrator().getUserAccount());
+
+		}
+		this.validator.validate(admin, bindingResult);
+		administratorForm.setAdministrator(admin);
+		result = administratorForm;
+		return result;
 	}
 }

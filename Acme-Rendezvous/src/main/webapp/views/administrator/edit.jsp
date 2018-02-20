@@ -24,27 +24,37 @@
 
 
 
-<form:form action="administrator/edit.do" modelAttribute="administrator">
+<form:form action="administrator/edit.do"
+	modelAttribute="administratorForm">
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="userAccount" />
-	<form:hidden path="userAccount.authorities" />
+	<form:hidden path="administrator.id" />
+	<form:hidden path="administrator.version" />
+	<form:hidden path="administrator.userAccount" />
+	<form:hidden path="administrator.userAccount.authorities" />
 
 
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
-		<jstl:if test="${administrator.id == 0}">
-			<acme:textbox code="administrator.username" path="userAccount.username" />
-			<acme:password code="administrator.password" path="userAccount.password" />
+		<jstl:if test="${administratorForm.administrator.id == 0}">
+			<acme:textbox code="administrator.username"
+				path="administrator.userAccount.username" />
+			<acme:password code="administrator.password"
+				path="administrator.userAccount.password" />
+			<acme:password code="administrator.password"
+				path="passwordCheck" />
+			<br />
 		</jstl:if>
 
-		<acme:textbox code="administrator.name" path="name" />
-		<acme:textbox code="administrator.surname" path="surname" />
-		<acme:textbox code="administrator.emailAddress" path="emailAddress" />
-		<acme:textbox code="administrator.postalAddress" path="postalAddress" />
-		<acme:textbox code="administrator.phoneNumber" path="phoneNumber" />
+		<acme:textbox code="administrator.name" path="administrator.name" />
+		<acme:textbox code="administrator.surname"
+			path="administrator.surname" />
+		<acme:textbox code="administrator.emailAddress"
+			path="administrator.emailAddress" />
+		<acme:textbox code="administrator.postalAddress"
+			path="administrator.postalAddress" />
+		<acme:textbox code="administrator.phoneNumber"
+			path="administrator.phoneNumber" />
 
 
 		<input type="submit" name="save"
