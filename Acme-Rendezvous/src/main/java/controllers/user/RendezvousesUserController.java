@@ -81,47 +81,39 @@ public class RendezvousesUserController extends AbstractController {
 
 	}
 
-	//	@RequestMapping(value = "/notassist", method = RequestMethod.GET)
-	//	public ModelAndView notassist() {
-	//		final ModelAndView result;
-	//		Collection<Rendezvouse> rendezvous;
-	//		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
-	//		result = new ModelAndView("rendezvous/listasis");
-	//		result.addObject("rendezvous", rendezvous);
-	//		result.addObject("requestURI", "rendezvous/user/listasis.do");
-	//		return result;
-	//
-	//	}
+	@RequestMapping(value = "/notassist", method = RequestMethod.GET)
+	public ModelAndView notassist(@RequestParam final int rendezvousId) {
+		ModelAndView result;
 
-	//	@RequestMapping(value = "/assist", method = RequestMethod.GET)
-	//	public ModelAndView assist() {
-	//		//TO DO
-	//		final ModelAndView result;
-	//		Collection<Rendezvouse> rendezvous;
-	////		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
-	//		result = new ModelAndView("rendezvous/listasis");
-	//		result.addObject("rendezvous", rendezvous);
-	//		result.addObject("requestURI", "rendezvous/user/listasis.do");
-	//		return result;
-	//
-	//	}
-	//	//Listing-----------------------------------------------------------
-	//
-	//	@RequestMapping(value = "/list-RSVP", method = RequestMethod.GET)
-	//	public ModelAndView list2() {
-	//
-	//		ModelAndView result;
-	//		Collection<Rendezvouse> rens;
-	//
-	//		rens = this.rendezvouseService.findRendezvousesAssitedByUser();
-	//
-	//		result = new ModelAndView("rendezvous/list");
-	//		result.addObject("rendezvous", rens);
-	//		result.addObject("requestURI", "rendezvous/user/list-RSVP.do");
-	//
-	//		return result;
-	//
-	//	}
+		try {
+			this.rendezvouseService.unassist(rendezvousId);
+			result = this.listnotasis();
+			result.addObject("message", "rendezvous.commit.ok");
+		} catch (final Throwable oops) {
+			result = this.listnotasis();
+			result.addObject("message", "rendezvous.commit.error");
+		}
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/assist", method = RequestMethod.GET)
+	public ModelAndView assist(@RequestParam final int rendezvousId) {
+		ModelAndView result;
+
+		try {
+			this.rendezvouseService.assist(rendezvousId);
+			result = this.listasis();
+			result.addObject("message", "rendezvous.commit.ok");
+		} catch (final Throwable oops) {
+			result = this.listasis();
+			result.addObject("message", "rendezvous.commit.error");
+		}
+
+		return result;
+
+	}
 
 	//Listing deleted rendezvouses-----------------------------------------------------------
 
