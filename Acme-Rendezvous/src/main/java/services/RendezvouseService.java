@@ -218,4 +218,24 @@ public class RendezvouseService {
 		return res;
 
 	}
+	public void assist(int rendezvousId) {
+		User usuario;
+		Rendezvouse rendezvous;
+		rendezvous = this.rendezvousRepository.findOne(rendezvousId);
+		usuario = this.userService.findByPrincipal();
+		//TODO comprobar que si la rendezvous es para mayores sea mayor el usuario
+		rendezvous.getAssistants().add(usuario);
+		this.rendezvousRepository.save(rendezvous);
+
+	}
+
+	public void unassist(int rendezvousId) {
+		User usuario;
+		Rendezvouse rendezvous;
+		rendezvous = this.rendezvousRepository.findOne(rendezvousId);
+		usuario = this.userService.findByPrincipal();
+		rendezvous.getAssistants().remove(usuario);
+		this.rendezvousRepository.save(rendezvous);
+
+	}
 }
