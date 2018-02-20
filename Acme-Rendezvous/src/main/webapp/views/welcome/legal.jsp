@@ -24,7 +24,7 @@
 
 <p>
 
-ACME (EN ADELANTE EL PROPIETARIO) con domicilio a efectos de notificaciones en Sevilla con CIF BXXXXXXX pone a disposición en su sitio web  www.acme.com determinados  contenidos de carácter informativo sobre sus actividades.Las presentes condiciones generales rigen única y exclusivamente el uso del sitio web de EL PROPIETARIO por parte de los USUARIOS que accedan al mismo. Las presentes condiciones generales se le exponen al USUARIO en el sitio web www.acmecarngo.com  en todas y cada una de las páginas, para que las lea, las imprima, archive y acepte a través de internet y se encuentre plenamente informado.
+ACME (EN ADELANTE EL PROPIETARIO) con domicilio a efectos de notificaciones en Sevilla con CIF BXXXXXXX pone a disposición en su sitio web  www.acme.com determinados  contenidos de carácter informativo sobre sus actividades.Las presentes condiciones generales rigen única y exclusivamente el uso del sitio web de EL PROPIETARIO por parte de los USUARIOS que accedan al mismo. Las presentes condiciones generales se le exponen al USUARIO en el sitio web www.acme.com  en todas y cada una de las páginas, para que las lea, las imprima, archive y acepte a través de internet y se encuentre plenamente informado.
 
 </p>
 
@@ -100,7 +100,7 @@ El acceso al sitio web de EL PROPIETARIO implica sin reservas la aceptación de l
 
 <p>
 
-<strong>2.3.-</strong> EL PROPIETARIO se reserva el derecho a modificar en cualquier momento los contenidos existentes en su sitio web. EL PROPIETARIO no asegura ni se responsabiliza del correcto funcionamiento de los enlaces a sitios web de terceros que figuren en www.acmecarngo.com</p>
+<strong>2.3.-</strong> EL PROPIETARIO se reserva el derecho a modificar en cualquier momento los contenidos existentes en su sitio web. EL PROPIETARIO no asegura ni se responsabiliza del correcto funcionamiento de los enlaces a sitios web de terceros que figuren en www.acme.com</p>
 
 
 
@@ -146,7 +146,7 @@ Además a través del sitio web del PROPIETARIO se ponen a disposición del usuario
 
 <p>
 
-<strong>3.1.3.-</strong> De la fiabilidad y veracidad de las informaciones introducidas por terceros en el sitio web, bien directamente, bien a través de enlaces o links. Asimismo, Acme Car'n Go colaborará y notificará a la autoridad competente estas incidencias en el momento en que tenga conocimiento fehaciente de que los daños ocasionados constituyan cualquier tipo de actividad ilícita.
+<strong>3.1.3.-</strong> De la fiabilidad y veracidad de las informaciones introducidas por terceros en el sitio web, bien directamente, bien a través de enlaces o links. Asimismo, ACME-RENDEZVOUS colaborará y notificará a la autoridad competente estas incidencias en el momento en que tenga conocimiento fehaciente de que los daños ocasionados constituyan cualquier tipo de actividad ilícita.
 
 </p>
 
