@@ -56,6 +56,7 @@
 
 	<input type="button" name="cancel"
 		value="<spring:message code="comment.cancel" />"
-		onclick="javascript:  window.location.replace('comment/user/list.do');" />
+		onclick="javascript:  window.location.replace('comment/user/list.do?rendezvouseId=${rendezvouse.id }');" />
 	<br />
+	
 </form:form>
