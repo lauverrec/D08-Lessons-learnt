@@ -1,0 +1,28 @@
+**EN DEVELOPER**
+
+1º: La generación del almacén de claves se puede hacer emitiendo el siguiente comando en la terminal:
+	keytool -genkey -alias tomcat -keyalg RSA -storepass changeit -keypass changeit -dname "CN=tomcat"
+
+2º: Editar conf / server.xml para que se vea así:
+
+<Connector port="8080" protocol="HTTP/1.1"		<--- Esta parte ya está
+   connectionTimeout="20000"
+   redirectPort="8443" />
+
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"		<--- Copiamos esta parte
+   maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+   clientAuth="false" sslProtocol="TLS"
+   keystoreFile="${user.home}/.keystore" keystorePass="changeit" />
+
+3º: Añadir a las ural que queramos usar https :requires-channel="https", por ejemplo a la de login quedaría:
+	<security:intercept-url pattern="/security/login.do" access="permitAll" requires-channel="https"/>
+
+Creamos la base datos
+Exportamos el war
+
+**EN PRE-PRODUCTION**
+1º: Realizamos paso 1.
+2º: Realizamos paso 2
+	Ruta del archivo server: C:\Program Files\Apache Software Foundation\Tomcat 7.0\conf
+
+Hacemos despliegue.
