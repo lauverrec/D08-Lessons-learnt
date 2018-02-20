@@ -135,7 +135,7 @@ public class RendezvousesUserController extends AbstractController {
 		user = this.userService.findByPrincipal();
 		rens = this.rendezvouseService.AllRendezvousesDeleted(user.getId());
 
-		result = new ModelAndView("rendezvous/list");
+		result = new ModelAndView("rendezvous/listasis");
 		result.addObject("rendezvous", rens);
 		result.addObject("requestURI", "rendezvous/user/list-deleted.do");
 

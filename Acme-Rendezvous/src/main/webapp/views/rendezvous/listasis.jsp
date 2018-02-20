@@ -88,7 +88,7 @@
 	</security:authorize>
 
 
-	
+	<jstl:if test="${assist}">
 	<spring:message code="rendezvouse.question" var="Question" />
 	<display:column title="${Question}" sortable="true">
 		<spring:url value="question/list.do" var="editURL">
@@ -97,7 +97,7 @@
 		<a href="${editURL}"><spring:message code="rendezvouse.question" /></a>
 	</display:column>
 	
-
+</jstl:if>
 <spring:message code="rendezvouse.assistans" var="ASS" />
 	<display:column title="${ASS}" sortable="true">
 		<spring:url value="rendezvous/listAssistants.do" var="editURL">

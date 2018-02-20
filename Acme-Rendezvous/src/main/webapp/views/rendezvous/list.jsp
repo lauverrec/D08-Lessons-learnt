@@ -100,6 +100,7 @@
 		</display:column>
 	</security:authorize>
 
+
 	<spring:message code="rendezvouse.question" var="Question" />
 	<display:column title="${Question}" sortable="true">
 		<spring:url value="question/list.do" var="editURL">
