@@ -90,28 +90,7 @@ public class QuestionUserController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Question question, final BindingResult bindingResult) {
-		ModelAndView result;
-
-		if (bindingResult.hasErrors())
-			result = this.createEditModelAndView(question);
-		else
-			try {
-				this.questionService.save(question);
-				result = new ModelAndView("redirect:list.do");
-
-			} catch (final Throwable oops) {
-				if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
-					result = this.createEditModelAndView(question, "question.rendezvouses");
-				else
-					result = this.createEditModelAndView(question, "question.commit.error");
-			}
-
-		return result;
-	}
-
-	//Edition -----------------------------------------------------------------
+	//Edition----------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int questionId) {
 		ModelAndView result;
@@ -131,8 +110,9 @@ public class QuestionUserController extends AbstractController {
 		result.addObject("answer", answers);
 		return result;
 	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveEdit(@Valid Question question, final BindingResult bindingResult) {
+	public ModelAndView save(@Valid Question question, final BindingResult bindingResult) {
 		ModelAndView result;
 
 		if (bindingResult.hasErrors())
@@ -143,7 +123,10 @@ public class QuestionUserController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(question, "question.commit.error");
+				if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
+					result = this.createEditModelAndView(question, "question.rendezvouses");
+				else
+					result = this.createEditModelAndView(question, "question.commit.error");
 			}
 
 		return result;
@@ -180,9 +163,9 @@ public class QuestionUserController extends AbstractController {
 		rendezvouses = this.rendezvouseService.findRendezvousesCreatedByUser();
 
 		result = new ModelAndView("Question/edit");
-		result.addObject("rendezvouses", rendezvouses);
-		result.addObject("Question", question);
 		result.addObject("message", message);
+		result.addObject("rendezvouses", rendezvouses);
+		result.addObject("question", question);
 
 		return result;
 

@@ -152,7 +152,7 @@ public class AnswerUserController extends AbstractController {
 		ModelAndView result;
 		result = new ModelAndView("Answer/edit");
 
-		result.addObject("Answer", answer);
+		result.addObject("answer", answer);
 		result.addObject("message", message);
 		return result;
 
