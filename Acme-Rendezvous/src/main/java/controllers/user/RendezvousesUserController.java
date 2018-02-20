@@ -90,7 +90,7 @@ public class RendezvousesUserController extends AbstractController {
 			result = this.listnotasis();
 			result.addObject("message", "rendezvous.commit.ok");
 		} catch (final Throwable oops) {
-			result = this.listnotasis();
+			result = this.listasis();
 			result.addObject("message", "rendezvous.commit.error");
 		}
 
@@ -107,7 +107,7 @@ public class RendezvousesUserController extends AbstractController {
 			result = this.listasis();
 			result.addObject("message", "rendezvous.commit.ok");
 		} catch (final Throwable oops) {
-			result = this.listasis();
+			result = this.listnotasis();
 			result.addObject("message", "rendezvous.commit.error");
 		}
 
