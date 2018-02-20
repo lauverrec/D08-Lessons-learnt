@@ -36,6 +36,8 @@
 		</display:column>
 	</security:authorize>
 
+	<!-- ATRIBUTOS -->
+
 	<spring:message code="comment.format.writtenMoment" var="pattern"></spring:message>
 	<spring:message code="comment.writtenMoment" var="momentHeader" />
 	<display:column property="writtenMoment" title="${momentHeader}"
@@ -46,12 +48,15 @@
 
 
 	<spring:message code="comment.picture" var="pictureHeader" />
-	<display:column property="picture" title="${pictureHeader}"
-		sortable="true" />
+	<display:column title="${pictureHeader}">
+	<div
+		style="position: relative; width: 500px; height: 300px; margin-left:
+		auto; margin-right: auto;"> <img src="${row.picture}" width="500"
+			height="300">
+	</div>
+	</display:column>
 
-	<spring:message code="comment.picture" var="pictureHeader" />
-	<display:column property="picture" title="${pictureHeader}"
-		sortable="true" />
+	
 
 
 
