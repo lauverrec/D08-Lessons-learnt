@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AnswerService;
 import services.QuestionService;
 import services.RendezvouseService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Answer;
 import domain.Question;
 import domain.Rendezvouse;
 import domain.User;
@@ -37,6 +39,9 @@ public class QuestionUserController extends AbstractController {
 
 	@Autowired
 	private RendezvouseService	rendezvouseService;
+
+	@Autowired
+	private AnswerService		answerService;
 
 
 	//Constructor--------------------------------------------------------
@@ -111,16 +116,19 @@ public class QuestionUserController extends AbstractController {
 	public ModelAndView edit(@RequestParam int questionId) {
 		ModelAndView result;
 		Question question;
-
+		Collection<Answer> answers;
 		User user;
 
+		answers = this.answerService.findAllAnswerByQuestionId(questionId);
 		user = this.userService.findByPrincipal();
 		question = this.questionService.findOne(questionId);
 		Assert.notNull(question);
 		Assert.isTrue(this.questionService.findAllQuestionsByUser().contains(question), "Cannot commit this operation because that is not your question");
+		Assert.isTrue(answers.size() == 0, "Cannot commit this operation because this question already contains an answer");
 		result = this.createEditModelAndView(question);
 		result.addObject("requestURI", "question/user/edit.do");
 		result.addObject("user", user);
+		result.addObject("answer", answers);
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
