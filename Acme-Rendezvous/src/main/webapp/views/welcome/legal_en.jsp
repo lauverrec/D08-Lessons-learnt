@@ -18,13 +18,13 @@
 
 <h1> <strong> GENERAL CONDITIONS OF USE OF THE ACME-RENDEZVOUS WEB SITE </strong> </h1>
 
-<span> <strong> www.acmecarngo.com </strong> </span>
+<span> <strong> www.acme.com </strong> </span>
 
 
 
 <p>
 
-Acme Car'n Go (IN ADVANCE THE OWNER) with address for the purposes of notifications in Seville with NIF B98232342 makes available on its website www.acmecarngo.com certain contents of an informative nature about its activities. These general conditions govern solely and exclusively the use Of the website of THE OWNER by the USERS who access it. These general conditions are exposed to the USER on the website www.acmecarngo.com in each and every one of the pages, to read, print, archive and accept through the internet and is fully informed.
+ACME-RENDEZVOUS (IN ADVANCE THE OWNER) with address for the purposes of notifications in Seville with NIF B98232342 makes available on its website www.acme.com certain contents of an informative nature about its activities. These general conditions govern solely and exclusively the use Of the website of THE OWNER by the USERS who access it. These general conditions are exposed to the USER on the website www.acme.com in each and every one of the pages, to read, print, archive and accept through the internet and is fully informed.
 
 </p>
 
@@ -100,7 +100,7 @@ Access to the OWNER website implies without reservation the acceptance of these 
 
 <p>
 
-<strong> 2.3 .- </strong> The owner reserves the right to modify at any time the contents existing on his website. THE OWNER does not assure or be responsible for the correct functioning of the links to third party websites that appear on www.acmecarngo.com. </ P>
+<strong> 2.3 .- </strong> The owner reserves the right to modify at any time the contents existing on his website. THE OWNER does not assure or be responsible for the correct functioning of the links to third party websites that appear on www.acme.com. </ P>
 
 
 
@@ -148,7 +148,7 @@ In addition, through the OWNER's website, free and paid services offered by thir
 
 <p>
 
-<strong> 3.1.3 .- </strong> Of the reliability and veracity of the information introduced by third parties on the website, either directly or through links or links. Likewise, Acme Car'n Go will collaborate and notify the competent authority of these incidents when it is aware that the damage caused constitutes any type of illegal activity.
+<strong> 3.1.3 .- </strong> Of the reliability and veracity of the information introduced by third parties on the website, either directly or through links or links. Likewise, ACME-RENDEZVOUS will collaborate and notify the competent authority of these incidents when it is aware that the damage caused constitutes any type of illegal activity.
 
 </p>
 

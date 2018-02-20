@@ -105,8 +105,6 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveCustomer(@ModelAttribute("userForm") UserForm userForm, final BindingResult binding) {
 		ModelAndView result;
-		final Md5PasswordEncoder encoder;
-		final String hash;
 		User user;
 
 		userForm = this.userService.reconstruct(userForm, binding);
@@ -134,9 +132,6 @@ public class UserController extends AbstractController {
 					userSaved = this.userService.save(u);
 					result = new ModelAndView("redirect:/");
 				} else {
-					//						encoder = new Md5PasswordEncoder();
-					//						hash = encoder.encodePassword(user.getUserAccount().getPassword(), null);
-					//						user.getUserAccount().setPassword(hash);
 					User u;
 					u = this.userService.save(user);
 

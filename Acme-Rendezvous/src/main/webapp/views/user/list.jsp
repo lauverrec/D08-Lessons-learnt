@@ -24,7 +24,7 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="users" requestURI="${RequestUri}" id="row">
+	name="users" requestURI="${requestURI}" id="row">
 	
 	
 	

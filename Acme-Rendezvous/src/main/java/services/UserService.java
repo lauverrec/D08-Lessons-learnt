@@ -190,6 +190,7 @@ public class UserService {
 			user.setRendezvousesAssisted(aux.getRendezvousesAssisted());
 			
 			userForm.setUser(user);
+			result = userForm;
 			
 			
 		}
