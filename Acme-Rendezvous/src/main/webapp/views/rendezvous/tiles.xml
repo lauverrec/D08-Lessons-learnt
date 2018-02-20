@@ -29,7 +29,10 @@
 		<put-attribute name="title" value="Asist to rendezvous" />
 		<put-attribute name="body" value="/views/rendezvous/listasis.jsp" />
 	</definition>
-	
+	<definition name="rendezvous/listnotasis" extends="master.page">	
+		<put-attribute name="title" value="Cancel to assistant" />
+		<put-attribute name="body" value="/views/rendezvous/listnotasis.jsp" />
+	</definition>
 
 	<definition name="rendezvous/edit" extends="master.page">
 		<put-attribute name="title" value="Edit rendezvous" />

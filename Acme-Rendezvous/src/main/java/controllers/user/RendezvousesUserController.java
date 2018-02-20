@@ -61,7 +61,7 @@ public class RendezvousesUserController extends AbstractController {
 		result = new ModelAndView("rendezvous/listasis");
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("registered", true);
-		result.addObject("requestURI", "rendezvous/user/listasis.do");
+		result.addObject("requestURI", "rendezvous/user/listnotasis.do");
 		return result;
 
 	}

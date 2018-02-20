@@ -112,6 +112,8 @@
 								code="master.page.mi.rendezvous" /></a></li>
 					<li><a href="rendezvous/user/listasis.do"><spring:message
 								code="master.page.mi.rendezvous.asis" /></a></li>
+					<li><a href="rendezvous/user/listnotasis.do"><spring:message
+								code="master.page.mi.rendezvous.notasis" /></a></li>
 					<li><a href="rendezvous/user/list-deleted.do"><spring:message
 								code="deleted.ones" /></a></li>
 
