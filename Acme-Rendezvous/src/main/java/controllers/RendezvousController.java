@@ -52,6 +52,24 @@ public class RendezvousController extends AbstractController {
 
 	}
 
+	@RequestMapping(value = "/listSimilar", method = RequestMethod.GET)
+	public ModelAndView listSimilar(@RequestParam int rendezvousId) {
+
+		ModelAndView result;
+		Rendezvouse rendezvous;
+		Collection<Rendezvouse> rendezvouses;
+
+		rendezvous = this.rendezvouseService.findOne(rendezvousId);
+		rendezvouses = rendezvous.getSimilarRendezvouses();
+
+		result = new ModelAndView("rendezvous/list");
+		result.addObject("rendezvous", rendezvouses);
+		result.addObject("requestURI", "rendezvous/list.do");
+
+		return result;
+
+	}
+
 	@RequestMapping(value = "/list-unregister", method = RequestMethod.GET)
 	public ModelAndView list() {
 

@@ -57,5 +57,6 @@
 		<put-attribute name="title" value="Mostrar un rendezvous" />
 		<put-attribute name="body" value="/views/rendezvous/display.jsp" />
 	</definition>
+	
  
 </tiles-definitions>

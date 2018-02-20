@@ -131,7 +131,8 @@
 
 		<spring:message code="rendezvouse.comments" var="Comment" />
 		<display:column title="${Comment}" sortable="true">
-			<spring:url value="comment/administrator/listByRendezvouse.do" var="listCommentURL">
+			<spring:url value="comment/administrator/listByRendezvouse.do"
+				var="listCommentURL">
 				<spring:param name="rendezvouseId" value="${row.id}" />
 			</spring:url>
 			<a href="${listCommentURL}"><spring:message
@@ -148,6 +149,18 @@
 		</display:column>
 	</security:authorize>
 
+	<security:authorize access="isAnonymous()">
+		<!-- Similar rendezvoses -->
+		<spring:message code="rendezvouse.similarRendezvouses"
+			var="similarRendezvouses" />
+		<display:column title="${similarRendezvouses}" sortable="true">
+			<spring:url value="rendezvous/listSimilar.do" var="listSimilarURL">
+				<spring:param name="rendezvousId" value="${row.id}" />
+			</spring:url>
+			<a href="${listSimilarURL}"><spring:message
+					code="rendezvouse.rendezvouses" /></a>
+		</display:column>
+	</security:authorize>
 
 
 
