@@ -1,8 +1,6 @@
 
 package controllers.administrator;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -58,9 +56,11 @@ public class AdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Administrator administrator, final BindingResult bindingResult) {
+	public ModelAndView save(final Administrator administrator, final BindingResult bindingResult) {
 		ModelAndView result;
+		//final Administrator administrator;
 
+		//administrator = this.administratorService.reconstruct(administratorForm, binding);
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(administrator);
 		else

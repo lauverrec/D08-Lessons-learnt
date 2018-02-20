@@ -25,6 +25,42 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="comments" requestURI="${requestURI}" id="row">
 
+	<!-- ATRIBUTOS -->
+
+	<spring:message code="comment.format.writtenMoment" var="pattern"></spring:message>
+	<spring:message code="comment.writtenMoment" var="momentHeader" />
+	<display:column property="writtenMoment" title="${momentHeader}"
+		sortable="true" format="${pattern}" />
+
+	<spring:message code="comment.text" var="textHeader" />
+	<display:column property="text" title="${textHeader}" sortable="true" />
+
+	<!-- Boton para responder a un comentario -->
+	<security:authorize access="hasRole('USER')">
+		<spring:message code="createComments" var="CreateComments" />
+		<display:column title="${CreateComments}" sortable="true">
+			<spring:url value="comment/user/createReply.do"
+				var="createReplyCommentURL">
+				<spring:param name="commentId" value="${row.id}" />
+			</spring:url>
+			<a href="${createReplyCommentURL}"><spring:message
+					code="comment.reply1" /></a>
+		</display:column>
+
+
+		<jstl:if test="${ not empty row.replys}">
+			<spring:message code="rendezvouse.comments" var="Comment" />
+			<display:column title="${Comment}" sortable="true">
+				<spring:url value="comment/user/listReplys.do" var="listReplysURL">
+					<spring:param name="commentId" value="${row.id}" />
+				</spring:url>
+				<a href="${listReplysURL}"><spring:message
+						code="comment.comments" /></a>
+			</display:column>
+
+
+		</jstl:if>
+	</security:authorize>
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<spring:message code="comment.delete" var="delete" />
@@ -36,53 +72,16 @@
 			<a href="${deleteURL}"><spring:message code="comment.delete" /></a>
 		</display:column>
 	</security:authorize>
-
-	<!-- ATRIBUTOS -->
-
-	<spring:message code="comment.format.writtenMoment" var="pattern"></spring:message>
-	<spring:message code="comment.writtenMoment" var="momentHeader" />
-	<display:column property="writtenMoment" title="${momentHeader}"
-		sortable="true" format="${pattern}" />
-
-	<spring:message code="comment.text" var="textHeader" />
-	<display:column property="text" title="${textHeader}" sortable="true" />
-
-<!-- Boton para responder a un comentario -->
-	<security:authorize access="hasRole('USER')">
-		<spring:message code="createComments" var="CreateComments" />
-		<display:column title="${CreateComments}" sortable="true">
-			<spring:url value="comment/user/createReply.do"
-				var="createReplyCommentURL">
-				<spring:param name="commentId" value="${row.id}" />
-			</spring:url>
-			<a href="${createReplyCommentURL}"><spring:message
-					code="comment.reply1" /></a>
-		</display:column>
-	
-
-	<jstl:if test="${ not empty row.replys}">
-		<spring:message code="rendezvouse.comments" var="Comment" />
-		<display:column title="${Comment}" sortable="true">
-			<spring:url value="comment/user/listReplys.do" var="listReplysURL">
-				<spring:param name="commentId" value="${row.id}" />
-			</spring:url>
-			<a href="${listReplysURL}"><spring:message
-					code="comment.comments" /></a>
-		</display:column>
-		
-
-	</jstl:if>
-	</security:authorize>
 	<%
 		/*
-					 <spring:message code="comment.picture" var="pictureHeader" />
-					 <display:column title="${pictureHeader}">
-					 <div
-					 style="position: relative; width: 500px; height: 300px; margin-left:
-					 auto; margin-right: auto;"> <img src="${row.picture}" width="500"
-					 height="300">
-					 </div>
-					 </display:column>
+						 <spring:message code="comment.picture" var="pictureHeader" />
+						 <display:column title="${pictureHeader}">
+						 <div
+						 style="position: relative; width: 500px; height: 300px; margin-left:
+						 auto; margin-right: auto;"> <img src="${row.picture}" width="500"
+						 height="300">
+						 </div>
+						 </display:column>
 			 */
 	%>
 

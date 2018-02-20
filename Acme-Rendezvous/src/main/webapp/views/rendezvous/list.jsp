@@ -126,7 +126,6 @@
 		<a href="${renURL}"><spring:message code="user.rendezvouse" /></a>
 	</display:column>
 
-	<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
 		<spring:message code="rendezvouse.comments" var="Comment" />
@@ -139,9 +138,10 @@
 					code="rendezvouse.comments" /></a>
 		</display:column>
 
-		<spring:message code="rendezvous.delete" var="delete" />
+		<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
+		<spring:message code="rendezvous.delete" var="deleteHeader" />
 
-		<display:column title="${delete}" sortable="true">
+		<display:column title="${deleteHeader}" sortable="true">
 			<spring:url value="rendezvous/administrator/delete.do" var="editURL">
 				<spring:param name="rendezvousId" value="${row.id}" />
 			</spring:url>
