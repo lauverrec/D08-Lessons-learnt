@@ -105,19 +105,39 @@ public class RendezvousesUserController extends AbstractController {
 	//		return result;
 	//
 	//	}
-	//Listing-----------------------------------------------------------
+	//	//Listing-----------------------------------------------------------
+	//
+	//	@RequestMapping(value = "/list-RSVP", method = RequestMethod.GET)
+	//	public ModelAndView list2() {
+	//
+	//		ModelAndView result;
+	//		Collection<Rendezvouse> rens;
+	//
+	//		rens = this.rendezvouseService.findRendezvousesAssitedByUser();
+	//
+	//		result = new ModelAndView("rendezvous/list");
+	//		result.addObject("rendezvous", rens);
+	//		result.addObject("requestURI", "rendezvous/user/list-RSVP.do");
+	//
+	//		return result;
+	//
+	//	}
 
-	@RequestMapping(value = "/list-RSVP", method = RequestMethod.GET)
+	//Listing deleted rendezvouses-----------------------------------------------------------
+
+	@RequestMapping(value = "/list-deleted", method = RequestMethod.GET)
 	public ModelAndView list2() {
 
 		ModelAndView result;
 		Collection<Rendezvouse> rens;
+		User user;
 
-		rens = this.rendezvouseService.findRendezvousesAssitedByUser();
+		user = this.userService.findByPrincipal();
+		rens = this.rendezvouseService.AllRendezvousesDeleted(user.getId());
 
 		result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvous", rens);
-		result.addObject("requestURI", "rendezvous/user/list-RSVP.do");
+		result.addObject("requestURI", "rendezvous/user/list-deleted.do");
 
 		return result;
 

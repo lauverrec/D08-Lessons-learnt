@@ -96,13 +96,13 @@
 
 				</ul></li>
 
-			<li><a class="fNiv"><spring:message code="master.page.ren" /></a>
+			<%-- <li><a class="fNiv"><spring:message code="master.page.ren" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="rendezvous/user/list-RSVP.do"><spring:message
 								code="master.page.ren.list" /></a></li>
 
-				</ul></li>
+				</ul></li> --%>
 
 			<li><a class="fNiv"><spring:message
 						code="master.page.rendezvous" /></a>
@@ -112,6 +112,8 @@
 								code="master.page.mi.rendezvous" /></a></li>
 					<li><a href="rendezvous/user/listasis.do"><spring:message
 								code="master.page.mi.rendezvous.asis" /></a></li>
+					<li><a href="rendezvous/user/list-deleted.do"><spring:message
+								code="deleted.ones" /></a></li>
 
 				</ul></li>
 

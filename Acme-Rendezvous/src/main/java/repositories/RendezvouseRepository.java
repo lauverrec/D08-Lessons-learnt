@@ -45,4 +45,8 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	//rendezvouses a las que puede asistir un usuario
 	@Query("select r from Rendezvouse r where ?1 not member of assistants and r.deleted=false and r.organisedMoment>CURRENT_TIMESTAMP")
 	Collection<Rendezvouse> assistantToRendezvouse(int usuarioId);
+
+	@Query("select a from User u join u.rendezvousesCreated a where a.deleted=true and u.id=?1")
+	Collection<Rendezvouse> AllRendezvousesDeleted(int userId);
+
 }

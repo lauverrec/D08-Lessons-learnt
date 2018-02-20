@@ -209,4 +209,13 @@ public class RendezvouseService {
 		resul = this.rendezvousRepository.assistantToRendezvouse(user.getId());
 		return resul;
 	}
+
+	public Collection<Rendezvouse> AllRendezvousesDeleted(int userId) {
+		Collection<Rendezvouse> res;
+		User user;
+		user = this.userService.findByPrincipal();
+		res = this.rendezvousRepository.AllRendezvousesDeleted(user.getId());
+		return res;
+
+	}
 }
