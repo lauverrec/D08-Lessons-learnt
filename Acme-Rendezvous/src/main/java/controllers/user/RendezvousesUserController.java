@@ -51,13 +51,13 @@ public class RendezvousesUserController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/listasis", method = RequestMethod.GET)
+	@RequestMapping(value = "/listnotasis", method = RequestMethod.GET)
 	public ModelAndView listasis() {
 		final ModelAndView result;
 		Collection<Rendezvouse> rendezvous;
 		User principal;
 		principal = this.userService.findByPrincipal();
-		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
+		rendezvous = this.rendezvouseService.CancelMyassistantToRendezvouse(principal);
 		result = new ModelAndView("rendezvous/listasis");
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("registered", true);
@@ -66,13 +66,13 @@ public class RendezvousesUserController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/listnotasis", method = RequestMethod.GET)
+	@RequestMapping(value = "/listasis", method = RequestMethod.GET)
 	public ModelAndView listnotasis() {
 		final ModelAndView result;
 		Collection<Rendezvouse> rendezvous;
 		User principal;
 		principal = this.userService.findByPrincipal();
-		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
+		rendezvous = this.rendezvouseService.assistantToRendezvouse(principal);
 		result = new ModelAndView("rendezvous/listasis");
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("registered", false);
@@ -81,29 +81,30 @@ public class RendezvousesUserController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/notassist", method = RequestMethod.GET)
-	public ModelAndView notassist() {
-		final ModelAndView result;
-		Collection<Rendezvouse> rendezvous;
-		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
-		result = new ModelAndView("rendezvous/listasis");
-		result.addObject("rendezvous", rendezvous);
-		result.addObject("requestURI", "rendezvous/user/listasis.do");
-		return result;
+	//	@RequestMapping(value = "/notassist", method = RequestMethod.GET)
+	//	public ModelAndView notassist() {
+	//		final ModelAndView result;
+	//		Collection<Rendezvouse> rendezvous;
+	//		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
+	//		result = new ModelAndView("rendezvous/listasis");
+	//		result.addObject("rendezvous", rendezvous);
+	//		result.addObject("requestURI", "rendezvous/user/listasis.do");
+	//		return result;
+	//
+	//	}
 
-	}
-
-	@RequestMapping(value = "/assist", method = RequestMethod.GET)
-	public ModelAndView assist() {
-		final ModelAndView result;
-		Collection<Rendezvouse> rendezvous;
-		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
-		result = new ModelAndView("rendezvous/listasis");
-		result.addObject("rendezvous", rendezvous);
-		result.addObject("requestURI", "rendezvous/user/listasis.do");
-		return result;
-
-	}
+	//	@RequestMapping(value = "/assist", method = RequestMethod.GET)
+	//	public ModelAndView assist() {
+	//		//TO DO
+	//		final ModelAndView result;
+	//		Collection<Rendezvouse> rendezvous;
+	////		rendezvous = this.rendezvouseService.AllRendezvousesICanAssist();
+	//		result = new ModelAndView("rendezvous/listasis");
+	//		result.addObject("rendezvous", rendezvous);
+	//		result.addObject("requestURI", "rendezvous/user/listasis.do");
+	//		return result;
+	//
+	//	}
 	//Listing-----------------------------------------------------------
 
 	@RequestMapping(value = "/list-RSVP", method = RequestMethod.GET)

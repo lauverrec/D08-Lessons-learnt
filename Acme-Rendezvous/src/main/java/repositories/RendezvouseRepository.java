@@ -29,8 +29,8 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	@Query("select r.assistants from Rendezvouse r where r.id=?1")
 	Collection<User> findAllAssistantsByRendezvous(int rendezvousId);
 
-	@Query("select r from Rendezvouse r where r.organisedMoment>CURRENT_TIMESTAMP")
-	Collection<Rendezvouse> AllRendezvousesICanAssist();
+	//	@Query("select r from Rendezvouse r where r.organisedMoment>CURRENT_TIMESTAMP")
+	//	Collection<Rendezvouse> AllRendezvousesICanAssist();
 	//te devuelve las rendezvous similares que contienen una rendezvous
 	@Query("select r from Rendezvouse r where ?1 member of r.similarRendezvouses")
 	Collection<Rendezvouse> SimilarRendezvouseWhereIS(int rendezvousId);
@@ -38,5 +38,11 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	@Query("select r.announcements from Rendezvouse r where r.id=?1")
 	Collection<Announcement> AnnoucemntofRendezvouse(int rendezvouse);
 
-	//select u from User u join u.rendezvousesAssisted r where 45 not member of u.rendezvousesAssisted and r.deleted=false and r.organisedMoment>CURRENT_TIMESTAMP;
+	// rendezvouses a las que puede dejar de asistir un usuario
+	@Query("select r from Rendezvouse r where ?1 member of assistants and r.deleted=false and r.organisedMoment>CURRENT_TIMESTAMP")
+	Collection<Rendezvouse> CancelMyassistantToRendezvouse(int usuarioId);
+
+	//rendezvouses a las que puede asistir un usuario
+	@Query("select r from Rendezvouse r where ?1 not member of assistants and r.deleted=false and r.organisedMoment>CURRENT_TIMESTAMP")
+	Collection<Rendezvouse> assistantToRendezvouse(int usuarioId);
 }

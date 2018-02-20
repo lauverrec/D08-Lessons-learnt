@@ -186,11 +186,6 @@ public class RendezvouseService {
 		return result;
 	}
 
-	public Collection<Rendezvouse> AllRendezvousesICanAssist() {
-		Collection<Rendezvouse> result;
-		result = this.rendezvousRepository.AllRendezvousesICanAssist();
-		return result;
-	}
 	public Collection<Rendezvouse> SimilarRendezvouseWhereIS(Rendezvouse rendezvouse) {
 		Collection<Rendezvouse> result;
 		result = this.rendezvousRepository.SimilarRendezvouseWhereIS(rendezvouse.getId());
@@ -202,5 +197,16 @@ public class RendezvouseService {
 
 		return res;
 
+	}
+	public Collection<Rendezvouse> CancelMyassistantToRendezvouse(User user) {
+		Collection<Rendezvouse> resul;
+		resul = this.rendezvousRepository.CancelMyassistantToRendezvouse(user.getId());
+		return resul;
+	}
+
+	public Collection<Rendezvouse> assistantToRendezvouse(User user) {
+		Collection<Rendezvouse> resul;
+		resul = this.rendezvousRepository.assistantToRendezvouse(user.getId());
+		return resul;
 	}
 }
