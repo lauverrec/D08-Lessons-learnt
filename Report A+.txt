@@ -23,6 +23,10 @@ Exportamos el war
 **EN PRE-PRODUCTION**
 1º: Realizamos paso 1.
 2º: Realizamos paso 2
+	<Connector port="443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+clientAuth="false" sslProtocol="TLS"
+keystoreFile="C:\Documents and Settings\Boss\.keystore" keystorePass="changeit" />
 	Ruta del archivo server: C:\Program Files\Apache Software Foundation\Tomcat 7.0\conf
 
 Hacemos despliegue.
