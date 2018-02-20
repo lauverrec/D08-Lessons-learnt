@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -224,6 +225,7 @@ public class RendezvouseService {
 		rendezvous = this.rendezvousRepository.findOne(rendezvousId);
 		usuario = this.userService.findByPrincipal();
 		//TODO comprobar que si la rendezvous es para mayores sea mayor el usuario
+		Assert.isTrue(this.calculateYearsOld(usuario.getBirthDate()) > 17);
 		rendezvous.getAssistants().add(usuario);
 		this.rendezvousRepository.save(rendezvous);
 
@@ -236,6 +238,18 @@ public class RendezvouseService {
 		usuario = this.userService.findByPrincipal();
 		rendezvous.getAssistants().remove(usuario);
 		this.rendezvousRepository.save(rendezvous);
+
+	}
+
+	public int calculateYearsOld(Date birtday) {
+		double yearsold;
+		int edad;
+		Date now;
+		now = new Date(System.currentTimeMillis());
+		long aux = now.getTime() - birtday.getTime();
+		yearsold = TimeUnit.MILLISECONDS.toDays(aux);
+		edad = (int) (yearsold / 365);
+		return edad;
 
 	}
 }
