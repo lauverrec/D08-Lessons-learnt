@@ -102,12 +102,21 @@ public class QuestionUserController extends AbstractController {
 		user = this.userService.findByPrincipal();
 		question = this.questionService.findOne(questionId);
 		Assert.notNull(question);
-		Assert.isTrue(this.questionService.findAllQuestionsByUser().contains(question), "Cannot commit this operation because that is not your question");
-		Assert.isTrue(answers.size() == 0, "Cannot commit this operation because this question already contains an answer");
-		result = this.createEditModelAndView(question);
-		result.addObject("requestURI", "question/user/edit.do");
-		result.addObject("user", user);
-		result.addObject("answer", answers);
+
+		try {
+			Assert.isTrue(answers.size() == 0, "Cannot commit this operation because this question already contains an answer");
+			Assert.isTrue(this.questionService.findAllQuestionsByUser().contains(question), "Cannot commit this operation because that is not your question");
+
+			result = this.createEditModelAndView(question);
+			result.addObject("requestURI", "question/user/edit.do");
+			result.addObject("user", user);
+			result.addObject("answer", answers);
+			return result;
+
+		} catch (final Throwable oops) {
+			result = this.list();
+			result.addObject("message", "error.edit.question");
+		}
 		return result;
 	}
 

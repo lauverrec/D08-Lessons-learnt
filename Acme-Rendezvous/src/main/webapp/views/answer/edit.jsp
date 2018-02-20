@@ -49,6 +49,6 @@
 	
 	<input type="button" name="cancel"
 		value="<spring:message code="answer.cancel" />"
-		onclick="javascript:  window.location.replace('rendezvous/user/list-RSVP.do');" />
+		onclick="javascript:  window.location.replace('rendezvous/user/list.do');" />
 	<br />
 </form:form>
