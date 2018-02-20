@@ -129,8 +129,7 @@
 		</spring:url>
 		<a href="${editURL}"><spring:message code="rendezvouse.assistans.notgo"/></a>
 			 </jstl:if> 
-			 <jstl:if test="${!assist}">
-			 
+		<jstl:if test="${!assist}">
 		<spring:url value="rendezvous/user/assist.do" var="editURL">
 		<spring:param name="rendezvousId" value="${row.id}"/>
 		</spring:url>

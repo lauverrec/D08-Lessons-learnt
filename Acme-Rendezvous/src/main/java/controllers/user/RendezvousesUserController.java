@@ -60,7 +60,7 @@ public class RendezvousesUserController extends AbstractController {
 		rendezvous = this.rendezvouseService.CancelMyassistantToRendezvouse(principal);
 		result = new ModelAndView("rendezvous/listasis");
 		result.addObject("rendezvous", rendezvous);
-		result.addObject("registered", true);
+		result.addObject("assist", true);
 		result.addObject("requestURI", "rendezvous/user/listnotasis.do");
 		return result;
 
@@ -75,7 +75,7 @@ public class RendezvousesUserController extends AbstractController {
 		rendezvous = this.rendezvouseService.assistantToRendezvouse(principal);
 		result = new ModelAndView("rendezvous/listasis");
 		result.addObject("rendezvous", rendezvous);
-		result.addObject("registered", false);
+		result.addObject("assist", false);
 		result.addObject("requestURI", "rendezvous/user/listasis.do");
 		return result;
 
