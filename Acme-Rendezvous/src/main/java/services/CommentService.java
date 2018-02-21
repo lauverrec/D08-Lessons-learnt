@@ -74,7 +74,6 @@ public class CommentService {
 		Assert.isTrue(comment.getUser().equals(userConnected));
 		Assert.isTrue(comment.getId() == 0);
 
-		//TODO: Los comentarios deben tener un rendezvous que se haya confirmado la asistencia.
 		comment.setWrittenMoment(moment);
 		result = this.commentRepository.save(comment);
 
@@ -92,7 +91,7 @@ public class CommentService {
 
 		if (comment.getReplys().size() != 0)
 			for (Comment c : comment.getReplys())
-				this.commentRepository.delete(c);
+				this.delete(c);
 
 		this.commentRepository.delete(comment);
 
