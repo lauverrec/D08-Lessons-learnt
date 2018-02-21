@@ -71,6 +71,7 @@ public class Rendezvouse extends DomainEntity {
 		this.picture = picture;
 	}
 
+	@Valid
 	public GPS getGps() {
 		return this.gps;
 	}
