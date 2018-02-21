@@ -225,23 +225,17 @@ public class AdministratorService {
 
 	public AdministratorForm reconstruct(final AdministratorForm administratorForm, final BindingResult bindingResult) {
 		final AdministratorForm result;
-		Administrator admin;
+		final Administrator adminBD;
 
 		if (administratorForm.getAdministrator().getId() == 0)
-			admin = administratorForm.getAdministrator();
+			result = administratorForm;
 		else {
-			admin = this.administratorRepository.findOne(administratorForm.getAdministrator().getId());
-			admin.setName(administratorForm.getAdministrator().getName());
-			admin.setSurname(administratorForm.getAdministrator().getSurname());
-			admin.setPostalAddress((administratorForm.getAdministrator().getPostalAddress()));
-			admin.setName(administratorForm.getAdministrator().getName());
-			admin.setPhoneNumber(administratorForm.getAdministrator().getPhoneNumber());
-			admin.setEmailAddress(administratorForm.getAdministrator().getEmailAddress());
-			admin.setUserAccount(administratorForm.getAdministrator().getUserAccount());
-
+			adminBD = this.administratorRepository.findOne(administratorForm.getAdministrator().getId());
+			administratorForm.getAdministrator().setId(adminBD.getId());
+			administratorForm.getAdministrator().setVersion(adminBD.getVersion());
+			administratorForm.getAdministrator().setUserAccount(adminBD.getUserAccount());
+			result = administratorForm;
 		}
-		administratorForm.setAdministrator(admin);
-		result = administratorForm;
 		this.validator.validate(result, bindingResult);
 		return result;
 	}
