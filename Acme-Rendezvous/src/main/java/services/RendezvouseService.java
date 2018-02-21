@@ -2,9 +2,9 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -246,17 +246,22 @@ public class RendezvouseService {
 
 	}
 
-	public int calculateYearsOld(final Date birtday) {
-		double yearsold;
-		int edad;
-		Date now;
-		now = new Date(System.currentTimeMillis());
-		final long aux = now.getTime() - birtday.getTime();
-		yearsold = TimeUnit.MILLISECONDS.toDays(aux);
-		edad = (int) (yearsold / 365);
-		return edad;
+	public int calculateYearsOld(final Date birthDay) {
+		Calendar today, fechan;
+		today = Calendar.getInstance();
+		fechan = Calendar.getInstance();
+		fechan.setTime(birthDay);
+
+		int diffYear = today.get(Calendar.YEAR) - fechan.get(Calendar.YEAR);
+		int diffMonth = today.get(Calendar.MONTH) - fechan.get(Calendar.MONTH);
+		int diffDay = today.get(Calendar.DAY_OF_MONTH) - fechan.get(Calendar.DAY_OF_MONTH);
+		// Si está en ese año pero todavía no los ha cumplido
+		if (diffMonth < 0 || (diffMonth == 0 && diffDay < 0))
+			diffYear = diffYear - 1;
+		return diffYear;
 
 	}
+
 	public Collection<Rendezvouse> ListOFSimilarRendezvous(Rendezvouse rendezvous) {
 		Collection<Rendezvouse> result;
 		result = this.rendezvousRepository.ListOFSimilarRendezvous(rendezvous.getId());
