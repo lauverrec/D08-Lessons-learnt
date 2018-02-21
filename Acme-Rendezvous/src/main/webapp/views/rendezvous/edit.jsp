@@ -51,7 +51,7 @@
 	<form:label path="picture">
 		<spring:message code="rendezvouse.picture" />:
 	</form:label>
-	<form:input path="picture" />
+	<form:input path="picture" placeholder="http://"/>
 	<form:errors cssClass="error" path="picture" />
 	<br />
 	<br />
