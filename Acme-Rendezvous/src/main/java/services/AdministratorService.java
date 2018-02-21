@@ -227,9 +227,17 @@ public class AdministratorService {
 		final AdministratorForm result;
 		final Administrator adminBD;
 
-		if (administratorForm.getAdministrator().getId() == 0)
+		if (administratorForm.getAdministrator().getId() == 0) {
+			UserAccount userAccount;
+			Authority authority;
+
+			userAccount = administratorForm.getAdministrator().getUserAccount();
+			authority = new Authority();
+			authority.setAuthority(Authority.ADMINISTRATOR);
+			userAccount.addAuthority(authority);
+			administratorForm.getAdministrator().setUserAccount(userAccount);
 			result = administratorForm;
-		else {
+		} else {
 			adminBD = this.administratorRepository.findOne(administratorForm.getAdministrator().getId());
 			administratorForm.getAdministrator().setId(adminBD.getId());
 			administratorForm.getAdministrator().setVersion(adminBD.getVersion());

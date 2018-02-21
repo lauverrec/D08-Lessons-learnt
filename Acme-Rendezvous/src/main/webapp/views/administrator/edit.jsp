@@ -29,8 +29,8 @@
 
 	<form:hidden path="administrator.id" />
 	<form:hidden path="administrator.version" />
-	<form:hidden path="administrator.userAccount" />
-	<form:hidden path="administrator.userAccount.authorities" />
+	<%-- <form:hidden path="administrator.userAccount" />
+	<form:hidden path="administrator.userAccount.authorities" /> --%>
 
 
 
