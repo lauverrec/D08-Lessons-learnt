@@ -29,7 +29,7 @@
 		<spring:message code="rendezvous.edit" var="Edit" />
 
 		<display:column title="${Edit}" sortable="true">
-			<jstl:if test="${row.draftMode==true}">
+			<jstl:if test="${row.draftMode==true && row.deleted==false}">
 				<spring:url value="rendezvous/user/edit.do" var="editURL">
 					<spring:param name="rendezvouseId" value="${row.id}" />
 				</spring:url>

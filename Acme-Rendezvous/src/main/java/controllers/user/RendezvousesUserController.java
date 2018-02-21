@@ -172,6 +172,7 @@ public class RendezvousesUserController extends AbstractController {
 		rendezvouse = this.rendezvouseService.findOne(rendezvouseId);
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse), "Cannot commit this operation, because it's illegal");
 		Assert.isTrue(rendezvouse.isDraftMode() == true, "Cannot commit this operation, because it's illegal");
+		Assert.isTrue(rendezvouse.isDeleted() == false, "Cannot commit this operation, because the rendezvous is deleted");
 		Assert.notNull(rendezvouse);
 		result = this.createEditModelAndView(rendezvouse);
 		return result;
