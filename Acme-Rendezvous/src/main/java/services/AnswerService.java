@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AnswerRepository;
 import domain.Answer;
@@ -27,6 +29,10 @@ public class AnswerService {
 	@Autowired
 	private UserService			userService;
 
+	//Importar la que pertenece a Spring
+	@Autowired
+	private Validator			validator;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -36,7 +42,7 @@ public class AnswerService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Answer create(Question question) {
+	public Answer create(final Question question) {
 		Answer result;
 		User user;
 
@@ -55,13 +61,13 @@ public class AnswerService {
 		return result;
 	}
 
-	public Answer findOne(int answerId) {
+	public Answer findOne(final int answerId) {
 		Answer result;
 		result = this.answerRepository.findOne(answerId);
 		return result;
 	}
 
-	public Answer save(Answer answer) {
+	public Answer save(final Answer answer) {
 		Assert.notNull(answer);
 		Answer result;
 		User user;
@@ -74,7 +80,7 @@ public class AnswerService {
 		return result;
 	}
 
-	public void delete(Answer answer) {
+	public void delete(final Answer answer) {
 		assert answer != null;
 		assert answer.getId() != 0;
 		Assert.isTrue(this.answerRepository.exists(answer.getId()));
@@ -83,7 +89,7 @@ public class AnswerService {
 
 	// Other business methods -------------------------------------------------
 
-	public Collection<Answer> findAllAnswerByQuestionId(int questionId) {
+	public Collection<Answer> findAllAnswerByQuestionId(final int questionId) {
 		Collection<Answer> answers;
 
 		answers = this.answerRepository.findAllAnswerByQuestionId(questionId);
@@ -99,6 +105,23 @@ public class AnswerService {
 		answers = this.answerRepository.findAllAnswersByUserId(user.getId());
 
 		return answers;
+	}
+
+	public Answer reconstruct(final Answer answer, final BindingResult bindingResult) {
+		Answer result;
+		Answer answerBD;
+		User userPrincipal;
+		if (answer.getId() == 0) {
+			result = answer;
+			userPrincipal = this.userService.findByPrincipal();
+			result.setUser(userPrincipal);
+		} else {
+			answerBD = this.answerRepository.findOne(answer.getId());
+			answer.setUser(answerBD.getUser());
+			result = answer;
+		}
+		this.validator.validate(result, bindingResult);
+		return result;
 	}
 
 }

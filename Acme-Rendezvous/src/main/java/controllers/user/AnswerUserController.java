@@ -3,8 +3,6 @@ package controllers.user;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -60,7 +58,7 @@ public class AnswerUserController extends AbstractController {
 	//Create-----------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int questionId) {
+	public ModelAndView create(@RequestParam final int questionId) {
 		ModelAndView result;
 		Answer answer;
 		Question question;
@@ -89,9 +87,10 @@ public class AnswerUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Answer answer, BindingResult bindingResult) {
+	public ModelAndView save(Answer answer, final BindingResult bindingResult) {
 		ModelAndView result;
 
+		answer = this.answerService.reconstruct(answer, bindingResult);
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(answer);
 		else
@@ -106,7 +105,7 @@ public class AnswerUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@ModelAttribute Answer answer, BindingResult bindingResult) {
+	public ModelAndView delete(@ModelAttribute final Answer answer, final BindingResult bindingResult) {
 		ModelAndView result;
 
 		try {
@@ -120,7 +119,7 @@ public class AnswerUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "deletevirtual")
-	public ModelAndView deletevirtual(@ModelAttribute Answer answer, BindingResult bindingResult) {
+	public ModelAndView deletevirtual(@ModelAttribute final Answer answer, final BindingResult bindingResult) {
 		ModelAndView result;
 
 		if (bindingResult.hasErrors())
@@ -138,7 +137,7 @@ public class AnswerUserController extends AbstractController {
 	}
 	//ancially methods---------------------------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(Answer answer) {
+	protected ModelAndView createEditModelAndView(final Answer answer) {
 		Assert.notNull(answer);
 		ModelAndView result;
 		result = this.createEditModelAndView(answer, null);
@@ -146,7 +145,7 @@ public class AnswerUserController extends AbstractController {
 
 	}
 
-	protected ModelAndView createEditModelAndView(Answer answer, String message) {
+	protected ModelAndView createEditModelAndView(final Answer answer, final String message) {
 		Assert.notNull(answer);
 
 		ModelAndView result;
