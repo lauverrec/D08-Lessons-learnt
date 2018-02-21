@@ -52,6 +52,21 @@ public class AnnouncementService {
 		Assert.notNull(announcement);
 		Announcement result;
 		Date madeMoment;
+		User user;
+		Collection<Rendezvouse> rendezvousesOfUserConnected;
+
+		user = this.userService.findByPrincipal();
+
+		//Un usuario solo podrá editar sus anuncios.
+		if (announcement.getId() != 0) {
+			Collection<Announcement> announcementsOfUser;
+			announcementsOfUser = this.announcementRepository.findAnnouncementByUserId(user.getId());
+			Assert.isTrue(announcementsOfUser.contains(announcement));
+		}
+
+		//Un usuario solo podrá crear anuncios para sus rendezvouses
+		rendezvousesOfUserConnected = new ArrayList<>(user.getRendezvousesCreated());
+		Assert.isTrue(rendezvousesOfUserConnected.contains(announcement.getRendezvouse()));
 
 		//Capar que un usuario solo pueda editar sus anuncios
 		madeMoment = new Date(System.currentTimeMillis() - 1000);
