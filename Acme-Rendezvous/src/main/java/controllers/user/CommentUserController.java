@@ -3,8 +3,6 @@ package controllers.user;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -45,7 +43,7 @@ public class CommentUserController extends AbstractController {
 	//---------------------LISTING--------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam int rendezvouseId) {
+	public ModelAndView list(@RequestParam final int rendezvouseId) {
 		final ModelAndView result;
 		Collection<Comment> comments;
 
@@ -60,7 +58,7 @@ public class CommentUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/listReplys", method = RequestMethod.GET)
-	public ModelAndView listReplys(@RequestParam int commentId) {
+	public ModelAndView listReplys(@RequestParam final int commentId) {
 		final ModelAndView result;
 		Collection<Comment> comments;
 		Comment comment;
@@ -79,7 +77,7 @@ public class CommentUserController extends AbstractController {
 
 	// Creation ---------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int rendezvouseId) {
+	public ModelAndView create(@RequestParam final int rendezvouseId) {
 		ModelAndView result;
 		Comment comment;
 		Rendezvouse rendezvouse;
@@ -94,7 +92,7 @@ public class CommentUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
-	public ModelAndView createReply(@RequestParam int commentId) {
+	public ModelAndView createReply(@RequestParam final int commentId) {
 		ModelAndView result;
 		Comment comment;
 		Comment resultComment;
@@ -112,9 +110,10 @@ public class CommentUserController extends AbstractController {
 
 	//Save
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Comment comment, final BindingResult binding) {
+	public ModelAndView save(Comment comment, final BindingResult binding) {
 		ModelAndView result;
 
+		comment = this.commentService.reconstruct(comment, binding);
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(comment);
 		else

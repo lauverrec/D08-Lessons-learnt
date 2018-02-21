@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CommentRepository;
 import domain.Comment;
@@ -29,6 +31,10 @@ public class CommentService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	//Importar la que pertenece a Spring
+	@Autowired
+	private Validator				validator;
 
 
 	// Constructors------------------------------------------------------------
@@ -56,7 +62,7 @@ public class CommentService {
 		return result;
 
 	}
-	public Comment save(Comment comment) {
+	public Comment save(final Comment comment) {
 		Date moment;
 		User userConnected;
 
@@ -81,7 +87,7 @@ public class CommentService {
 
 	}
 
-	public void delete(Comment comment) {
+	public void delete(final Comment comment) {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
 
@@ -90,13 +96,13 @@ public class CommentService {
 		this.administratorService.checkPrincipal();
 
 		if (comment.getReplys().size() != 0)
-			for (Comment c : comment.getReplys())
+			for (final Comment c : comment.getReplys())
 				this.delete(c);
 
 		this.commentRepository.delete(comment);
 
 	}
-	public Comment findOne(int commentId) {
+	public Comment findOne(final int commentId) {
 		Assert.isTrue(commentId != 0);
 		Comment result;
 
@@ -114,7 +120,7 @@ public class CommentService {
 
 	//Other methods bussisnes
 
-	public Collection<Comment> commentsOfThisRendezvouse(int rendezvouseId) {
+	public Collection<Comment> commentsOfThisRendezvouse(final int rendezvouseId) {
 		Collection<Comment> commentsOfThisRendezvouse;
 
 		commentsOfThisRendezvouse = this.commentRepository.commentsOfThisRendezvouse(rendezvouseId);
@@ -122,14 +128,14 @@ public class CommentService {
 		return commentsOfThisRendezvouse;
 	}
 
-	public Collection<Comment> findAllCommentsByRendezvousId(int rendezvousId) {
+	public Collection<Comment> findAllCommentsByRendezvousId(final int rendezvousId) {
 		Collection<Comment> result;
 		result = this.commentRepository.findAllCommentsByRendezvousId(rendezvousId);
 		return result;
 
 	}
 
-	public Collection<Comment> commentsOfThisRendezvouseWithCommentNull(int rendezvouseId) {
+	public Collection<Comment> commentsOfThisRendezvouseWithCommentNull(final int rendezvouseId) {
 		Collection<Comment> commentsOfThisRendezvouse;
 
 		commentsOfThisRendezvouse = this.commentRepository.commentsOfThisRendezvouseWithCommentNull(rendezvouseId);
@@ -137,9 +143,35 @@ public class CommentService {
 		return commentsOfThisRendezvouse;
 	}
 
-	public Collection<Comment> commentTofindAllCommentsByRendezvousId(int renzvousId) {
+	public Collection<Comment> commentTofindAllCommentsByRendezvousId(final int renzvousId) {
 		Collection<Comment> result;
 		result = this.commentRepository.commentTofindAllCommentsByRendezvousId(renzvousId);
+		return result;
+	}
+
+	public Comment reconstruct(final Comment comment, final BindingResult binding) {
+		Comment result;
+		Comment commentBD;
+		User userPrincipal;
+		if (comment.getId() == 0) {
+			Collection<Comment> replys;
+			Date moment;
+
+			result = comment;
+			moment = new Date(System.currentTimeMillis() - 1000);
+			replys = new ArrayList<Comment>();
+			userPrincipal = this.userService.findByPrincipal();
+			result.setUser(userPrincipal);
+			result.setReplys(replys);
+			result.setWrittenMoment(moment);
+		} else {
+			commentBD = this.commentRepository.findOne(comment.getId());
+			comment.setUser(commentBD.getUser());
+			comment.setReplys(commentBD.getReplys());
+			comment.setWrittenMoment(commentBD.getWrittenMoment());
+			result = comment;
+		}
+		this.validator.validate(result, binding);
 		return result;
 	}
 }
