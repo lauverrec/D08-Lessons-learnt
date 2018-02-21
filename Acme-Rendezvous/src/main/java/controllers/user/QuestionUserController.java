@@ -65,7 +65,7 @@ public class QuestionUserController extends AbstractController {
 	// Display ----------------------------------------------------------------
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam int questionId) {
+	public ModelAndView display(@RequestParam final int questionId) {
 		ModelAndView result;
 		Question question = new Question();
 
@@ -92,7 +92,7 @@ public class QuestionUserController extends AbstractController {
 
 	//Edition----------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int questionId) {
+	public ModelAndView edit(@RequestParam final int questionId) {
 		ModelAndView result;
 		Question question;
 		Collection<Answer> answers;
@@ -124,6 +124,7 @@ public class QuestionUserController extends AbstractController {
 	public ModelAndView save(@Valid Question question, final BindingResult bindingResult) {
 		ModelAndView result;
 
+		question = this.questionService.reconstruct(question, bindingResult);
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(question);
 		else
@@ -142,7 +143,7 @@ public class QuestionUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@ModelAttribute Question question, final BindingResult bindingResult) {
+	public ModelAndView delete(@ModelAttribute final Question question, final BindingResult bindingResult) {
 		ModelAndView result;
 
 		try {
@@ -156,7 +157,7 @@ public class QuestionUserController extends AbstractController {
 	}
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(Question question) {
+	protected ModelAndView createEditModelAndView(final Question question) {
 		assert question != null;
 		ModelAndView result;
 		result = this.createEditModelAndView(question, null);

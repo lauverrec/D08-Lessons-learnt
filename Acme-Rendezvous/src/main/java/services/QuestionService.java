@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.QuestionRepository;
 import domain.Answer;
@@ -29,6 +31,10 @@ public class QuestionService {
 
 	@Autowired
 	private AnswerService		answerService;
+
+	//Importar la que pertenece a Spring
+	@Autowired
+	private Validator			validator;
 
 
 	// Constructors -----------------------------------------------------------
@@ -57,20 +63,20 @@ public class QuestionService {
 		return result;
 	}
 
-	public Question findOne(int questionId) {
+	public Question findOne(final int questionId) {
 		Question result;
 		result = this.questionRepository.findOne(questionId);
 		return result;
 	}
 
-	public Question save(Question question) {
+	public Question save(final Question question) {
 		Assert.notNull(question);
 		Question result;
 		result = this.questionRepository.save(question);
 		return result;
 	}
 
-	public void delete(Question question) {
+	public void delete(final Question question) {
 		assert question != null;
 		assert question.getId() != 0;
 		Assert.isTrue(this.questionRepository.exists(question.getId()));
@@ -80,7 +86,7 @@ public class QuestionService {
 		questionId = question.getId();
 		answers = this.answerService.findAllAnswerByQuestionId(questionId);
 
-		for (Answer s : answers)
+		for (final Answer s : answers)
 			this.answerService.delete(s);
 
 		this.questionRepository.delete(question);
@@ -98,11 +104,28 @@ public class QuestionService {
 		return questions;
 	}
 
-	public Collection<Question> findAllQuestionsByRendezvous(int rendezvouseId) {
+	public Collection<Question> findAllQuestionsByRendezvous(final int rendezvouseId) {
 		Collection<Question> questions;
 
 		questions = this.questionRepository.findAllQuestionsByRendezvous(rendezvouseId);
 		return questions;
+	}
+
+	public Question reconstruct(final Question question, final BindingResult bindingResult) {
+		Question result;
+		Question questionBD;
+		User userPrincipal;
+		if (question.getId() == 0) {
+			result = question;
+			userPrincipal = this.userService.findByPrincipal();
+			result.setUser(userPrincipal);
+		} else {
+			questionBD = this.questionRepository.findOne(question.getId());
+			question.setUser(questionBD.getUser());
+			result = question;
+		}
+		this.validator.validate(result, bindingResult);
+		return result;
 	}
 
 }
