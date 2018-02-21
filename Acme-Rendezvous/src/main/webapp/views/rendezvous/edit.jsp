@@ -101,8 +101,7 @@
 	<form:label path="similarRendezvouses">
 		<spring:message code="rendezvous.similarRendezvouses" />:
 	</form:label>
-	<form:select id="similarRendezvouses" path="similarRendezvouses" >
-		<form:option value="0" label="----" />			
+	<form:select id="similarRendezvouses" path="similarRendezvouses" >		
 		<form:options items="${similarRendezvouses}" itemValue="id" itemLabel="name" />		
 	</form:select>
 	<form:errors cssClass="error" path="similarRendezvouses" />

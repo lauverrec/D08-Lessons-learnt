@@ -117,7 +117,7 @@ public class RendezvouseService {
 		similarrendezvous = this.SimilarRendezvouseWhereIS(rendezvouse);
 		announcements = this.AnnoucemntofRendezvouse(rendezvouse);
 		questions = this.questionService.findAllQuestionsByRendezvous(rendezvouse.getId());
-		comments = this.commentService.findAllCommentsByRendezvousId(rendezvouse.getId());
+		comments = this.commentService.commentTofindAllCommentsByRendezvousId(rendezvouse.getId());
 
 		assistant = this.rendezvousRepository.findAllAssistantsByRendezvous(rendezvouse.getId());
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse));
@@ -133,7 +133,6 @@ public class RendezvouseService {
 			this.questionService.delete(q);
 
 		for (Announcement a : announcements)
-			//			rendezvouse.getAnnouncements().remove(a);
 			this.announcementService.delete(a);
 		for (User u : assistant)
 			u.getRendezvousesAssisted().remove(rendezvouse);
