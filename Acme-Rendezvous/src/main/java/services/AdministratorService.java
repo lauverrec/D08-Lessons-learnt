@@ -240,9 +240,9 @@ public class AdministratorService {
 			admin.setUserAccount(administratorForm.getAdministrator().getUserAccount());
 
 		}
-		this.validator.validate(admin, bindingResult);
 		administratorForm.setAdministrator(admin);
 		result = administratorForm;
+		this.validator.validate(result, bindingResult);
 		return result;
 	}
 }

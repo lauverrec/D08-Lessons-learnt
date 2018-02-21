@@ -36,10 +36,12 @@ public class AdministratorController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		Administrator administrator;
+		AdministratorForm administratorForm;
 
 		administrator = this.administratorService.create();
 		Assert.notNull(administrator);
-		result = this.createEditModelAndView(administrator);
+		administratorForm = new AdministratorForm(administrator);
+		result = this.createEditModelAndView(administratorForm);
 		return result;
 	}
 
@@ -48,11 +50,13 @@ public class AdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
+		AdministratorForm administratorForm;
 		Administrator administrator;
 
 		administrator = this.administratorService.findByPrincipal();
 		Assert.notNull(administrator);
-		result = this.createEditModelAndView(administrator);
+		administratorForm = new AdministratorForm(administrator);
+		result = this.createEditModelAndView(administratorForm);
 		return result;
 	}
 
@@ -64,19 +68,19 @@ public class AdministratorController extends AbstractController {
 		administratorForm = this.administratorService.reconstruct(administratorForm, bindingResult);
 		administrator = administratorForm.getAdministrator();
 		if (bindingResult.hasErrors())
-			result = this.createEditModelAndView(administrator);
+			result = this.createEditModelAndView(administratorForm);
 		else
 			try {
-				Assert.isTrue(administratorForm.getAdministrator().getUserAccount().getPassword().equals(administratorForm.getPasswordCheck()), "password does not match");
+				Assert.isTrue(administratorForm.getAdministrator().getId() == 0 && administratorForm.getAdministrator().getUserAccount().getPassword().equals(administratorForm.getPasswordCheck()), "password does not match");
 				this.administratorService.save(administrator);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
 				if (oops.getMessage().equals("password does not match"))
-					result = this.createEditModelAndView(administrator, "administrator.commit.error.passwordDoesNotMatch");
+					result = this.createEditModelAndView(administratorForm, "administrator.commit.error.passwordDoesNotMatch");
 				if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
-					result = this.createEditModelAndView(administrator, "administrator.commit.error.duplicateProfile");
+					result = this.createEditModelAndView(administratorForm, "administrator.commit.error.duplicateProfile");
 				else
-					result = this.createEditModelAndView(administrator, "administrator.commit.error");
+					result = this.createEditModelAndView(administratorForm, "administrator.commit.error");
 			}
 
 		return result;
@@ -84,19 +88,16 @@ public class AdministratorController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final Administrator administrator) {
+	protected ModelAndView createEditModelAndView(final AdministratorForm administratorForm) {
 
 		ModelAndView result;
-		result = this.createEditModelAndView(administrator, null);
+		result = this.createEditModelAndView(administratorForm, null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Administrator administrator, final String message) {
-		AdministratorForm administratorForm;
+	protected ModelAndView createEditModelAndView(final AdministratorForm administratorForm, final String message) {
 		ModelAndView result;
 
-		administratorForm = new AdministratorForm();
-		administratorForm.setAdministrator(administrator);
 		result = new ModelAndView("administrator/edit");
 		result.addObject("administratorForm", administratorForm);
 		result.addObject("message", message);
