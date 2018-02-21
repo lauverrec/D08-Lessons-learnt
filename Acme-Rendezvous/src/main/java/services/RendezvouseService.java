@@ -257,6 +257,12 @@ public class RendezvouseService {
 		return edad;
 
 	}
+	public Collection<Rendezvouse> ListOFSimilarRendezvous(Rendezvouse rendezvous) {
+		Collection<Rendezvouse> result;
+		result = this.rendezvousRepository.ListOFSimilarRendezvous(rendezvous.getId());
+		return result;
+
+	}
 
 	public Rendezvouse reconstruct(final Rendezvouse rendezvous, final BindingResult bindingResult) {
 		Rendezvouse result;
