@@ -41,8 +41,7 @@
 				path="administrator.userAccount.username" />
 			<acme:password code="administrator.password"
 				path="administrator.userAccount.password" />
-			<acme:password code="administrator.password"
-				path="passwordCheck" />
+			<acme:password code="administrator.password" path="passwordCheck" />
 			<br />
 		</jstl:if>
 
@@ -55,6 +54,16 @@
 			path="administrator.postalAddress" />
 		<acme:textbox code="administrator.phoneNumber"
 			path="administrator.phoneNumber" />
+
+		<jstl:if test="${administratorForm.administrator.id == 0}">
+			<form:label path="conditions">
+				<spring:message code="actor.legal.accept" /> - <a
+					href="welcome/legal.do"><spring:message
+						code="actor.legal.moreinfo" /></a>
+			</form:label>
+			<form:checkbox id="conditions" path="conditions" />
+			<form:errors cssClass="error" path="conditions" />
+		</jstl:if>
 
 
 		<input type="submit" name="save"

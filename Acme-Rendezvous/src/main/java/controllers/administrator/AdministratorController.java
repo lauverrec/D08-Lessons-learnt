@@ -63,21 +63,23 @@ public class AdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(AdministratorForm administratorForm, final BindingResult bindingResult) {
 		ModelAndView result;
-		final Administrator administrator;
 
 		administratorForm = this.administratorService.reconstruct(administratorForm, bindingResult);
-		administrator = administratorForm.getAdministrator();
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(administratorForm);
 		else
 			try {
-				if ((administratorForm.getAdministrator().getId() == 0))
+				if ((administratorForm.getAdministrator().getId() == 0)) {
 					Assert.isTrue(administratorForm.getAdministrator().getUserAccount().getPassword().equals(administratorForm.getPasswordCheck()), "password does not match");
-				this.administratorService.save(administrator);
+					Assert.isTrue(administratorForm.getConditions(), "the conditions must be accepted");
+				}
+				this.administratorService.save(administratorForm.getAdministrator());
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
 				if (oops.getMessage().equals("password does not match"))
 					result = this.createEditModelAndView(administratorForm, "administrator.commit.error.passwordDoesNotMatch");
+				else if (oops.getMessage().equals("the conditions must be accepted"))
+					result = this.createEditModelAndView(administratorForm, "administrator.commit.error.conditions");
 				else if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
 					result = this.createEditModelAndView(administratorForm, "administrator.commit.error.duplicateProfile");
 				else
