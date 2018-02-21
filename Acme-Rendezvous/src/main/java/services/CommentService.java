@@ -137,4 +137,10 @@ public class CommentService {
 
 		return commentsOfThisRendezvouse;
 	}
+
+	public Collection<Comment> commentTofindAllCommentsByRendezvousId(int renzvousId) {
+		Collection<Comment> result;
+		result = this.commentRepository.commentTofindAllCommentsByRendezvousId(renzvousId);
+		return result;
+	}
 }
