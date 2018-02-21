@@ -71,13 +71,14 @@ public class AdministratorController extends AbstractController {
 			result = this.createEditModelAndView(administratorForm);
 		else
 			try {
-				Assert.isTrue(administratorForm.getAdministrator().getId() == 0 && administratorForm.getAdministrator().getUserAccount().getPassword().equals(administratorForm.getPasswordCheck()), "password does not match");
+				if ((administratorForm.getAdministrator().getId() == 0))
+					Assert.isTrue(administratorForm.getAdministrator().getUserAccount().getPassword().equals(administratorForm.getPasswordCheck()), "password does not match");
 				this.administratorService.save(administrator);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
 				if (oops.getMessage().equals("password does not match"))
 					result = this.createEditModelAndView(administratorForm, "administrator.commit.error.passwordDoesNotMatch");
-				if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
+				else if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
 					result = this.createEditModelAndView(administratorForm, "administrator.commit.error.duplicateProfile");
 				else
 					result = this.createEditModelAndView(administratorForm, "administrator.commit.error");
@@ -85,7 +86,6 @@ public class AdministratorController extends AbstractController {
 
 		return result;
 	}
-
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final AdministratorForm administratorForm) {
