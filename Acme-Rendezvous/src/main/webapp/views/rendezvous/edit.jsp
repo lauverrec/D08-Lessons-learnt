@@ -27,8 +27,8 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="assistants" />
-	<form:hidden path="announcements" />
+	<%-- <form:hidden path="assistants" />
+	<form:hidden path="announcements" /> --%>
 
 
 	<form:label path="name">

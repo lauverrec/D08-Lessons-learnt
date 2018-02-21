@@ -3,8 +3,6 @@ package controllers.user;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -138,7 +136,7 @@ public class RendezvousesUserController extends AbstractController {
 	// Display ----------------------------------------------------------------
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam int rendezvousId) {
+	public ModelAndView display(@RequestParam final int rendezvousId) {
 		ModelAndView result;
 		Rendezvouse ren = new Rendezvouse();
 
@@ -180,9 +178,10 @@ public class RendezvousesUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Rendezvouse rendezvous, final BindingResult bindingResult) {
+	public ModelAndView save(Rendezvouse rendezvous, final BindingResult bindingResult) {
 		ModelAndView result;
 
+		rendezvous = this.rendezvouseService.reconstruct(rendezvous, bindingResult);
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(rendezvous);
 		else

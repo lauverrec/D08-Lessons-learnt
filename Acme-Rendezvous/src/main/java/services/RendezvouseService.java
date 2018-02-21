@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RendezvouseRepository;
 import domain.Announcement;
@@ -39,6 +41,10 @@ public class RendezvouseService {
 
 	@Autowired
 	private CommentService			commentService;
+
+	//Importar la que pertenece a Spring
+	@Autowired
+	private Validator				validator;
 
 
 	// Constructors -----------------------------------------------------------
@@ -123,18 +129,18 @@ public class RendezvouseService {
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse));
 
 		user.getRendezvousesCreated().remove(rendezvouse);
-		for (Rendezvouse r : similarrendezvous)
+		for (final Rendezvouse r : similarrendezvous)
 			r.getSimilarRendezvouses().remove(rendezvouse);
 
-		for (Comment c : comments)
+		for (final Comment c : comments)
 			this.commentService.delete(c);
 
-		for (Question q : questions)
+		for (final Question q : questions)
 			this.questionService.delete(q);
 
-		for (Announcement a : announcements)
+		for (final Announcement a : announcements)
 			this.announcementService.delete(a);
-		for (User u : assistant)
+		for (final User u : assistant)
 			u.getRendezvousesAssisted().remove(rendezvouse);
 		this.rendezvousRepository.delete(rendezvouse);
 
@@ -160,7 +166,7 @@ public class RendezvouseService {
 
 	}
 
-	public Collection<Rendezvouse> findRendezvousesAssitedByUser2(int userId) {
+	public Collection<Rendezvouse> findRendezvousesAssitedByUser2(final int userId) {
 		Collection<Rendezvouse> res;
 
 		res = this.rendezvousRepository.findRendezvousesAssitedByUser2(userId);
@@ -168,7 +174,7 @@ public class RendezvouseService {
 
 	}
 
-	public Collection<User> findAllAssistantsByRendezvous(int rendezvousId) {
+	public Collection<User> findAllAssistantsByRendezvous(final int rendezvousId) {
 		Collection<User> res;
 
 		res = this.rendezvousRepository.findAllAssistantsByRendezvous(rendezvousId);
@@ -179,38 +185,38 @@ public class RendezvouseService {
 	public Rendezvouse deletevirtual(final Rendezvouse rendezvouse) {
 		Rendezvouse result;
 		Assert.notNull(rendezvouse);
-		boolean aux = true;
+		final boolean aux = true;
 		Assert.isTrue(rendezvouse.isDraftMode() == true);
 		rendezvouse.setDeleted(aux);
 		result = this.rendezvousRepository.save(rendezvouse);
 		return result;
 	}
 
-	public Collection<Rendezvouse> SimilarRendezvouseWhereIS(Rendezvouse rendezvouse) {
+	public Collection<Rendezvouse> SimilarRendezvouseWhereIS(final Rendezvouse rendezvouse) {
 		Collection<Rendezvouse> result;
 		result = this.rendezvousRepository.SimilarRendezvouseWhereIS(rendezvouse.getId());
 		return result;
 	}
-	public Collection<Announcement> AnnoucemntofRendezvouse(Rendezvouse rendezvouse) {
+	public Collection<Announcement> AnnoucemntofRendezvouse(final Rendezvouse rendezvouse) {
 		Collection<Announcement> res;
 		res = this.rendezvousRepository.AnnoucemntofRendezvouse(rendezvouse.getId());
 
 		return res;
 
 	}
-	public Collection<Rendezvouse> CancelMyassistantToRendezvouse(User user) {
+	public Collection<Rendezvouse> CancelMyassistantToRendezvouse(final User user) {
 		Collection<Rendezvouse> resul;
 		resul = this.rendezvousRepository.CancelMyassistantToRendezvouse(user.getId());
 		return resul;
 	}
 
-	public Collection<Rendezvouse> assistantToRendezvouse(User user) {
+	public Collection<Rendezvouse> assistantToRendezvouse(final User user) {
 		Collection<Rendezvouse> resul;
 		resul = this.rendezvousRepository.assistantToRendezvouse(user.getId());
 		return resul;
 	}
 
-	public Collection<Rendezvouse> AllRendezvousesDeleted(int userId) {
+	public Collection<Rendezvouse> AllRendezvousesDeleted(final int userId) {
 		Collection<Rendezvouse> res;
 		User user;
 		user = this.userService.findByPrincipal();
@@ -218,7 +224,7 @@ public class RendezvouseService {
 		return res;
 
 	}
-	public void assist(int rendezvousId) {
+	public void assist(final int rendezvousId) {
 		User usuario;
 		Rendezvouse rendezvous;
 		rendezvous = this.rendezvousRepository.findOne(rendezvousId);
@@ -230,7 +236,7 @@ public class RendezvouseService {
 
 	}
 
-	public void unassist(int rendezvousId) {
+	public void unassist(final int rendezvousId) {
 		User usuario;
 		Rendezvouse rendezvous;
 		rendezvous = this.rendezvousRepository.findOne(rendezvousId);
@@ -240,15 +246,42 @@ public class RendezvouseService {
 
 	}
 
-	public int calculateYearsOld(Date birtday) {
+	public int calculateYearsOld(final Date birtday) {
 		double yearsold;
 		int edad;
 		Date now;
 		now = new Date(System.currentTimeMillis());
-		long aux = now.getTime() - birtday.getTime();
+		final long aux = now.getTime() - birtday.getTime();
 		yearsold = TimeUnit.MILLISECONDS.toDays(aux);
 		edad = (int) (yearsold / 365);
 		return edad;
 
+	}
+
+	public Rendezvouse reconstruct(final Rendezvouse rendezvous, final BindingResult bindingResult) {
+		Rendezvouse result;
+		Rendezvouse rendezvousBD;
+		if (rendezvous.getId() == 0) {
+			Collection<User> assistants;
+			Collection<Rendezvouse> similarRendezvouses;
+			Collection<Announcement> announcements;
+
+			announcements = new ArrayList<Announcement>();
+			similarRendezvouses = new ArrayList<Rendezvouse>();
+			assistants = new ArrayList<User>();
+
+			rendezvous.setAssistants(assistants);
+			rendezvous.setAnnouncements(announcements);
+			rendezvous.setSimilarRendezvouses(similarRendezvouses);
+			rendezvous.setDeleted(false);
+			result = rendezvous;
+		} else {
+			rendezvousBD = this.rendezvousRepository.findOne(rendezvous.getId());
+			rendezvous.setAssistants(rendezvousBD.getAssistants());
+			rendezvous.setAnnouncements(rendezvousBD.getAnnouncements());
+			result = rendezvous;
+		}
+		this.validator.validate(result, bindingResult);
+		return result;
 	}
 }
