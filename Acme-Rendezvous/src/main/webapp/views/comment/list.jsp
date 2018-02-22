@@ -22,8 +22,20 @@
 
 
 
+
+
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="comments" requestURI="${requestURI}" id="row">
+	
+	
+		<spring:message code="comment.display" var="Display" />
+		<display:column title="${Display}" sortable="true">
+			<spring:url value="comment/administrator/display.do" var="displayURL">
+				<spring:param name="commentId" value="${row.id}" />
+			</spring:url>
+			<a href="${displayURL}"><spring:message code="comment.display" /></a>
+
+		</display:column>
 
 	<!-- ATRIBUTOS -->
 
@@ -62,30 +74,37 @@
 		</jstl:if>
 	</security:authorize>
 
+
+	<spring:message code="comment.picture" var="pictureHeader" />
+	<display:column title="${pictureHeader}">
+		<div
+			style="position: relative; width: 200px; height: 100px; margin-left: auto; margin-right: auto;">
+			<img src="${row.picture}" width="200" height="100">
+		</div>
+	</display:column>
+
+	<security:authorize access="hasRole('USER')">
+		<spring:message code="comment.user" var="userHeader" />
+		<display:column title="${userHeader}" sortable="true">
+			<spring:url value="user/display.do" var="userURL">
+				<spring:param name="userId" value="${row.user.id }" />
+			</spring:url>
+			<a href="${userURL}"><jstl:out value="${row.user.name }" /></a>
+		</display:column>
+	</security:authorize>
+
+	<!-- Boton de eliminar el comentario para el administrador -->
+
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<spring:message code="comment.delete" var="delete" />
 
-		<display:column title="${deleteURL}" sortable="true">
+		<display:column title="${delete}" sortable="true">
 			<spring:url value="comment/administrator/delete.do" var="deleteURL">
 				<spring:param name="commentId" value="${row.id}" />
 			</spring:url>
 			<a href="${deleteURL}"><spring:message code="comment.delete" /></a>
 		</display:column>
 	</security:authorize>
-	<%
-		/*
-						 <spring:message code="comment.picture" var="pictureHeader" />
-						 <display:column title="${pictureHeader}">
-						 <div
-						 style="position: relative; width: 500px; height: 300px; margin-left:
-						 auto; margin-right: auto;"> <img src="${row.picture}" width="500"
-						 height="300">
-						 </div>
-						 </display:column>
-			 */
-	%>
-
-
 
 </display:table>
 

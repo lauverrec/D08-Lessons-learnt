@@ -79,6 +79,22 @@ public class CommentAdministratorController extends AbstractController {
 		return result;
 	}
 
+	// Display ----------------------------------------------------------------
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int commentId) {
+		ModelAndView result;
+		Comment comment = new Comment();
+
+		comment = this.commentService.findOne(commentId);
+
+		result = new ModelAndView("comment/display");
+		result.addObject("comment", comment);
+		result.addObject("requestURI", "comment/administrator/display.do");
+
+		return result;
+	}
+
 	//ancially methods---------------------------------------------------------------------------
 
 	protected ModelAndView listWithMessage(final String message) {

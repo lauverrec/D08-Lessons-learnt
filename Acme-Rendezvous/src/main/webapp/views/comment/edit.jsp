@@ -19,34 +19,23 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="comment/user/edit.do" modelAttribute="comment">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="commentTo" />
-	<form:hidden path="rendezvouse"/>
-	<%-- <form:hidden path="user" />
-	<form:hidden path="replys" />
-	<form:hidden path="writtenMoment"/> --%>
-	
+	<form:hidden path="rendezvouse" />
+
+
 
 	<!-- ATRIBUTOS -->
-
-
-	<form:label path="text">
-		<spring:message code="comment.text" />:
-	</form:label>
-	<form:input path="text" />
-	<form:errors cssClass="error" path="text" />
+	<acme:textarea code="comment.text" path="text" />
 	<br />
 	<br />
 
-	<form:label path="picture">
-		<spring:message code="comment.picture" />:
-	</form:label>
-	<form:input path="picture" />
-	<form:errors cssClass="error" path="picture" />
+	<acme:textbox code="comment.picture" path="picture" />
 	<br />
 	<br />
 	<!-- BOTONES -->
@@ -54,9 +43,9 @@
 		value="<spring:message code="comment.save"/>" />&nbsp;
 	
 
-	<input type="button" name="cancel"
-		value="<spring:message code="comment.cancel" />"
-		onclick="javascript:  window.location.replace('comment/user/list.do?rendezvouseId=${rendezvouse.id }');" />
-	<br />
-	
+	<acme:cancel
+		url="comment/user/list.do?rendezvouseId=${rendezvouse.id }"
+		code="comment.cancel" />
+
+
 </form:form>

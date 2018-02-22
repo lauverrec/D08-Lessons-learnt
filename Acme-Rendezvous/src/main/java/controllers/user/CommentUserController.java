@@ -126,6 +126,22 @@ public class CommentUserController extends AbstractController {
 		return result;
 	}
 
+	// Display ----------------------------------------------------------------
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int commentId) {
+		ModelAndView result;
+		Comment comment = new Comment();
+
+		comment = this.commentService.findOne(commentId);
+
+		result = new ModelAndView("comment/display");
+		result.addObject("comment", comment);
+		result.addObject("requestURI", "comment/user/display.do");
+
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 	protected ModelAndView createEditModelAndView(final Comment comment) {
 		ModelAndView result;
