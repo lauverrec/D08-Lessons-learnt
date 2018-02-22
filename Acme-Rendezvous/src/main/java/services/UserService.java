@@ -159,37 +159,20 @@ public class UserService {
 			UserAccount userAccount;
 			Authority authority;
 			
+			userAccount = userForm.getUser().getUserAccount();
 			authority = new Authority();
 			authority.setAuthority(Authority.USER);
-			userAccount = user.getUserAccount();
-			userAccount.setAuthorities(new ArrayList<Authority>());
 			userAccount.addAuthority(authority);
-			user.setUserAccount(userAccount);
-			userForm.setUser(user);
+			userForm.getUser().setUserAccount(userAccount);
 			result = userForm;
 			
 		}else{
 			
-			User aux;
-			UserAccount ua;
+			user = this.userRepository.findOne(userForm.getUser().getId());
+			userForm.getUser().setId(user.getId());
+			userForm.getUser().setVersion(user.getVersion());
+			userForm.getUser().setUserAccount(user.getUserAccount());
 			
-			aux = this.userRepository.findOne(user.getId());
-			
-			user.setId(aux.getId());
-			user.setVersion(aux.getVersion());
-			
-			ua = new UserAccount();
-			ua.setId(aux.getUserAccount().getId());
-			ua.setVersion(aux.getVersion());
-			ua.setAuthorities(aux.getUserAccount().getAuthorities());
-			ua.setUsername(user.getUserAccount().getUsername());
-			ua.setPassword(user.getUserAccount().getPassword());
-			user.setUserAccount(ua);
-			
-			user.setRendezvousesCreated(aux.getRendezvousesCreated());
-			user.setRendezvousesAssisted(aux.getRendezvousesAssisted());
-			
-			userForm.setUser(user);
 			result = userForm;
 			
 			

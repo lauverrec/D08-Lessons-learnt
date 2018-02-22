@@ -4,8 +4,8 @@ package controllers;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,62 +108,45 @@ public class UserController extends AbstractController {
 		User user;
 
 		userForm = this.userService.reconstruct(userForm, binding);
-		user = userForm.getUser();
-
-		if (user.getId() == 0 && !userForm.getPasswordCheck().equals(userForm.getUser().getUserAccount().getPassword())) {
-			result = new ModelAndView("user/edit");
-			result.addObject("userForm", userForm);
-			result.addObject("message", "user.password.match");
-
-		} else if (binding.hasErrors()) {
-			result = new ModelAndView("user/edit");
-			result.addObject("userForm", userForm);
-		} else if (userForm.getConditions() != null && !userForm.getConditions() && user.getId() == 0) {
-			result = new ModelAndView("user/edit");
-			result.addObject("userForm", userForm);
-			result.addObject("message", "actor.conditions.accept");
-		} else
+		
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(userForm);
+		else
 			try {
-				//Codificación del password a MD5
-				if (user.getId() != 0) {
-					User u;
-					User userSaved;
-					u = this.userService.reconstructPass(user, binding);
-					userSaved = this.userService.save(u);
-					result = new ModelAndView("redirect:/");
-				} else {
-					User u;
-					u = this.userService.save(user);
-
-					result = new ModelAndView("redirect:/security/login.do");
+				if ((userForm.getUser().getId() == 0)) {
+					Assert.isTrue(userForm.getUser().getUserAccount().getPassword().equals(userForm.getPasswordCheck()), "password does not match");
+					Assert.isTrue(userForm.getConditions(), "the conditions must be accepted");
 				}
+				this.userService.save(userForm.getUser());
+				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
-				if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
-					result = this.createEditModelAndView(user, "user.commit.error.duplicateProfile");
-				else {
-					result = new ModelAndView("user/edit");
-					result.addObject("userForm", userForm);
-					result.addObject("message", "user.commit.error");
-				}
+				if (oops.getMessage().equals("password does not match"))
+					result = this.createEditModelAndView(userForm, "user.password.match");
+				else if (oops.getMessage().equals("the conditions must be accepted"))
+					result = this.createEditModelAndView(userForm, "actor.conditions.accept");
+				else if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
+					result = this.createEditModelAndView(userForm, "user.commit.error.duplicateProfile");
+				else
+					result = this.createEditModelAndView(userForm, "user.commit.error");
 			}
 
 		return result;
 	}
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final User user) {
+	protected ModelAndView createEditModelAndView(final UserForm userForm) {
 
 		ModelAndView result;
-		result = this.createEditModelAndView(user, null);
+		result = this.createEditModelAndView(userForm, null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final User user, final String message) {
+	protected ModelAndView createEditModelAndView(final UserForm userForm, final String message) {
 
 		ModelAndView result;
 
 		result = new ModelAndView("user/edit");
-		result.addObject("user", user);
+		result.addObject("user", userForm);
 		result.addObject("message", message);
 		result.addObject("RequestURI", "user/edit.do");
 
