@@ -192,13 +192,14 @@ public class RendezvousesUserController extends AbstractController {
 			} catch (final Throwable oops) {
 				if (oops.getMessage().equals("future"))
 					result = this.createEditModelAndView(rendezvous, "rendezvous.future.error");
+				else if (oops.getMessage().equals("jaja"))
+					result = this.createEditModelAndView(rendezvous, "menor.error");
 				else
 					result = this.createEditModelAndView(rendezvous, "rendezvouse.commit.error");
 			}
 
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@ModelAttribute final Rendezvouse rendezvouse, final BindingResult bindingResult) {
 		ModelAndView result;

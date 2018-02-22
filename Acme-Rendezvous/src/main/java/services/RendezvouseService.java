@@ -104,6 +104,9 @@ public class RendezvouseService {
 			rendezvouse.getAssistants().add(user);
 
 		Assert.isTrue(rendezvouse.getOrganisedMoment().after(now), "future");
+		if (rendezvouse.isForAdult() == true)
+			Assert.isNull(this.calculateYearsOld(user.getBirthDate()) < 18, "jaja");
+
 		result = this.rendezvousRepository.save(rendezvouse);
 		if (rendezvouse.getId() == 0)
 			user.getRendezvousesCreated().add(result);
