@@ -18,6 +18,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="question/user/edit.do" modelAttribute="question">
 
@@ -27,12 +28,9 @@
 <!-- ATRIBUTOS -->
 
 	
-	<form:label path="name">
-		<spring:message code="question.name" />:
-	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
-	<br />
+	
+	
+	<acme:textbox code="question.name" path="name"/>
 	<br />
 	
 <h2><spring:message code="question.rendezvouse" /></h2>

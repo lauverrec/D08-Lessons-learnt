@@ -107,11 +107,6 @@
 		<a href="${editURL}"><spring:message code="rendezvouse.assistans" /></a>
 	</display:column>
 
-
-
-
-
-
 	<spring:message code="user.maker" var="Maker" />
 	<display:column title="${Maker}" sortable="true">
 		<spring:url value="rendezvous/listMaker.do" var="renURL">
@@ -185,6 +180,21 @@
 			<a href="${editURL}"><spring:message code="rendezvous.delete" /></a>
 		</display:column>
 	</security:authorize>
+
+
+<security:authorize access="hasRole('USER')">
+		<jstl:if test="${row.deleted==true}">
+		<display:column>
+			<FONT COLOR="grey">
+			<spring:message code="delete.delete"/>
+			</FONT><br>
+		</display:column>
+			</jstl:if>
+	</security:authorize>
+	
+
+
+
 
 </display:table>
 

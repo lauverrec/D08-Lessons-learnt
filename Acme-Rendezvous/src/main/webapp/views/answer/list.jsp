@@ -18,7 +18,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="answers" requestURI="answer/user/list.do" id="row">
@@ -39,11 +39,12 @@
 	
 	
 	<!-- Attributes -->
+		
 	
 	<spring:message code="answer.question" var="questionHeader" />
 	<display:column value="${row.question.name}" title="${questionHeader}" sortable="true" />
 	
-	<spring:message code="answer.reply" var="replyHeader" />
-	<display:column property="reply" title="${replyHeader}" sortable="true" />
+	<acme:column code="answer.reply" property="reply"/>
+	
 </display:table>
 

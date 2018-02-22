@@ -18,7 +18,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="questions" requestURI="question/user/list.do" id="row">
@@ -46,8 +46,10 @@
 	
 	
 	<!-- Attributes -->
-	<spring:message code="question.name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}" sortable="true" />
+	<acme:column code="question.name" property="name"/>
+	
+	
+	
 	
 </display:table>
 <security:authorize access="hasRole('USER')">
