@@ -44,5 +44,10 @@
 
 	<input type="submit" name="save"
 		value="<spring:message code="announcement.save"/>" />&nbsp;
+		
+		<input type="button" name="cancel"
+		value="<spring:message code="rendezvous.cancel"/>"
+		onclick="javascript: window.location.replace('rendezvous/user/list.do')" />
+	<br />
 
 </form:form>
