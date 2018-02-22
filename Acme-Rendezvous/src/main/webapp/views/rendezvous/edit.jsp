@@ -73,7 +73,7 @@
 		<form:option value="0" label="NO"/> 
 	</form:select>  
 	<br /> 
-	
+	<br />
 		<form:label path="forAdult">
 		<spring:message code="rendezvouse.forAdult" />:
 	</form:label>
@@ -82,21 +82,21 @@
 		<form:option value="0" label="NO"/> 
 	</form:select>  
 	<br /> 
-	
+	<br />
 		<form:label path="gps.longitude">
 		<spring:message code="rendezvouse.location.longitude" />:
 	</form:label>
 	<form:input path="gps.longitude" />
 	<form:errors cssClass="error" path="gps.longitude" />
 	<br />
-	
+	<br />
 	<form:label path="gps.latitude">
 		<spring:message code="rendezvouse.location.latitude" />:
 	</form:label>
 	<form:input path="gps.latitude" />
 	<form:errors cssClass="error" path="gps.latitude" />
 	<br />
-	
+	<br />
 
 	<form:label path="similarRendezvouses">
 		<spring:message code="rendezvous.similarRendezvouses" />:
