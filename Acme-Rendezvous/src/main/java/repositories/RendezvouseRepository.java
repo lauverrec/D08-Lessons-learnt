@@ -48,7 +48,7 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	@Query("select a from User u join u.rendezvousesCreated a where a.deleted=true and u.id=?1")
 	Collection<Rendezvouse> AllRendezvousesDeleted(int userId);
 
-	//lista las rendezvous menos
+	//lista las rendezvous menos la pasada por parametro
 	@Query("select r from Rendezvouse r where r.id!=?1")
 	Collection<Rendezvouse> ListOFSimilarRendezvous(int rendezvousId);
 

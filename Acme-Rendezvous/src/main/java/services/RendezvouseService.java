@@ -232,7 +232,6 @@ public class RendezvouseService {
 		Rendezvouse rendezvous;
 		rendezvous = this.rendezvousRepository.findOne(rendezvousId);
 		usuario = this.userService.findByPrincipal();
-		//TODO comprobar que si la rendezvous es para mayores sea mayor el usuario
 		Assert.isTrue(this.calculateYearsOld(usuario.getBirthDate()) > 17);
 		rendezvous.getAssistants().add(usuario);
 		this.rendezvousRepository.save(rendezvous);
