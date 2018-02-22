@@ -181,18 +181,50 @@
 		</display:column>
 	</security:authorize>
 
+<spring:message code="draftMode" var="draftMode" />
+<display:column title="${draftMode}">
+	<jstl:if test="${row.draftMode==true}">
+	<div
+  style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+  			
+		  <img src="images/no.png"width= "30" height="30">
+		  </div>
+		  </jstl:if>
+	<jstl:if test="${row.draftMode==false}">
+	<div
+  style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+  			
+		  <img src="images/yes.png"width= "30" height="30">
+		  </div>
+		  </jstl:if>
+		
+</display:column>
 
 <security:authorize access="hasRole('USER')">
+		<spring:message code="delete" var="Delete" />
+		<display:column title="${Delete}">
 		<jstl:if test="${row.deleted==true}">
-		<display:column>
 			<FONT COLOR="grey">
 			<spring:message code="delete.delete"/>
 			</FONT><br>
+		</jstl:if>
 		</display:column>
-			</jstl:if>
+			
 	</security:authorize>
+
 	
 
+
+	<spring:message code="forAdult" var="forAdult" />
+	<display:column title="${forAdult}">
+	<jstl:if test="${row.forAdult==true}">
+	<div
+  style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+  			
+		  <img src="images/18.png"width= "30" height="30">
+		  </div>
+		  </jstl:if> 
+</display:column>
 
 
 
