@@ -91,9 +91,12 @@ public class UserService {
 		Md5PasswordEncoder encoder;
 		String passwordHash;
 
-		encoder = new Md5PasswordEncoder();
-		passwordHash = encoder.encodePassword(user.getUserAccount().getPassword(), null);
-		user.getUserAccount().setPassword(passwordHash);
+		if(user.getId()==0){
+			encoder = new Md5PasswordEncoder();
+			passwordHash = encoder.encodePassword(user.getUserAccount().getPassword(), null);
+			user.getUserAccount().setPassword(passwordHash);
+		}
+		
 
 		result = this.userRepository.save(user);
 
@@ -183,14 +186,6 @@ public class UserService {
 
 		return result;
 		
-	}
-	
-
-	public User reconstructPass(final User user, final BindingResult binding) {
-		User u;
-		u = this.userRepository.findOne(user.getId());
-		user.getUserAccount().setPassword(u.getUserAccount().getPassword());
-		return user;
 	}
 
 }
