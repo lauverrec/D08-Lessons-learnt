@@ -139,13 +139,28 @@
 		</display:column>
 
 		<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
+		<script type="text/javascript">
+			function confirmDelete() {
+				alert("hola");
+				//eliminar=confirm('<spring:message code="rendezvous.confirmDelete"/>');
+				/* if (eliminar)
+				//Redireccionamos si das a aceptar
+				  window.location.href ="rendezvous/admin/delete.do?rendezvousId=" + rendezvousId; //página web a la que te redirecciona si confirmas la eliminación
+				else*/
+			}
+		</script>
+		
 		<spring:message code="rendezvous.delete" var="deleteHeader" />
-
 		<display:column title="${deleteHeader}" sortable="true">
-			<spring:url value="rendezvous/administrator/delete.do" var="editURL">
+		<form:form action="rendezvous/administrator/delete.do?rendezvousId${row.id}" modelAttribute="administrator">
+			<input type="submit" name="delete"
+				value="<spring:message code="rendezvous.delete" />"
+				onclick="confirmDelete();" />
+			<%-- <spring:url value="rendezvous/administrator/delete.do" var="editURL">
 				<spring:param name="rendezvousId" value="${row.id}" />
 			</spring:url>
-			<a href="${editURL}"><spring:message code="rendezvous.delete" /></a>
+			<a href="${editURL}"><spring:message code="rendezvous.delete" /></a> --%>
+		</form:form>
 		</display:column>
 	</security:authorize>
 
@@ -162,45 +177,45 @@
 		</display:column>
 	</security:authorize>
 
-<spring:message code="draftMode" var="draftMode" />
-<display:column title="${draftMode}">
-	<jstl:if test="${row.draftMode==true}">
-	<div
-  style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
-  			
-		  <img src="images/no.png"width= "30" height="30">
-		  </div>
-		  </jstl:if>
-	<jstl:if test="${row.draftMode==false}">
-	<div
-  style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
-  			
-		  <img src="images/yes.png"width= "30" height="30">
-		  </div>
-		  </jstl:if>
-		
-</display:column>
-		<spring:message code="delete" var="Delete" />
-		<display:column title="${Delete}">
-		<jstl:if test="${row.deleted==true}">
-			<FONT COLOR="grey">
-			<spring:message code="delete.delete"/>
-			</FONT><br>
+	<spring:message code="draftMode" var="draftMode" />
+	<display:column title="${draftMode}">
+		<jstl:if test="${row.draftMode==true}">
+			<div
+				style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+
+				<img src="images/no.png" width="30" height="30">
+			</div>
 		</jstl:if>
-		</display:column>
-			
-	
-	
+		<jstl:if test="${row.draftMode==false}">
+			<div
+				style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+
+				<img src="images/yes.png" width="30" height="30">
+			</div>
+		</jstl:if>
+
+	</display:column>
+	<spring:message code="delete" var="Delete" />
+	<display:column title="${Delete}">
+		<jstl:if test="${row.deleted==true}">
+			<FONT COLOR="grey"> <spring:message code="delete.delete" />
+			</FONT>
+			<br>
+		</jstl:if>
+	</display:column>
+
+
+
 	<spring:message code="forAdult" var="forAdult" />
 	<display:column title="${forAdult}">
-	<jstl:if test="${row.forAdult==true}">
-	<div
-  style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
-  			
-		  <img src="images/18.png"width= "30" height="30">
-		  </div>
-		  </jstl:if>
-</display:column>
+		<jstl:if test="${row.forAdult==true}">
+			<div
+				style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+
+				<img src="images/18.png" width="30" height="30">
+			</div>
+		</jstl:if>
+	</display:column>
 
 
 
