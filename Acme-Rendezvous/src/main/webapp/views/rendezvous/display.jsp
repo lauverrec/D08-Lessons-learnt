@@ -19,7 +19,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <display:table name="rendezvous" class="displaytag"
@@ -46,8 +46,13 @@
 			<B><spring:message code="rendezvouse.description" />:</B>
 			<jstl:out value="${row.description}"></jstl:out>
 		<p>
-			<B><spring:message code="rendezvouse.organisedMoment" />:</B>
-			<jstl:out value="${row.organisedMoment}"></jstl:out>
+			
+ 			<spring:message code="rendezvous.format.birthDate" var="pattern"></spring:message>
+			<fmt:formatDate value="${row.organisedMoment}" pattern="${pattern}" var="newdatevar" />
+			<B><spring:message code="rendezvouse.organisedMoment"></spring:message>:</B>
+			<c:out value="${newdatevar}" />
+			 
+	
 		<p>
 			<B><spring:message code="rendezvouse.location.longitude" />:</B>
 			<jstl:out value="${row.gps.longitude}"></jstl:out>

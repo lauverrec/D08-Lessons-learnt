@@ -18,13 +18,14 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <display:table name="user" class="displaytag"
   requestURI="${RequestUri}" id="row">
   
   <!-- Attributes -->
-
+	
 	<display:column>
 	<spring:message code="user.name" />:
 	<jstl:out value="${row.name}"></jstl:out>
@@ -33,6 +34,14 @@
 	<p>
 		<spring:message code="user.surname" />:
 		<jstl:out value="${row.surname}"></jstl:out>
+	</p>
+	
+	<p>
+		<spring:message code="user.format.birthDate" var="pattern"></spring:message>
+		<fmt:formatDate value="${row.birthDate}" pattern="${pattern}" var="newdatevar" />
+		<spring:message code="user.birthDate">:</spring:message>
+		<c:out value="${newdatevar}" />
+	 
 	</p>
 	
 	<p>
