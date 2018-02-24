@@ -154,10 +154,6 @@
 			<input type="button" name="delete"
 				value="<spring:message code="rendezvous.delete" />"
 				onclick="confirmDelete(${row.id});" />
-			<%-- <spring:url value="rendezvous/administrator/delete.do" var="editURL">
-				<spring:param name="rendezvousId" value="${row.id}" />
-			</spring:url>
-			<a href="${editURL}"><spring:message code="rendezvous.delete" /></a> --%>
 		</display:column>
 	</security:authorize>
 
