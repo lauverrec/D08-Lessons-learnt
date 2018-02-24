@@ -20,6 +20,15 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<script type="text/javascript">
+	function confirmDelete(rendezvousId) {
+		confirm=confirm('<spring:message code="rendezvous.confirmDelete"/>');
+		if (confirm)
+		  window.location.href ="rendezvous/administrator/delete.do?rendezvousId=" + rendezvousId;
+		  else
+			  window.location.href ="rendezvous/administrator/list.do";
+	}
+</script>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="rendezvous" requestURI="${requestURI }" id="row">
@@ -139,28 +148,16 @@
 		</display:column>
 
 		<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
-		<script type="text/javascript">
-			function confirmDelete() {
-				alert("hola");
-				//eliminar=confirm('<spring:message code="rendezvous.confirmDelete"/>');
-				/* if (eliminar)
-				//Redireccionamos si das a aceptar
-				  window.location.href ="rendezvous/admin/delete.do?rendezvousId=" + rendezvousId; //página web a la que te redirecciona si confirmas la eliminación
-				else*/
-			}
-		</script>
-		
+
 		<spring:message code="rendezvous.delete" var="deleteHeader" />
 		<display:column title="${deleteHeader}" sortable="true">
-		<form:form action="rendezvous/administrator/delete.do?rendezvousId=${row.id}" modelAttribute="administrator">
-			<input type="submit" name="delete"
+			<input type="button" name="delete"
 				value="<spring:message code="rendezvous.delete" />"
-				onclick="confirmDelete();" />
+				onclick="confirmDelete(${row.id});" />
 			<%-- <spring:url value="rendezvous/administrator/delete.do" var="editURL">
 				<spring:param name="rendezvousId" value="${row.id}" />
 			</spring:url>
 			<a href="${editURL}"><spring:message code="rendezvous.delete" /></a> --%>
-		</form:form>
 		</display:column>
 	</security:authorize>
 
