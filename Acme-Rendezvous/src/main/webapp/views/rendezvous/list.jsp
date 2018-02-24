@@ -152,7 +152,7 @@
 		
 		<spring:message code="rendezvous.delete" var="deleteHeader" />
 		<display:column title="${deleteHeader}" sortable="true">
-		<form:form action="rendezvous/administrator/delete.do?rendezvousId${row.id}" modelAttribute="administrator">
+		<form:form action="rendezvous/administrator/delete.do?rendezvousId=${row.id}" modelAttribute="administrator">
 			<input type="submit" name="delete"
 				value="<spring:message code="rendezvous.delete" />"
 				onclick="confirmDelete();" />
