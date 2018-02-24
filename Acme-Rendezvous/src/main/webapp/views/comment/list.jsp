@@ -20,22 +20,31 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<script type="text/javascript">
+	function confirmDelete(commentId) {
+		confirm=confirm('<spring:message code="comment.confirm.delete"/>');
+		if (confirm)
+		  window.location.href ="comment/administrator/delete.do?commentId=" + commentId;
+		  else
+			  window.location.href ="comment/administrator/list.do";
+	}
+</script>
 
 
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="comments" requestURI="${requestURI}" id="row">
-	
-	
-		<spring:message code="comment.display" var="Display" />
-		<display:column title="${Display}" sortable="true">
-			<spring:url value="comment/administrator/display.do" var="displayURL">
-				<spring:param name="commentId" value="${row.id}" />
-			</spring:url>
-			<a href="${displayURL}"><spring:message code="comment.display" /></a>
 
-		</display:column>
+
+	<spring:message code="comment.display" var="Display" />
+	<display:column title="${Display}" sortable="true">
+		<spring:url value="comment/administrator/display.do" var="displayURL">
+			<spring:param name="commentId" value="${row.id}" />
+		</spring:url>
+		<a href="${displayURL}"><spring:message code="comment.display" /></a>
+
+	</display:column>
 
 	<!-- ATRIBUTOS -->
 
@@ -96,13 +105,11 @@
 	<!-- Boton de eliminar el comentario para el administrador -->
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
-		<spring:message code="comment.delete" var="delete" />
-
-		<display:column title="${delete}" sortable="true">
-			<spring:url value="comment/administrator/delete.do" var="deleteURL">
-				<spring:param name="commentId" value="${row.id}" />
-			</spring:url>
-			<a href="${deleteURL}"><spring:message code="comment.delete" /></a>
+		<spring:message code="comment.delete" var="deleteHeader" />
+		<display:column title="${deleteHeader}" sortable="true">
+			<input type="button" name="delete"
+				value="<spring:message code="comment.delete" />"
+				onclick="confirmDelete(${row.id});" />
 		</display:column>
 	</security:authorize>
 
