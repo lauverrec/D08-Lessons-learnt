@@ -22,7 +22,7 @@
 
 <script type="text/javascript">
 	function confirmDelete(rendezvousId) {
-		confirm=confirm('<spring:message code="rendezvous.confirmDelete"/>');
+		confirm=confirm('<spring:message code="rendezvous.confirm.delete"/>');
 		if (confirm)
 		  window.location.href ="rendezvous/administrator/delete.do?rendezvousId=" + rendezvousId;
 		  else

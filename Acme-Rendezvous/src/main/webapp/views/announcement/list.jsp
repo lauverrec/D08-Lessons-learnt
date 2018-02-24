@@ -23,7 +23,15 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-
+<script type="text/javascript">
+	function confirmDelete(announcementId) {
+		confirm=confirm('<spring:message code="announcement.confirm.delete"/>');
+		if (confirm)
+		  window.location.href ="announcement/administrator/delete.do?announcementId=" + announcementId;
+		  else
+			  window.location.href ="announcement/administrator/list.do";
+	}
+</script>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="announcements" requestURI="${requestURI}" id="row">
 
@@ -55,13 +63,11 @@
 	
 	<!-- Boton de delete para el administrador ya que puede borrar las Announcement que quiera pero no editarlas -->
 	<security:authorize access="hasRole('ADMINISTRATOR')">
-		<spring:message code="announcement.delete" var="delete" />
-
-		<display:column title="${delete}" sortable="true">
-				<spring:url value="announcement/administrator/delete.do" var="editURL">
-					<spring:param name="announcementId" value="${row.id}" />
-				</spring:url>
-				<a href="${editURL}"><spring:message code="announcement.delete" /></a>
+	<spring:message code="announcement.delete" var="deleteHeader" />
+		<display:column title="${deleteHeader}" sortable="true">
+			<input type="button" name="delete"
+				value="<spring:message code="announcement.delete" />"
+				onclick="confirmDelete(${row.id});" />
 		</display:column>
 	</security:authorize>
 		
