@@ -4,13 +4,18 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+	@Index(columnList = "rendezvouse_id,user_id")
+})
 public class Question extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
@@ -22,7 +27,7 @@ public class Question extends DomainEntity {
 		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -38,7 +43,7 @@ public class Question extends DomainEntity {
 		return this.rendezvouse;
 	}
 
-	public void setRendezvouse(Rendezvouse rendezvouse) {
+	public void setRendezvouse(final Rendezvouse rendezvouse) {
 		this.rendezvouse = rendezvouse;
 	}
 
@@ -48,7 +53,7 @@ public class Question extends DomainEntity {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(final User user) {
 		this.user = user;
 	}
 

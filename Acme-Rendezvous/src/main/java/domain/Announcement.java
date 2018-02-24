@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -18,6 +20,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+	@Index(columnList = "rendezvouse_id")
+})
 public class Announcement extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
@@ -34,7 +39,7 @@ public class Announcement extends DomainEntity {
 		return this.madeMoment;
 	}
 
-	public void setMadeMoment(Date madeMoment) {
+	public void setMadeMoment(final Date madeMoment) {
 		this.madeMoment = madeMoment;
 	}
 
@@ -43,7 +48,7 @@ public class Announcement extends DomainEntity {
 		return this.title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -52,7 +57,7 @@ public class Announcement extends DomainEntity {
 		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -67,7 +72,7 @@ public class Announcement extends DomainEntity {
 		return this.rendezvouse;
 	}
 
-	public void setRendezvouse(Rendezvouse rendezvouse) {
+	public void setRendezvouse(final Rendezvouse rendezvouse) {
 		this.rendezvouse = rendezvouse;
 	}
 

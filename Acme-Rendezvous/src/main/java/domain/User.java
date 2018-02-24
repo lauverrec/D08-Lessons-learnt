@@ -33,7 +33,7 @@ public class User extends Actor {
 		return this.birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(final Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -51,7 +51,7 @@ public class User extends Actor {
 		return this.rendezvousesCreated;
 	}
 
-	public void setRendezvousesCreated(Collection<Rendezvouse> rendezvousesCreated) {
+	public void setRendezvousesCreated(final Collection<Rendezvouse> rendezvousesCreated) {
 		this.rendezvousesCreated = rendezvousesCreated;
 	}
 
@@ -62,7 +62,7 @@ public class User extends Actor {
 		return this.rendezvousesAssisted;
 	}
 
-	public void setRendezvousesAssisted(Collection<Rendezvouse> rendezvousesAssisted) {
+	public void setRendezvousesAssisted(final Collection<Rendezvouse> rendezvousesAssisted) {
 		this.rendezvousesAssisted = rendezvousesAssisted;
 	}
 
