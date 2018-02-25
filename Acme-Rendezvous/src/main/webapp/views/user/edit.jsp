@@ -59,7 +59,7 @@
 	<br />
 	<acme:textbox code="user.surname" path="user.surname"/>
 	<br />
-	<acme:textbox code="user.birthDate" path="user.birthDate" />
+	<acme:textbox code="user.birthDate" path="user.birthDate" placeHolder="yyyy/MM/dd"/>
 	<br />
 	<acme:textbox code="user.postalAddress" path="user.postalAddress"/>
 	<br />
