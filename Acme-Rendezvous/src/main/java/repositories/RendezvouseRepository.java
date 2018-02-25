@@ -52,4 +52,7 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	@Query("select r from Rendezvouse r where r.id!=?1")
 	Collection<Rendezvouse> ListOFSimilarRendezvous(int rendezvousId);
 
+	@Query("select r from Rendezvouse r where r.forAdult=false")
+	Collection<Rendezvouse> findAllMinusAdult();
+
 }

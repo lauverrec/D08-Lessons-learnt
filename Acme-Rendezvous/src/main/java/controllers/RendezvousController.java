@@ -76,7 +76,7 @@ public class RendezvousController extends AbstractController {
 		ModelAndView result;
 		Collection<Rendezvouse> rendezvous;
 
-		rendezvous = this.rendezvouseService.findAll();
+		rendezvous = this.rendezvouseService.findAllMinusAdult();
 
 		result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvous", rendezvous);

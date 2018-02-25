@@ -198,7 +198,7 @@
 	</display:column>
 
 
-
+	<security:authorize access="hasRole('USER')">
 	<spring:message code="forAdult" var="forAdult" />
 	<display:column title="${forAdult}">
 		<jstl:if test="${row.forAdult==true}">
@@ -209,7 +209,7 @@
 			</div>
 		</jstl:if>
 	</display:column>
-
+</security:authorize>
 
 
 

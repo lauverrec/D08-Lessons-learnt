@@ -200,6 +200,13 @@ public class RendezvouseService {
 		result = this.rendezvousRepository.SimilarRendezvouseWhereIS(rendezvouse.getId());
 		return result;
 	}
+
+	public Collection<Rendezvouse> findAllMinusAdult() {
+		Collection<Rendezvouse> result;
+		result = this.rendezvousRepository.findAllMinusAdult();
+		return result;
+	}
+
 	public Collection<Announcement> AnnoucemntofRendezvouse(final Rendezvouse rendezvouse) {
 		Collection<Announcement> res;
 		res = this.rendezvousRepository.AnnoucemntofRendezvouse(rendezvouse.getId());
