@@ -19,6 +19,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 
@@ -42,6 +43,12 @@
 
 
 	<display:column>
+	
+		<spring:message code="user.format.birthDate" var="pattern"></spring:message>
+		<fmt:formatDate value="${row.writtenMoment}" pattern="${pattern}" var="newdatevar" />
+		<B><spring:message code="user.birthDate">:</spring:message></B>
+		<c:out value="${newdatevar}" />
+
 		<B><spring:message code="comment.writtenMoment" />:</B>
 		<jstl:out value="${row.writtenMoment}"></jstl:out>
 		<p>
