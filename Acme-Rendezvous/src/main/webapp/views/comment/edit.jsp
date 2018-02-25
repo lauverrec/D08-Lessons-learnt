@@ -35,7 +35,7 @@
 	<br />
 	<br />
 
-	<acme:textbox code="comment.picture" path="picture" />
+	<acme:textbox code="comment.picture" path="picture" placeHolder="http://" />
 	<br />
 	<br />
 	<!-- BOTONES -->
