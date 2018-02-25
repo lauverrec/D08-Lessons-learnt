@@ -105,10 +105,9 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveCustomer(@ModelAttribute("userForm") UserForm userForm, final BindingResult binding) {
 		ModelAndView result;
-		User user;
 
 		userForm = this.userService.reconstruct(userForm, binding);
-		
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(userForm);
 		else

@@ -16,7 +16,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.png" alt="Acme-Rendezvous Co., Inc." />
+
+	<img src="images/rendezvous2.jpg" alt="Acme-Rendezvous Co., Inc." />
 </div>
 
 <div>
