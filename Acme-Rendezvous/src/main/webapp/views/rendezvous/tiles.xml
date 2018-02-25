@@ -21,12 +21,12 @@
 
 
 	<definition name="rendezvous/list" extends="master.page">
-		<put-attribute name="title" value="List rendezvous" />
+		<put-attribute name="title" value="List rendezvouses" />
 		<put-attribute name="body" value="/views/rendezvous/list.jsp" />
 	</definition>
 	
 		<definition name="rendezvous/listasis" extends="master.page">	
-		<put-attribute name="title" value="Asist to rendezvous" />
+		<put-attribute name="title" value="List rendezvouses" />
 		<put-attribute name="body" value="/views/rendezvous/listasis.jsp" />
 	</definition>
 	<definition name="rendezvous/listnotasis" extends="master.page">	

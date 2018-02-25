@@ -73,7 +73,9 @@
 			<B><spring:message code="rendezvouse.forAdult" />:</B>
 			<jstl:out value="${row.forAdult}"></jstl:out>
 		<p>
-			<B><spring:message code="rendezvouse.similarRendezvouses" />:</B>
+		
+			<jstl:if test="${row.similarRendezvouses.size()>0 }">
+			<B><spring:message code="rendezvouse.similarRendezvouses" />:</B></jstl:if>
 			<jstl:forEach items="${row.similarRendezvouses}" var="item">
 				<spring:url value="rendezvous/display.do"
 					var="displayRendezvousSimilarURL">

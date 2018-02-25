@@ -39,7 +39,7 @@
 	<p>
 		<spring:message code="user.format.birthDate" var="pattern"></spring:message>
 		<fmt:formatDate value="${row.birthDate}" pattern="${pattern}" var="newdatevar" />
-		<spring:message code="user.birthDate">:</spring:message>
+		<spring:message code="user.birthDate"></spring:message>:
 		<c:out value="${newdatevar}" />
 	 
 	</p>
