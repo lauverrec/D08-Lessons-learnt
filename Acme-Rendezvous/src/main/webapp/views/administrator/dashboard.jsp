@@ -87,7 +87,7 @@
 
 <caption class="caption">
 	<spring:message
-		code="dashboard.findAvgStddevOfTheNumOfRendezvouseAssitedPerUser" />
+		code="dashboard.findTop10RendezvouseWithRSVPd" />
 </caption>
 <display:table name="findTop10RendezvouseWithRSVPd" id="row"
 	class="displaytag">
