@@ -105,7 +105,7 @@ public class RendezvouseService {
 
 		Assert.isTrue(rendezvouse.getOrganisedMoment().after(now), "future");
 		if (rendezvouse.isForAdult() == true)
-			Assert.isNull(this.calculateYearsOld(user.getBirthDate()) < 18, "jaja");
+			Assert.isTrue(this.calculateYearsOld(user.getBirthDate()) > 18, "jaja");
 
 		result = this.rendezvousRepository.save(rendezvouse);
 		if (rendezvouse.getId() == 0)
