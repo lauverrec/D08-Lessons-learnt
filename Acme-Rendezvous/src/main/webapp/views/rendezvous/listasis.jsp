@@ -144,9 +144,10 @@
 			</security:authorize>
 			
 			</jstl:if>
-
+			
+<jstl:if test="${assist}">
 <display:column>
-		<jstl:if test="${assist}">
+		
 
 			<spring:url value="rendezvous/user/notassist.do" var="editURL">
 				<spring:param name="rendezvousId" value="${row.id}" />
@@ -156,17 +157,22 @@
 
 			<!-- Boton para comentar en este rendezvouse si es que es asistente -->
 
-		</jstl:if>
-		<jstl:if test="${!assist}">
+		
+	</display:column>	
+	</jstl:if>
+	
+	<jstl:if test="${!assist && row.deleted==false}">
+		<display:column>
+		
 			<spring:url value="rendezvous/user/assist.do" var="editURL">
 				<spring:param name="rendezvousId" value="${row.id}" />
 			</spring:url>
 			<a href="${editURL}"><spring:message
 					code="rendezvouse.assistans.go" /></a>
-		</jstl:if>
+		
 
 	</display:column>
-
+</jstl:if>
 	<!-- Boton de delete para el administrador ya que puede borrar las Rendezvous que quiera pero no editarlas -->
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
