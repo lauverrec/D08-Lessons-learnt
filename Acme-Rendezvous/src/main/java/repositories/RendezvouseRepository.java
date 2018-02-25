@@ -41,7 +41,7 @@ public interface RendezvouseRepository extends JpaRepository<Rendezvouse, Intege
 	Collection<Rendezvouse> CancelMyassistantToRendezvouse(int usuarioId);
 
 	//rendezvouses a las que puede asistir un usuario
-	@Query("select r from Rendezvouse r where ?1 not member of assistants and r.deleted=false and r.organisedMoment>CURRENT_TIMESTAMP and r.draftMode=false")
+	@Query("select r from Rendezvouse r where ?1 not member of assistants and r.deleted=false and r.organisedMoment>CURRENT_TIMESTAMP and r.draftMode=false and r.forAdult=false")
 	Collection<Rendezvouse> assistantToRendezvouse(int usuarioId);
 
 	//Todas las rendezvous que estan borradas
