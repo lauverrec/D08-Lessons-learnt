@@ -145,7 +145,7 @@
 		<spring:url value="rendezvous/listMaker.do" var="renURL">
 			<spring:param name="rendezvousId" value="${row.id}" />
 		</spring:url>
-		<a href="${renURL}"><spring:message code="user.rendezvouse" /></a>
+		<a href="${renURL}"><spring:message code="user.maker" /></a>
 	</display:column>
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
