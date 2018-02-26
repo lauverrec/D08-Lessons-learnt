@@ -42,12 +42,16 @@
 	<acme:textbox code="rendezvouse.location.latitude" path="gps.latitude"/>
 	<br />
 
+	<acme:booleanselect code="rendezvouse.draftMode" path="draftMode"/>
+	
+	<br/>
+	<acme:booleanselect code="rendezvouse.forAdult" path="forAdult"/>
+	<br/>
 	<acme:select items="${similarRendezvouses}" itemLabel="name" code="rendezvous.similarRendezvouses" path="similarRendezvouses"/>
 	<br />
 	
 
-	<acme:booleanselect code="rendezvouse.draftMode" path="draftMode"/>
-	<acme:booleanselect code="rendezvouse.forAdult" path="forAdult"/>
+	
 
 	<!-- botones -->
 
