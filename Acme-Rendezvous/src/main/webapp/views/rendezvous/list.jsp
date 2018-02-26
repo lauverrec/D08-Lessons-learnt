@@ -85,7 +85,7 @@
 					code="rendezvous.announcement" /></a>
 		</display:column>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<spring:message code="rendezvous.announcement" var="announcements" />
 		<display:column title="${announcements}" sortable="true">
@@ -96,8 +96,8 @@
 					code="rendezvous.announcement" /></a>
 		</display:column>
 	</security:authorize>
-	
-	
+
+
 
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="rendezvous.announcement" var="announcements" />
@@ -212,20 +212,30 @@
 
 
 	<security:authorize access="hasRole('USER')">
-	<spring:message code="forAdult" var="forAdult" />
-	<display:column title="${forAdult}">
-		<jstl:if test="${row.forAdult==true}">
-			<div
-				style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+		<spring:message code="forAdult" var="forAdult" />
+		<display:column title="${forAdult}">
+			<jstl:if test="${row.forAdult==true}">
+				<div
+					style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
 
-				<img src="images/18.png" width="30" height="30">
-			</div>
-		</jstl:if>
-	</display:column>
-</security:authorize>
+					<img src="images/18.png" width="30" height="30">
+				</div>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 
 
-
+	<security:authorize access="hasRole('USER')">
+		<spring:message code="rendezvouse.linkSimilar" var="linkSimilar" />
+		<display:column title="${linkSimilar}" sortable="true">
+			<spring:url value="rendezvous/user/editSimilar.do"
+				var="editSimilarURL">
+				<spring:param name="rendezvouseId" value="${row.id}" />
+			</spring:url>
+			<a href="${editSimilarURL}"><spring:message
+					code="rendezvouse.link" /></a>
+		</display:column>
+	</security:authorize>
 
 
 

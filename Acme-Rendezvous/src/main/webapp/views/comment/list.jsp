@@ -36,7 +36,18 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="comments" requestURI="${requestURI}" id="row">
 
+<security:authorize access="hasRole('USER')">
+	<spring:message code="comment.display" var="Display" />
+	<display:column title="${Display}" sortable="true">
+		<spring:url value="comment/user/display.do" var="displayURL">
+			<spring:param name="commentId" value="${row.id}" />
+		</spring:url>
+		<a href="${displayURL}"><spring:message code="comment.display" /></a>
 
+	</display:column>
+</security:authorize>
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
 	<spring:message code="comment.display" var="Display" />
 	<display:column title="${Display}" sortable="true">
 		<spring:url value="comment/administrator/display.do" var="displayURL">
@@ -45,7 +56,7 @@
 		<a href="${displayURL}"><spring:message code="comment.display" /></a>
 
 	</display:column>
-
+</security:authorize>
 	<!-- ATRIBUTOS -->
 
 	<spring:message code="comment.format.writtenMoment" var="pattern"></spring:message>

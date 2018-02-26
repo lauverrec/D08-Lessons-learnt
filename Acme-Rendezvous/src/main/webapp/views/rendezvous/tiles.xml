@@ -24,12 +24,12 @@
 		<put-attribute name="title" value="List rendezvouses" />
 		<put-attribute name="body" value="/views/rendezvous/list.jsp" />
 	</definition>
-	
-		<definition name="rendezvous/listasis" extends="master.page">	
+
+	<definition name="rendezvous/listasis" extends="master.page">
 		<put-attribute name="title" value="List rendezvouses" />
 		<put-attribute name="body" value="/views/rendezvous/listasis.jsp" />
 	</definition>
-	<definition name="rendezvous/listnotasis" extends="master.page">	
+	<definition name="rendezvous/listnotasis" extends="master.page">
 		<put-attribute name="title" value="Cancel to assistant" />
 		<put-attribute name="body" value="/views/rendezvous/listnotasis.jsp" />
 	</definition>
@@ -38,13 +38,19 @@
 		<put-attribute name="title" value="Edit rendezvous" />
 		<put-attribute name="body" value="/views/rendezvous/edit.jsp" />
 	</definition>
-	
-	
+
+
 
 	<definition name="rendezvous/display" extends="master.page">
 		<put-attribute name="title" value="Display rendezvous" />
 		<put-attribute name="body" value="/views/rendezvous/display.jsp" />
 	</definition>
-	
+
+
+	<definition name="rendezvous/editSimilar" extends="master.page">
+		<put-attribute name="title" value="Link and unlink similar" />
+		<put-attribute name="body" value="/views/rendezvous/editSimilar.jsp" />
+	</definition>
+
 
 </tiles-definitions>

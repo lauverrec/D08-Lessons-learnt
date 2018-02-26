@@ -231,6 +231,59 @@ public class RendezvousesUserController extends AbstractController {
 		return result;
 
 	}
+
+	@RequestMapping(value = "/editSimilar", method = RequestMethod.GET)
+	public ModelAndView editSimilar(@RequestParam final int rendezvouseId) {
+		ModelAndView result;
+		Rendezvouse rendezvouse;
+		User user;
+
+		user = this.userService.findByPrincipal();
+		rendezvouse = this.rendezvouseService.findOne(rendezvouseId);
+		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse), "Cannot commit this operation, because it's illegal");
+		Assert.notNull(rendezvouse);
+		result = this.createEditSimilarModelAndView(rendezvouse);
+		return result;
+	}
+
+	@RequestMapping(value = "/editSimilar", method = RequestMethod.POST, params = "link")
+	public ModelAndView editSimilarLink(Rendezvouse rendezvous, final BindingResult bindingResult) {
+		ModelAndView result;
+
+		rendezvous = this.rendezvouseService.reconstruct(rendezvous, bindingResult);
+		if (bindingResult.hasErrors())
+			result = this.createEditModelAndView(rendezvous);
+		else
+			try {
+				this.rendezvouseService.linkSimilar(rendezvous);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditSimilarModelAndView(rendezvous, "rendezvouse.commit.error");
+			}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/editSimilar", method = RequestMethod.POST, params = "unlink")
+	public ModelAndView editSimilarUnlink(Rendezvouse rendezvous, final BindingResult bindingResult) {
+		ModelAndView result;
+
+		rendezvous = this.rendezvouseService.reconstruct(rendezvous, bindingResult);
+		if (bindingResult.hasErrors())
+			result = this.createEditModelAndView(rendezvous);
+		else
+			try {
+				Rendezvouse unlinked = rendezvous.getSimilarRendezvouses().iterator().next();
+				rendezvous.getSimilarRendezvouses().remove(unlinked);
+				this.rendezvouseService.linkSimilar(rendezvous);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditSimilarModelAndView(rendezvous, "rendezvouse.commit.error");
+			}
+		return result;
+
+	}
+
 	//ancially methods---------------------------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final Rendezvouse rendezvouse) {
@@ -247,6 +300,29 @@ public class RendezvousesUserController extends AbstractController {
 		ModelAndView result;
 		result = new ModelAndView("rendezvous/edit");
 		similarRendezvouses = this.rendezvouseService.ListOFSimilarRendezvous(rendezvouse);
+
+		result.addObject("rendezvouse", rendezvouse);
+		result.addObject("similarRendezvouses", similarRendezvouses);
+		result.addObject("message", message);
+		return result;
+
+	}
+
+	protected ModelAndView createEditSimilarModelAndView(final Rendezvouse rendezvouse) {
+		Assert.notNull(rendezvouse);
+		ModelAndView result;
+		result = this.createEditSimilarModelAndView(rendezvouse, null);
+		return result;
+
+	}
+
+	protected ModelAndView createEditSimilarModelAndView(final Rendezvouse rendezvouse, final String message) {
+		Assert.notNull(rendezvouse);
+		Collection<Rendezvouse> similarRendezvouses;
+		ModelAndView result;
+
+		result = new ModelAndView("rendezvous/editSimilar");
+		similarRendezvouses = this.rendezvouseService.findRendezvousesCreatedByUser();
 
 		result.addObject("rendezvouse", rendezvouse);
 		result.addObject("similarRendezvouses", similarRendezvouses);
