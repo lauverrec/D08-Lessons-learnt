@@ -44,16 +44,17 @@
 
 	<display:column>
 	
-		<spring:message code="user.format.birthDate" var="pattern"></spring:message>
+	<p>
+		<spring:message code="comment.format.birthDate" var="pattern"></spring:message>
 		<fmt:formatDate value="${row.writtenMoment}" pattern="${pattern}" var="newdatevar" />
-		<B><spring:message code="user.birthDate">:</spring:message></B>
+		<B><spring:message code="comment.writtenMoment"></spring:message>:</B>
 		<c:out value="${newdatevar}" />
-
-		<B><spring:message code="comment.writtenMoment" />:</B>
-		<jstl:out value="${row.writtenMoment}"></jstl:out>
-		<p>
+	</p>
+		
+	<p>
 			<B><spring:message code="comment.text" />:</B>
 			<jstl:out value="${row.text}"></jstl:out>
+	</p>
 		<p>
 		<B><spring:message code="comment.user" />:</B>
 			<spring:url value="user/display.do" var="userURL">
