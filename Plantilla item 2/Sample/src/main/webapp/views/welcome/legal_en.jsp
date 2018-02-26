@@ -16,15 +16,21 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h1> <strong> GENERAL CONDITIONS OF USE OF THE Acme BNB WEB SITE </strong> </h1>
+<h1> <strong> COOKIES POLICY </strong> </h1>
 
-<span> <strong> www.acmebnb.com </strong> </span>
+<p> 
+	We use our own and third-party cookies to improve our services and show you the language previously selected by you. If you go on surfing, we will consider you accepting its use.
+</p>
+
+<h1> <strong> GENERAL CONDITIONS OF USE OF THE ACME-RENDEZVOUS WEB SITE </strong> </h1>
+
+<span> <strong> www.acme.com </strong> </span>
 
 
 
 <p>
 
-Acme BNB (IN ADVANCE THE OWNER) with address for the purposes of notifications in Seville with NIF B98232342 makes available on its website www.acmebnb.com certain contents of an informative nature about its activities. These general conditions govern solely and exclusively the use Of the website of THE OWNER by the USERS who access it. These general conditions are exposed to the USER on the website www.acmebnb.com in each and every one of the pages, to read, print, archive and accept through the internet and is fully informed.
+ACME-RENDEZVOUS (IN ADVANCE THE OWNER) with address for the purposes of notifications in Seville with NIF BXXXXXXXX makes available on its website www.acme.com certain contents of an informative nature about its activities. These general conditions govern solely and exclusively the use Of the website of THE OWNER by the USERS who access it. These general conditions are exposed to the USER on the website www.acme.com in each and every one of the pages, to read, print, archive and accept through the internet and is fully informed.
 
 </p>
 
@@ -42,9 +48,15 @@ Access to the OWNER website implies without reservation the acceptance of these 
 
 <blockquote>
 
+<p> 
+
+<strong>1.1 .- </strong> The publication of any inappropriate word in a comment, announcement or appointment (for example, viagra, sex ...) will be deleted by an administrator.
+
+</p>
+
 <p>
 
-<Strong> 1.1 .- </strong> The use of the website of THE OWNER, does not imply the obligation of registration of the USER. The conditions of access and use of this website are strictly governed by the current legality and by the principle of good faith committing the USER to make a good use of the web. All acts that violate the legality, rights or interests of third parties are prohibited: privacy, data protection, intellectual property, etc. The OWNER expressly forbids the following:
+<Strong> 1.2 .- </strong> The use of the website of THE OWNER, does not imply the obligation of registration of the USER. The conditions of access and use of this website are strictly governed by the current legality and by the principle of good faith committing the USER to make a good use of the web. All acts that violate the legality, rights or interests of third parties are prohibited: privacy, data protection, intellectual property, etc. The OWNER expressly forbids the following:
 
 </p>
 
@@ -52,7 +64,7 @@ Access to the OWNER website implies without reservation the acceptance of these 
 
 <p>
 
-<strong> 1.1.1 .- </strong> Perform actions that can produce on the website or through it by any means any type of damage to the OWNER systems or to third parties.
+<strong> 1.2.1 .- </strong> Perform actions that can produce on the website or through it by any means any type of damage to the OWNER systems or to third parties.
 
 </p>
 
@@ -60,7 +72,7 @@ Access to the OWNER website implies without reservation the acceptance of these 
 
 <p>
 
-<Strong> 1.1.2 .- </strong> To carry out any type of publicity or commercial information directly or covertly, sending out massive emails ("spaming") or sending large messages in order to block Mail servers
+<Strong> 1.2.2 .- </strong> To carry out any type of publicity or commercial information directly or covertly, sending out massive emails ("spaming") or sending large messages in order to block Mail servers
 
 </p>
 
@@ -68,7 +80,7 @@ Access to the OWNER website implies without reservation the acceptance of these 
 
 <p>
 
-<strong> 1.2 .- </strong> THE OWNER, may at any time interrupt access to your website if it detects a use contrary to legality, good faith or these general conditions - see clause five.
+<strong> 1.3 .- </strong> THE OWNER, may at any time interrupt access to your website if it detects a use contrary to legality, good faith or these general conditions - see clause five.
 
 </p>
 
@@ -100,7 +112,7 @@ Access to the OWNER website implies without reservation the acceptance of these 
 
 <p>
 
-<strong> 2.3 .- </strong> The owner reserves the right to modify at any time the contents existing on his website. THE OWNER does not assure or be responsible for the correct functioning of the links to third party websites that appear on www.acmebnb.com. </ P>
+<strong> 2.3 .- </strong> The owner reserves the right to modify at any time the contents existing on his website. THE OWNER does not assure or be responsible for the correct functioning of the links to third party websites that appear on www.acme.com. </ P>
 
 
 
@@ -148,7 +160,7 @@ In addition, through the OWNER's website, free and paid services offered by thir
 
 <p>
 
-<strong> 3.1.3 .- </strong> Of the reliability and veracity of the information introduced by third parties on the website, either directly or through links or links. Likewise, Acme BNB will collaborate and notify the competent authority of these incidents when it is aware that the damage caused constitutes any type of illegal activity.
+<strong> 3.1.3 .- </strong> Of the reliability and veracity of the information introduced by third parties on the website, either directly or through links or links. Likewise, ACME-RENDEZVOUS will collaborate and notify the competent authority of these incidents when it is aware that the damage caused constitutes any type of illegal activity.
 
 </p>
 
