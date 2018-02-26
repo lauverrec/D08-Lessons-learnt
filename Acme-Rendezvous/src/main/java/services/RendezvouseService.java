@@ -163,7 +163,29 @@ public class RendezvouseService {
 		Assert.isTrue(rendezvouse.getPicture().equals(BD.getPicture()));
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse), "Cannot commit this operation, because it's illegal");
 
-		result = this.rendezvousRepository.save(rendezvouse);
+		BD.getSimilarRendezvouses().addAll(rendezvouse.getSimilarRendezvouses());
+		result = this.rendezvousRepository.save(BD);
+
+		return result;
+
+	}
+
+	public Rendezvouse unlinkSimilar(Rendezvouse rendezvouse) {
+		Rendezvouse BD;
+		Rendezvouse result;
+		User user;
+
+		user = this.userService.findByPrincipal();
+		BD = this.rendezvousRepository.findOne(rendezvouse.getId());
+		Assert.isTrue(rendezvouse.getDescription().equals(BD.getDescription()));
+		Assert.isTrue(rendezvouse.getName().equals(BD.getName()));
+		Assert.isTrue(rendezvouse.getGps().getLatitude().equals(BD.getGps().getLatitude()));
+		Assert.isTrue(rendezvouse.getGps().getLongitude().equals(BD.getGps().getLongitude()));
+		Assert.isTrue(rendezvouse.getPicture().equals(BD.getPicture()));
+		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse), "Cannot commit this operation, because it's illegal");
+
+		BD.getSimilarRendezvouses().removeAll(rendezvouse.getSimilarRendezvouses());
+		result = this.rendezvousRepository.save(BD);
 
 		return result;
 

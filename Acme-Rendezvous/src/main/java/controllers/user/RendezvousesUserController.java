@@ -273,9 +273,7 @@ public class RendezvousesUserController extends AbstractController {
 			result = this.createEditModelAndView(rendezvous);
 		else
 			try {
-				Rendezvouse unlinked = rendezvous.getSimilarRendezvouses().iterator().next();
-				rendezvous.getSimilarRendezvouses().remove(unlinked);
-				this.rendezvouseService.linkSimilar(rendezvous);
+				this.rendezvouseService.unlinkSimilar(rendezvous);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditSimilarModelAndView(rendezvous, "rendezvouse.commit.error");
