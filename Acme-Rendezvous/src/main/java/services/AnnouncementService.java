@@ -51,7 +51,6 @@ public class AnnouncementService {
 	public Announcement save(final Announcement announcement) {
 		Assert.notNull(announcement);
 		Announcement result;
-		//Date madeMoment;
 		User user;
 		Collection<Rendezvouse> rendezvousesOfUserConnected;
 
@@ -67,10 +66,6 @@ public class AnnouncementService {
 		//Un usuario solo podrá crear anuncios para sus rendezvouses
 		rendezvousesOfUserConnected = new ArrayList<>(user.getRendezvousesCreated());
 		Assert.isTrue(rendezvousesOfUserConnected.contains(announcement.getRendezvouse()));
-
-		//Capar que un usuario solo pueda editar sus anuncios
-		//	madeMoment = new Date(System.currentTimeMillis() - 1000);
-		//	announcement.setMadeMoment(madeMoment);
 
 		result = this.announcementRepository.save(announcement);
 		return result;
