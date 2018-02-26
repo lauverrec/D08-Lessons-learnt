@@ -17,11 +17,12 @@
 <hr />
 
 <div id="overbox3"> 
-	<h2 align="center">Aviso Legal</h2>
+	<h2 align="center"><spring:message code="master.page.legal" /></h2>
+	<h2 align="center"></h2>
 
     <div id="infobox3"  align="center">
 
-        <a href="welcome/legal.do">Términos y condiciones</a>
+        <a href="welcome/legal.do"><spring:message code="master.page.terminos"/></a>
      
     </div>
     <br/>
