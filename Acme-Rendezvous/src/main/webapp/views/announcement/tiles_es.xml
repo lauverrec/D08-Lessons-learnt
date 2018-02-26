@@ -41,6 +41,11 @@
 		<put-attribute name="title" value="Lista de anuncios" />
 		<put-attribute name="body" value="/views/announcement/list.jsp" />
 	</definition>
+	
+	<definition name="announcement/listb" extends="master.page">	
+		<put-attribute name="title" value="Lista de anuncios" />
+		<put-attribute name="body" value="/views/announcement/listb.jsp" />
+	</definition>
 
 	<definition name="announcement/edit" extends="master.page">	
 		<put-attribute name="title" value="Editar anuncio" />

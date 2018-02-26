@@ -106,6 +106,22 @@ public class AnnouncementUserController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/listb", method = RequestMethod.GET)
+	public ModelAndView listb(@RequestParam int rendezvousId) {
+		ModelAndView result;
+		Collection<Announcement> announcements;
+
+		announcements = new ArrayList<>(this.announcementService.findAnnouncementByRendezvousId(rendezvousId));
+
+		result = new ModelAndView("announcement/listb");
+		result.addObject("announcements", announcements);
+		result.addObject("editar", true);
+		result.addObject("boton", true);
+		result.addObject("requestURI", "announcement/user/listb.do");
+
+		return result;
+	}
+
 	//announcement/user/listAll.do
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public ModelAndView list() {
