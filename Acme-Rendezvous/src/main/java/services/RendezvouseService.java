@@ -158,8 +158,13 @@ public class RendezvouseService {
 		BD = this.rendezvousRepository.findOne(rendezvouse.getId());
 		Assert.isTrue(rendezvouse.getDescription().equals(BD.getDescription()));
 		Assert.isTrue(rendezvouse.getName().equals(BD.getName()));
-		Assert.isTrue(rendezvouse.getGps().getLatitude().equals(BD.getGps().getLatitude()));
-		Assert.isTrue(rendezvouse.getGps().getLongitude().equals(BD.getGps().getLongitude()));
+
+		if (rendezvouse.getGps().getLongitude() != null)
+			Assert.isTrue(rendezvouse.getGps().getLatitude().equals(BD.getGps().getLatitude()));
+
+		if (rendezvouse.getGps().getLongitude() != null)
+			Assert.isTrue(rendezvouse.getGps().getLongitude().equals(BD.getGps().getLongitude()));
+
 		Assert.isTrue(rendezvouse.getPicture().equals(BD.getPicture()));
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse), "Cannot commit this operation, because it's illegal");
 
@@ -179,8 +184,13 @@ public class RendezvouseService {
 		BD = this.rendezvousRepository.findOne(rendezvouse.getId());
 		Assert.isTrue(rendezvouse.getDescription().equals(BD.getDescription()));
 		Assert.isTrue(rendezvouse.getName().equals(BD.getName()));
-		Assert.isTrue(rendezvouse.getGps().getLatitude().equals(BD.getGps().getLatitude()));
-		Assert.isTrue(rendezvouse.getGps().getLongitude().equals(BD.getGps().getLongitude()));
+
+		if (rendezvouse.getGps().getLongitude() != null)
+			Assert.isTrue(rendezvouse.getGps().getLatitude().equals(BD.getGps().getLatitude()));
+
+		if (rendezvouse.getGps().getLongitude() != null)
+			Assert.isTrue(rendezvouse.getGps().getLongitude().equals(BD.getGps().getLongitude()));
+
 		Assert.isTrue(rendezvouse.getPicture().equals(BD.getPicture()));
 		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse), "Cannot commit this operation, because it's illegal");
 

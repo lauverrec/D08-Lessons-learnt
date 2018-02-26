@@ -21,6 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="rendezvous/user/editSimilar.do"
 	modelAttribute="rendezvouse">
@@ -40,15 +41,9 @@
 
 
 
+	<acme:select items="${similarRendezvouses}" itemLabel="name"
+		code="rendezvous.similarRendezvouses" path="similarRendezvouses" />
 
-	<form:label path="similarRendezvouses">
-		<spring:message code="rendezvous.similarRendezvouses" />:
-	</form:label>
-	<form:select id="similarRendezvouses" path="similarRendezvouses">
-		<form:options items="${similarRendezvouses}" itemValue="id"
-			itemLabel="name" />
-	</form:select>
-	<form:errors cssClass="error" path="similarRendezvouses" />
 	<br />
 	<br />
 
@@ -58,11 +53,11 @@
 		value="<spring:message code="rendezvous.link"/>" />&nbsp;
 		
 	<input type="submit" name="unlink"
-	value="<spring:message code="rendezvous.unlink"/>" />&nbsp;
-
-	<input type="button" name="cancel"
-		value="<spring:message code="rendezvous.cancel"/>"
-		onclick="javascript: window.location.replace('rendezvous/user/list.do')" />
+		value="<spring:message code="rendezvous.unlink"/>" />&nbsp;
+		
+		<acme:cancel
+		url="rendezvous/user/list.do"
+		code="rendezvous.cancel" />
 	<br />
 
 </form:form>
