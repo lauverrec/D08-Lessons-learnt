@@ -19,6 +19,7 @@ import services.UserService;
 import controllers.AbstractController;
 import domain.Answer;
 import domain.Question;
+import domain.Rendezvouse;
 import domain.User;
 
 @Controller
@@ -62,9 +63,13 @@ public class AnswerUserController extends AbstractController {
 		ModelAndView result;
 		Answer answer;
 		Question question;
+		Rendezvouse rendezvous;
+		User user;
 
+		user = this.userService.findByPrincipal();
 		question = this.questionService.findOne(questionId);
-
+		rendezvous = question.getRendezvouse();
+		Assert.isTrue(user.getRendezvousesAssisted().contains(rendezvous), "Cannot commit this operation, it's illegal");
 		answer = this.answerService.create(question);
 		result = this.createEditModelAndView(answer);
 
@@ -79,6 +84,7 @@ public class AnswerUserController extends AbstractController {
 
 		user = this.userService.findByPrincipal();
 		answer = this.answerService.findOne(answerId);
+
 		Assert.notNull(answer);
 		Assert.isTrue(this.answerService.findAllAnswersByUserId().contains(answer), "Cannot commit this operation because that is not one of your answers");
 		result = this.createEditModelAndView(answer);
