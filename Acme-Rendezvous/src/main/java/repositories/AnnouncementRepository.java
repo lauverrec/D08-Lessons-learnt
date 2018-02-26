@@ -12,7 +12,7 @@ import domain.Announcement;
 @Repository
 public interface AnnouncementRepository extends JpaRepository<Announcement, Integer> {
 
-	@Query("select a from Announcement a where a.rendezvouse.id=?1")
+	@Query("select a from Announcement a where a.rendezvouse.id=?1 order by madeMoment desc")
 	Collection<Announcement> findAnnouncementByRendezvousId(int rendezvouseId);
 
 	@Query("select r.announcements from Rendezvouse r join r.assistants a where a.id=?1 order by madeMoment desc")
