@@ -21,6 +21,7 @@ import services.UserService;
 import controllers.AbstractController;
 import domain.Announcement;
 import domain.Rendezvouse;
+import domain.User;
 
 @Controller
 @RequestMapping("/announcement/user")
@@ -57,9 +58,16 @@ public class AnnouncementUserController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int announcementId) {
 		ModelAndView result;
 		Announcement announcement;
-
+	
 		announcement = this.announcementService.findOne(announcementId);
-		//Assert.isTrue(user.getRendezvousesCreated().contains(announcement), "Cannot commit this operation, because it's illegal");
+		
+		//Un usuario solo podrá editar sus anuncios.
+		if (announcement.getId() != 0) {
+			Collection<Announcement> announcementsOfUser;
+			announcementsOfUser = this.announcementService.findAnnouncementByUserId();
+			Assert.isTrue(announcementsOfUser.contains(announcement), "Cannot commit this operation, because it's illegal");
+		}
+		
 		Assert.notNull(announcement);
 		result = this.createEditModelAndView(announcement);
 		return result;
@@ -69,6 +77,8 @@ public class AnnouncementUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Announcement announcement, BindingResult binding) {
 		ModelAndView result;
+
+
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(announcement);
