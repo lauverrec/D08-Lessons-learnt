@@ -20,110 +20,48 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="rendezvous/user/edit.do"
 	modelAttribute="rendezvouse">
-
+	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<%-- <form:hidden path="assistants" />
-	<form:hidden path="announcements" /> --%>
 
-
-	<form:label path="name">
-		<spring:message code="rendezvouse.name" />:
-	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
+	<acme:textbox code="rendezvouse.name" path="name"/>
 	<br />
+	<acme:textbox code="rendezvouse.description" path="description"/>
+	<br />
+	<acme:textbox code="rendezvouse.picture" path="picture" placeHolder="http:\\\\"/>
+	<br />
+	<acme:textbox code="rendezvouse.organisedMoment" path="organisedMoment" placeHolder="yyyy/MM/dd"/>
 	<br />
 
-	<form:label path="description">
-		<spring:message code="rendezvouse.description" />:
-	</form:label>
-	<form:input path="description" />
-	<form:errors cssClass="error" path="description" />
+	<acme:textbox code="rendezvouse.location.longitude" path="gps.longitude"/>
 	<br />
+	<acme:textbox code="rendezvouse.location.latitude" path="gps.latitude"/>
 	<br />
 
+	<acme:select items="${similarRendezvouses}" itemLabel="name" code="rendezvous.similarRendezvouses" path="similarRendezvouses"/>
+	<br />
+	
 
-	<form:label path="picture">
-		<spring:message code="rendezvouse.picture" />:
-	</form:label>
-	<form:input path="picture" placeholder="http://"/>
-	<form:errors cssClass="error" path="picture" />
-	<br />
-	<br />
-
-
-	<form:label path="organisedMoment">
-		<spring:message code="rendezvouse.organisedMoment" />:
-	</form:label>
-	<form:input path="organisedMoment" placeholder="yyyy/MM/dd" />
-	<form:errors cssClass="error" path="organisedMoment" />
-	<br />
-	<br />
-
-	<form:label path="draftMode">
-		<spring:message code="rendezvouse.draftMode" />:
-	</form:label>
-	<form:select id="draftMode" path="draftMode">	
-		<form:option value="1" label="YES"/>
-		<form:option value="0" label="NO"/> 
-	</form:select>  
-	<br /> 
-	<br />
-		<form:label path="forAdult">
-		<spring:message code="rendezvouse.forAdult" />:
-	</form:label>
-	<form:select id="forAdult" path="forAdult">	
-		<form:option value="1" label="YES"/>
-		<form:option value="0" label="NO"/> 
-	</form:select>  
-	<br /> 
-	<br />
-		<form:label path="gps.longitude">
-		<spring:message code="rendezvouse.location.longitude" />:
-	</form:label>
-	<form:input path="gps.longitude" />
-	<form:errors cssClass="error" path="gps.longitude" />
-	<br />
-	<br />
-	<form:label path="gps.latitude">
-		<spring:message code="rendezvouse.location.latitude" />:
-	</form:label>
-	<form:input path="gps.latitude" />
-	<form:errors cssClass="error" path="gps.latitude" />
-	<br />
-	<br />
-
-	<form:label path="similarRendezvouses">
-		<spring:message code="rendezvous.similarRendezvouses" />:
-	</form:label>
-	<form:select id="similarRendezvouses" path="similarRendezvouses" >		
-		<form:options items="${similarRendezvouses}" itemValue="id" itemLabel="name" />		
-	</form:select>
-	<form:errors cssClass="error" path="similarRendezvouses" />
-	<br />
-	<br />  
+	<acme:booleanselect code="rendezvouse.draftMode" path="draftMode"/>
+	<acme:booleanselect code="rendezvouse.forAdult" path="forAdult"/>
 
 	<!-- botones -->
 
-	<input type="submit" name="save"
-		value="<spring:message code="rendezvous.save"/>" />&nbsp;
+	<acme:submit name="save" code="rendezvous.save"/>
 		
 	<jstl:if test="${rendezvouse.id !=0 }">
-		<input type="submit" name="deletevirtual"
-			value="<spring:message code="rendezvous.delete"/>"
-			onclick="javascript: return confirm('<spring:message code="rendezvous.confirm.delete"/>')" />&nbsp;
+			<acme:submit name="deletevirtual" code="rendezvous.delete"/>
 	</jstl:if>
 
-	<input type="button" name="cancel"
-		value="<spring:message code="rendezvous.cancel"/>"
-		onclick="javascript: window.location.replace('rendezvous/user/list.do')" />
+	<acme:cancel url="rendezvous/user/list.do" code="rendezvous.cancel"/>
 	<br />
 
+
+	
 </form:form>
 
 
