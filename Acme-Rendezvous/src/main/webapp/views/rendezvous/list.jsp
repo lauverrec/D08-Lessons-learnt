@@ -86,16 +86,7 @@
 		</display:column>
 	</security:authorize>
 	
-	<security:authorize access="hasRole('ADMINISTRATOR')">
-		<spring:message code="rendezvous.announcement" var="announcements" />
-		<display:column title="${announcements}" sortable="true">
-			<spring:url value="announcement/administrator/list.do" var="announcementURL">
-				<spring:param name="rendezvousId" value="${row.id }" />
-			</spring:url>
-			<a href="${announcementURL}"><spring:message
-					code="rendezvous.announcement" /></a>
-		</display:column>
-	</security:authorize>
+	
 
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="rendezvous.announcement" var="announcements" />
