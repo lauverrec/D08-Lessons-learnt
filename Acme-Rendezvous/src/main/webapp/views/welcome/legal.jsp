@@ -16,6 +16,12 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<h1> <strong> POLITICA DE COOKIES </strong> </h1>
+
+<p>
+	Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle el idioma seleccionado previamente por usted. Si continua navegando, consideramos que acepta su uso.
+</p>
+
 <h1><strong>CONDICIONES GENERALES DE USO DEL SITIO WEB DE ACME-RENDEZVOUS</strong></h1>
 
 <span><strong>www.acme.com</strong></span>
@@ -43,8 +49,12 @@ El acceso al sitio web de EL PROPIETARIO implica sin reservas la aceptación de l
 <blockquote>
 
 <p>
+<strong>1.1.-</strong> La publicación de cualquier palabra inapropiada en un comentario, anuncio o cita (por ejemplo, viagra, sexo...) será borrada por un administrador. 
 
-<strong>1.1.-</strong> La utilización del sitio web de EL PROPIETARIO, no conlleva la obligatoriedad de inscripción del USUARIO. Las condiciones de acceso y uso del presente sitio web se rigen estrictamente por la legalidad vigente y por el principio de buena fe comprometiéndose el USUARIO a realizar un buen uso de la web.  Quedan prohibidos todos los actos que vulneren la legalidad, derechos o intereses de terceros: derecho a la intimidad, protección de datos, propiedad intelectual etc. Expresamente EL PROPIETARIO prohíbe los siguientes:
+</p>
+<p>
+
+<strong>1.2.-</strong> La utilización del sitio web de EL PROPIETARIO, no conlleva la obligatoriedad de inscripción del USUARIO. Las condiciones de acceso y uso del presente sitio web se rigen estrictamente por la legalidad vigente y por el principio de buena fe comprometiéndose el USUARIO a realizar un buen uso de la web.  Quedan prohibidos todos los actos que vulneren la legalidad, derechos o intereses de terceros: derecho a la intimidad, protección de datos, propiedad intelectual etc. Expresamente EL PROPIETARIO prohíbe los siguientes:
 
 </p>
 
@@ -52,7 +62,7 @@ El acceso al sitio web de EL PROPIETARIO implica sin reservas la aceptación de l
 
 <p>
 
-<strong>1.1.1.-</strong> Realizar acciones que puedan producir en el sitio web o a través del mismo por cualquier medio cualquier tipo de daño a los sistemas de EL PROPIETARIO  o a terceros.
+<strong>1.2.1.-</strong> Realizar acciones que puedan producir en el sitio web o a través del mismo por cualquier medio cualquier tipo de daño a los sistemas de EL PROPIETARIO  o a terceros.
 
 </p>
 
@@ -60,7 +70,7 @@ El acceso al sitio web de EL PROPIETARIO implica sin reservas la aceptación de l
 
 <p>
 
-<strong>1.1.2.-</strong> Realizar sin la debida autorización cualquier tipo de publicidad o información comercial directamente o de forma encubierta, el envío de correos masivos ("spaming") o envío de grandes mensajes con el fin de bloquear servidores de la red ("mail bombing")
+<strong>1.2.2.-</strong> Realizar sin la debida autorización cualquier tipo de publicidad o información comercial directamente o de forma encubierta, el envío de correos masivos ("spaming") o envío de grandes mensajes con el fin de bloquear servidores de la red ("mail bombing")
 
 </p>
 
@@ -68,7 +78,7 @@ El acceso al sitio web de EL PROPIETARIO implica sin reservas la aceptación de l
 
 <p>
 
-<strong>1.2.-</strong> EL PROPIETARIO, podrá interrumpir en cualquier momento el acceso a su sitio web si detecta un uso contrario a la legalidad, la buena fe o a las presentes condiciones generales- ver cláusula quinta.
+<strong>1.3.-</strong> EL PROPIETARIO, podrá interrumpir en cualquier momento el acceso a su sitio web si detecta un uso contrario a la legalidad, la buena fe o a las presentes condiciones generales- ver cláusula quinta.
 
 </p>
 
