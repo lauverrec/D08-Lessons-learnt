@@ -71,7 +71,7 @@
 	<acme:submit name="save" code="user.save"/>
 	<acme:cancel url="welcome/index.do" code="user.cancel"/>
 	<br />
-	
+	<br/>
 	<jstl:if test="${userForm.user.id == 0}">
    		<form:label path="conditions">
 		<spring:message code="actor.legal.accept"/> - <a href="welcome/legal.do"><spring:message code="actor.legal.moreinfo"/></a>
