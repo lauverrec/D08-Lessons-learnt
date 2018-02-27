@@ -117,6 +117,8 @@ public class AnswerService {
 			result.setUser(userPrincipal);
 		} else {
 			answerBD = this.answerRepository.findOne(answer.getId());
+			answer.setId(answerBD.getId());
+			answer.setVersion(answerBD.getVersion());
 			answer.setUser(answerBD.getUser());
 			result = answer;
 		}

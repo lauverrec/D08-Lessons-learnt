@@ -121,6 +121,8 @@ public class QuestionService {
 			result.setUser(userPrincipal);
 		} else {
 			questionBD = this.questionRepository.findOne(question.getId());
+			question.setId(questionBD.getId());
+			question.setVersion(questionBD.getVersion());
 			question.setUser(questionBD.getUser());
 			result = question;
 		}

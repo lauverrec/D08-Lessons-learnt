@@ -166,6 +166,8 @@ public class CommentService {
 			result.setWrittenMoment(moment);
 		} else {
 			commentBD = this.commentRepository.findOne(comment.getId());
+			comment.setId(commentBD.getId());
+			comment.setVersion(commentBD.getVersion());
 			comment.setUser(commentBD.getUser());
 			comment.setReplys(commentBD.getReplys());
 			comment.setWrittenMoment(commentBD.getWrittenMoment());

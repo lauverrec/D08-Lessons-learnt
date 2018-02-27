@@ -350,6 +350,8 @@ public class RendezvouseService {
 			result = rendezvous;
 		} else {
 			rendezvousBD = this.rendezvousRepository.findOne(rendezvous.getId());
+			rendezvous.setId(rendezvousBD.getId());
+			rendezvous.setVersion(rendezvousBD.getVersion());
 			rendezvous.setAssistants(rendezvousBD.getAssistants());
 			rendezvous.setAnnouncements(rendezvousBD.getAnnouncements());
 			result = rendezvous;
