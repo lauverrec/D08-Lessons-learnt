@@ -311,7 +311,7 @@ public class RendezvousesUserController extends AbstractController {
 		Collection<Rendezvouse> similarRendezvouses;
 		ModelAndView result;
 		result = new ModelAndView("rendezvous/edit");
-		similarRendezvouses = this.rendezvouseService.ListOFSimilarRendezvous(rendezvouse);
+		similarRendezvouses = this.rendezvouseService.findAllRendezvousesNotDeletedExceptRendezvousId(rendezvouse.getId());
 
 		result.addObject("rendezvouse", rendezvouse);
 		result.addObject("similarRendezvouses", similarRendezvouses);
