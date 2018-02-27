@@ -112,7 +112,7 @@ Access to the OWNER website implies without reservation the acceptance of these 
 
 <p>
 
-<strong> 2.3 .- </strong> The owner reserves the right to modify at any time the contents existing on his website. THE OWNER does not assure or be responsible for the correct functioning of the links to third party websites that appear on www.acme.com. </ P>
+<strong> 2.3 .- </strong> The owner reserves the right to modify at any time the contents existing on his website. THE OWNER does not assure or be responsible for the correct functioning of the links to third party websites that appear on www.acme.com. 
 
 
 
