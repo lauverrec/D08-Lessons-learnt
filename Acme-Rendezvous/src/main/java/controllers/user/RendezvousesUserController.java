@@ -246,6 +246,20 @@ public class RendezvousesUserController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/editNotSimilar", method = RequestMethod.GET)
+	public ModelAndView editNotSimilar(@RequestParam final int rendezvouseId) {
+		ModelAndView result;
+		Rendezvouse rendezvouse;
+		User user;
+
+		user = this.userService.findByPrincipal();
+		rendezvouse = this.rendezvouseService.findOne(rendezvouseId);
+		Assert.isTrue(user.getRendezvousesCreated().contains(rendezvouse), "Cannot commit this operation, because it's illegal");
+		Assert.notNull(rendezvouse);
+		result = this.createEditNotSimilarModelAndView(rendezvouse);
+		return result;
+	}
+
 	@RequestMapping(value = "/editSimilar", method = RequestMethod.POST, params = "link")
 	public ModelAndView editSimilarLink(Rendezvouse rendezvous, final BindingResult bindingResult) {
 		ModelAndView result;
@@ -316,17 +330,44 @@ public class RendezvousesUserController extends AbstractController {
 
 	protected ModelAndView createEditSimilarModelAndView(final Rendezvouse rendezvouse, final String message) {
 		Assert.notNull(rendezvouse);
+		Collection<Rendezvouse> notSimilarRendezvouses;
 		Collection<Rendezvouse> similarRendezvouses;
 		ModelAndView result;
 
-		result = new ModelAndView("rendezvous/editSimilar");
-		similarRendezvouses = this.rendezvouseService.findRendezvousesCreatedByUser();
+		result = new ModelAndView("rendezvous/editNotSimilar");
+		notSimilarRendezvouses = this.rendezvouseService.findRendezvousesCreatedByUser();
+		notSimilarRendezvouses.remove(rendezvouse);
+		similarRendezvouses = rendezvouse.getSimilarRendezvouses();
 
 		result.addObject("rendezvouse", rendezvouse);
 		result.addObject("similarRendezvouses", similarRendezvouses);
+		result.addObject("notSimilarRendezvouses", notSimilarRendezvouses);
 		result.addObject("message", message);
 		return result;
 
 	}
 
+	protected ModelAndView createEditNotSimilarModelAndView(final Rendezvouse rendezvouse) {
+		Assert.notNull(rendezvouse);
+		ModelAndView result;
+		result = this.createEditNotSimilarModelAndView(rendezvouse, null);
+		return result;
+
+	}
+
+	protected ModelAndView createEditNotSimilarModelAndView(final Rendezvouse rendezvouse, final String message) {
+		Assert.notNull(rendezvouse);
+		Collection<Rendezvouse> notSimilarRendezvouses;
+		ModelAndView result;
+
+		result = new ModelAndView("rendezvous/editSimilar");
+		notSimilarRendezvouses = this.rendezvouseService.findRendezvousesCreatedByUser();
+		notSimilarRendezvouses.remove(rendezvouse);
+
+		result.addObject("rendezvouse", rendezvouse);
+		result.addObject("notSimilarRendezvouses", notSimilarRendezvouses);
+		result.addObject("message", message);
+		return result;
+
+	}
 }

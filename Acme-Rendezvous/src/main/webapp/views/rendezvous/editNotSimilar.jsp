@@ -41,7 +41,7 @@
 
 
 
-	<acme:select items="${notSimilarRendezvouses}" itemLabel="name"
+	<acme:select items="${similarRendezvouses}" itemLabel="name"
 		code="rendezvous.similarRendezvouses" path="similarRendezvouses" />
 
 	<br />
@@ -49,8 +49,9 @@
 
 	<!-- botones -->
 
-	<input type="submit" name="link"
-		value="<spring:message code="rendezvous.link"/>" />&nbsp;
+	
+	<input type="submit" name="unlink"
+		value="<spring:message code="rendezvous.unlink"/>" />&nbsp;
 		
 		<acme:cancel
 		url="rendezvous/user/list.do"

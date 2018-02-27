@@ -228,14 +228,26 @@
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="rendezvouse.linkSimilar" var="linkSimilar" />
 		<display:column title="${linkSimilar}" sortable="true">
-			<spring:url value="rendezvous/user/editSimilar.do"
+			<spring:url value="rendezvous/user/editNotSimilar.do"
 				var="editSimilarURL">
 				<spring:param name="rendezvouseId" value="${row.id}" />
 			</spring:url>
 			<a href="${editSimilarURL}"><spring:message
 					code="rendezvouse.link" /></a>
 		</display:column>
+		
+		<spring:message code="rendezvouse.unlinkSimilar" var="unlinkSimilar" />
+		<display:column title="${unlinkSimilar}" sortable="true">
+			<spring:url value="rendezvous/user/editSimilar.do"
+				var="editSimilarURL">
+				<spring:param name="rendezvouseId" value="${row.id}" />
+			</spring:url>
+			<a href="${editSimilarURL}"><spring:message
+					code="rendezvouse.unlink" /></a>
+		</display:column>
 	</security:authorize>
+	
+	
 
 
 
