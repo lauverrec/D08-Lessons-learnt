@@ -113,28 +113,43 @@ public class AdministratorService {
 	public Double[] findAvgStddevOfTheNumOfRendezvouseCreatedPerUser() {
 		Double[] result;
 		result = this.administratorRepository.findAvgStddevOfTheNumOfRendezvouseCreatedPerUser();
-		Assert.notNull(result);
+		if (result[0] == null && result[1] == null) {
+			result[1] = 0.;
+			result[0] = 0.;
+		} else if (result[0] == null)
+			result[0] = 0.;
+		else if (result[1] == null)
+			result[1] = 0.;
+
 		return result;
 	}
 
 	public Double findRatioUsersWithRendezvousesAndNotRendezvouses() {
 		Double result;
 		result = this.administratorRepository.findRatioUsersWithRendezvousesAndNotRendezvouses();
-		Assert.notNull(result);
+		if (result == null)
+			result = 0.;
 		return result;
 	}
 
 	public Double findAvgStddevOfTheNumOfAssistansPerRendezvouse() {
 		Double result;
 		result = this.administratorRepository.findAvgStddevOfTheNumOfAssistansPerRendezvouse();
-		Assert.notNull(result);
+		if (result == null)
+			result = 0.;
 		return result;
 	}
 
 	public Double[] findAvgStddevOfTheNumOfRendezvouseAssitedPerUser() {
 		Double[] result;
 		result = this.administratorRepository.findAvgStddevOfTheNumOfRendezvouseAssitedPerUser();
-		Assert.notNull(result);
+		if (result[0] == null && result[1] == null) {
+			result[1] = 0.;
+			result[0] = 0.;
+		} else if (result[0] == null)
+			result[0] = 0.;
+		else if (result[1] == null)
+			result[1] = 0.;
 		return result;
 	}
 
@@ -152,7 +167,13 @@ public class AdministratorService {
 	public Double[] findAvgStddevOfTheNumOfAnnouncementsPerRendezvous() {
 		Double[] result;
 		result = this.administratorRepository.findAvgStddevOfTheNumOfAnnouncementsPerRendezvous();
-		Assert.notNull(result);
+		if (result[0] == null && result[1] == null) {
+			result[1] = 0.;
+			result[0] = 0.;
+		} else if (result[0] == null)
+			result[0] = 0.;
+		else if (result[1] == null)
+			result[1] = 0.;
 		return result;
 	}
 	public Collection<Rendezvouse> findRendezvousesWithMore75PerCent() {
@@ -182,6 +203,7 @@ public class AdministratorService {
 		result = new Double[] {
 			avg, stdev
 		};
+
 		return result;
 	}
 	public Double[] findAvgStddevOfTheNumOfAnswerToQuestionsPerRendezvous() {
@@ -203,7 +225,13 @@ public class AdministratorService {
 	public Double[] findAvgStddevOfTheNumOfRepliesPerComment() {
 		Double[] result;
 		result = this.administratorRepository.findAvgStddevOfTheNumOfRepliesPerComment();
-		Assert.notNull(result);
+		if (result[0] == null && result[1] == null) {
+			result[1] = 0.;
+			result[0] = 0.;
+		} else if (result[0] == null)
+			result[0] = 0.;
+		else if (result[1] == null)
+			result[1] = 0.;
 		return result;
 	}
 
