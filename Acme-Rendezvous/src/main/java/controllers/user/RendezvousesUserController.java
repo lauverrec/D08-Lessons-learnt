@@ -335,8 +335,7 @@ public class RendezvousesUserController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("rendezvous/editNotSimilar");
-		notSimilarRendezvouses = this.rendezvouseService.findRendezvousesCreatedByUser();
-		notSimilarRendezvouses.remove(rendezvouse);
+		notSimilarRendezvouses = this.rendezvouseService.findAllRendezvousesNotDeletedExceptRendezvousId(rendezvouse.getId());
 		notSimilarRendezvouses.removeAll(rendezvouse.getSimilarRendezvouses());
 		similarRendezvouses = rendezvouse.getSimilarRendezvouses();
 
@@ -362,8 +361,7 @@ public class RendezvousesUserController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("rendezvous/editSimilar");
-		notSimilarRendezvouses = this.rendezvouseService.findRendezvousesCreatedByUser();
-		notSimilarRendezvouses.remove(rendezvouse);
+		notSimilarRendezvouses = this.rendezvouseService.findAllRendezvousesNotDeletedExceptRendezvousId(rendezvouse.getId());
 		notSimilarRendezvouses.removeAll(rendezvouse.getSimilarRendezvouses());
 
 		result.addObject("rendezvouse", rendezvouse);

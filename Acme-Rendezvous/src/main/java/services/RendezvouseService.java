@@ -149,7 +149,7 @@ public class RendezvouseService {
 
 	}
 
-	public Rendezvouse linkSimilar(Rendezvouse rendezvouse) {
+	public Rendezvouse linkSimilar(final Rendezvouse rendezvouse) {
 		Rendezvouse BD;
 		Rendezvouse result;
 		User user;
@@ -175,7 +175,7 @@ public class RendezvouseService {
 
 	}
 
-	public Rendezvouse unlinkSimilar(Rendezvouse rendezvouse) {
+	public Rendezvouse unlinkSimilar(final Rendezvouse rendezvouse) {
 		Rendezvouse BD;
 		Rendezvouse result;
 		User user;
@@ -315,8 +315,8 @@ public class RendezvouseService {
 		fechan.setTime(birthDay);
 
 		int diffYear = today.get(Calendar.YEAR) - fechan.get(Calendar.YEAR);
-		int diffMonth = today.get(Calendar.MONTH) - fechan.get(Calendar.MONTH);
-		int diffDay = today.get(Calendar.DAY_OF_MONTH) - fechan.get(Calendar.DAY_OF_MONTH);
+		final int diffMonth = today.get(Calendar.MONTH) - fechan.get(Calendar.MONTH);
+		final int diffDay = today.get(Calendar.DAY_OF_MONTH) - fechan.get(Calendar.DAY_OF_MONTH);
 		// Si está en ese año pero todavía no los ha cumplido
 		if (diffMonth < 0 || (diffMonth == 0 && diffDay < 0))
 			diffYear = diffYear - 1;
@@ -324,11 +324,17 @@ public class RendezvouseService {
 
 	}
 
-	public Collection<Rendezvouse> ListOFSimilarRendezvous(Rendezvouse rendezvous) {
+	public Collection<Rendezvouse> ListOFSimilarRendezvous(final Rendezvouse rendezvous) {
 		Collection<Rendezvouse> result;
 		result = this.rendezvousRepository.ListOFSimilarRendezvous(rendezvous.getId());
 		return result;
 
+	}
+
+	public Collection<Rendezvouse> findAllRendezvousesNotDeletedExceptRendezvousId(final int rendezvousId) {
+		Collection<Rendezvouse> result;
+		result = this.rendezvousRepository.findAllRendezvousesNotDeletedExceptRendezvousId(rendezvousId);
+		return result;
 	}
 
 	public Rendezvouse reconstruct(final Rendezvouse rendezvous, final BindingResult bindingResult) {
