@@ -360,6 +360,7 @@ public class RendezvouseService {
 			rendezvous.setVersion(rendezvousBD.getVersion());
 			rendezvous.setAssistants(rendezvousBD.getAssistants());
 			rendezvous.setAnnouncements(rendezvousBD.getAnnouncements());
+			rendezvous.setSimilarRendezvouses(rendezvousBD.getSimilarRendezvouses());
 			result = rendezvous;
 		}
 		this.validator.validate(result, bindingResult);
