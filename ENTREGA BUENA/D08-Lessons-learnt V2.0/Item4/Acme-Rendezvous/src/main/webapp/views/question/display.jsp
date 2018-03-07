@@ -18,6 +18,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 
 <display:table name="Question" class="displaytag"
@@ -33,6 +35,7 @@
 </display:column>
 	
 	
+	<c:if test="${fn:contains(theString, 'test')}">
 	<security:authorize access="hasRole('USER')">
 	<spring:message code="question.answer.create" var="Answer" />
 	<display:column title="${Answer}" sortable="true">
@@ -44,6 +47,7 @@
 	
 	</display:column> 
 	</security:authorize>
+	</c:if>
 	
 	
 	
