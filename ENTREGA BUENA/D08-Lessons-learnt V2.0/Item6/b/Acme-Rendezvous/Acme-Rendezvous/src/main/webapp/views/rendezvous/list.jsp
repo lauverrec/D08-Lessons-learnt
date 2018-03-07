@@ -69,11 +69,11 @@
 	<display:column property="organisedMoment" title="${titleHeader}"
 		sortable="true" format="${pattern}" />
 
-	<spring:message code="rendezvouse.picture" var="titleHeader" />
+	<%-- <spring:message code="rendezvouse.picture" var="titleHeader" />
 	<display:column title="${titleHeader}">
 		<a href="${row.picture}"><spring:message
 				code="rendezvouse.picture" /></a>
-	</display:column>
+	</display:column> --%>
 	<!-- ENLACES -->
 	<security:authorize access="isAnonymous()">
 		<spring:message code="rendezvous.announcement" var="announcements" />
