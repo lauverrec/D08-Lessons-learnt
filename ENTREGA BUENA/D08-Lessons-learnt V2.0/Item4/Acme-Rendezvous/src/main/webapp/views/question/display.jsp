@@ -35,19 +35,19 @@
 </display:column>
 	
 	
-	<c:if test="${fn:contains(theString, 'test')}">
+	
 	<security:authorize access="hasRole('USER')">
 	<spring:message code="question.answer.create" var="Answer" />
 	<display:column title="${Answer}" sortable="true">
-	
+	<jstl:if test="${fn:contains(row.rendezvouse.assistants, row.user)}">
 		<spring:url value="answer/user/create.do" var="editURL">
 			<spring:param name="questionId" value="${row.id}" />
 		</spring:url>
 		<a href="${editURL}"><spring:message code="question.answer.create.reply" /></a>
-	
+	</jstl:if>
 	</display:column> 
 	</security:authorize>
-	</c:if>
+
 	
 	
 	
