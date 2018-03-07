@@ -8,4 +8,6 @@ Con este fichero queremos aclarar nuestras decisiones que hemos tomado sobre el 
 
 4. El usuario acepta los términos y condiciones de uso una vez que se registra en el sistema por primera vez.
 
+5. Los términos y condiciones de uso las sacamos de internet ya que no somos expertos en este ámbito, lo único que añadimos por nuestra cuenta fue las cookies que usa el sistema.
+
 Estas decisiones se le comentaron a nuestro profesor de seguimiento, Carlos Muller, el cual nos dio el visto bueno.
